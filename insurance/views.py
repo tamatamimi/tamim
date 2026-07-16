@@ -68,12 +68,19 @@ def employee_detail(request, pk):
             "remaining": member.get_annual_remaining(year),
         })
 
+    current_year = datetime.date.today().year
+    year_options = list(range(current_year, current_year - 4, -1))
+    if year not in year_options:
+        year_options.append(year)
+        year_options.sort(reverse=True)
+
     context = {
         "employee": employee,
         "claims": claims,
         "family_members": family_members,
         "settings": settings,
         "year": year,
+        "year_options": year_options,
         "employee_used": employee_used,
         "employee_remaining": employee_remaining,
         "family_stats": family_stats,

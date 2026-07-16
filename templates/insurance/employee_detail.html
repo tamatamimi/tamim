@@ -11,8 +11,8 @@
     <form method="get" class="d-flex align-items-center gap-2">
       <label class="form-label mb-0">السنة:</label>
       <select name="year" class="form-select form-select-sm" onchange="this.form.submit()" style="width:100px">
-        {% for y in "2026 2025 2024 2023"|split:" " %}
-        <option value="{{ y }}" {% if y|add:0 == year %}selected{% endif %}>{{ y }}</option>
+        {% for y in year_options %}
+        <option value="{{ y }}" {% if y == year %}selected{% endif %}>{{ y }}</option>
         {% endfor %}
       </select>
     </form>
