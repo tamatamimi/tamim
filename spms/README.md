@@ -11,7 +11,7 @@
 | المرحلة | المخرَج | الحالة |
 |---|---|---|
 | P1 | مخطط قاعدة البيانات (DDL) — `sql/P1_schema.sql` | ✅ تم |
-| P2 | حزم PL/SQL الأساسية: PKG_SECURITY, PKG_INHERITANCE, PKG_CALC | ⏳ لم يبدأ |
+| P2 | حزم PL/SQL الأساسية — `sql/P2_pkg_security.sql`, `sql/P2_pkg_inheritance.sql`, `sql/P2_pkg_calc.sql` + اختبارات `sql/P2_tests.sql` | ✅ تم |
 | P3 | AUDIT_LOG + triggers/hooks | ⏳ لم يبدأ |
 | P4 | تطبيق APEX: الهيكل، المصادقة، RBAC | ⏳ لم يبدأ |
 | P5 | وحدة الخطة الاستراتيجية (شاشات CRUD + التأريخ) | ⏳ لم يبدأ |
@@ -50,6 +50,29 @@
 
 لم يُنفَّذ أي منطق أعمال في هذه المرحلة (لا حزم PL/SQL، لا triggers إجرائية) —
 الجداول والقيود والفهارس فقط، حسب نطاق Prompt P1.
+
+## P2 — حزم PL/SQL الأساسية
+
+ترتيب التشغيل في SQL Workshop (بعد P1):
+
+1. `sql/P2_pkg_security.sql` — **PKG_SECURITY** (القسم 6): سياق المستخدم
+   (`set_current_user` / `current_user_scope`)، فحوص RBAC (`has_role` /
+   `has_permission`)، عزل الجهات (`is_unit_in_scope` — الجهة وفروعها عبر
+   الشجرة، REQ-052)، وتسجيل التدقيق (`log_action` بمعاملة مستقلة، REQ-054).
+   ملاحظة: بديل VPD لأن apex.oracle.com لا يتيح `CREATE CONTEXT`.
+2. `sql/P2_pkg_inheritance.sql` — **PKG_INHERITANCE** (القسم 4):
+   `is_direct_child` (تحقق الأبوة المباشرة)، `create_root_plan` (خطة الرئاسة من
+   الخطة الاستراتيجية المعتمدة مع تثبيت الإصدار)، `derive_plan` (منطق القسم 4
+   حرفياً: تحقق الابن المباشر ← إنشاء الخطة بإصدار مثبّت ← نسخ المرجعيات بمستهدف
+   فارغ ← تسجيل في AUDIT_LOG)، وإدارة التأريخ الفعّال AD-01
+   (`start_new_version` / `approve_version` — الإصدارات المثبّتة لا تُمسّ).
+3. `sql/P2_pkg_calc.sql` — **PKG_CALC** (القسم 5): نسبة إنجاز المؤشر بصيغة
+   `LEAST(100, actual/NULLIF(target,0)*100)`، متوسط البُعد مع fallback الأوزان
+   (AD-02)، نسبة الجهة، التجميع المؤسسي، والمقارنات (أفضل/أقل ربع وجهة، اتجاه
+   الأداء — REQ-042).
+4. `sql/P2_tests.sql` — 3 وحدات اختبار ببيانات معلومة (تُنظَّف بـ ROLLBACK):
+   صحة نسبة المؤشر وسقف 100 وحماية الصفر؛ الموزون مقابل المتساوي؛ الاشتقاق
+   (تثبيت الإصدار، نسخ 4 مرجعيات، رفض غير الابن المباشر) والتجميع والمقارنات.
 
 ## المرجعية
 
