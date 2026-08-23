@@ -1,107 +1,163 @@
 /* ==========================================================================
-   Jannatan — إعادة تصميم المنتجات فقط
+   Jannatan — عرض المنتجات بأسلوب naturesbakery
    --------------------------------------------------------------------------
-   هذا الملف يلمس بطاقات المنتجات وشبكتها وصفحة المنتج المفردة فقط.
-   لا يمسّ: عرض الموقع · الهيدر · البحث · القائمة · الفوتر · الخطوط العامة ·
-   الألوان الرئيسية · أي إعداد في Theme Options.
-   كل قاعدة مقيّدة بحاوية منتج (.product-small / .products .product /
-   .single-product / .woocommerce div.product) فلا تتسرّب لأي مكان آخر.
-
-   طريقة الاستخدام: المظهر ← تخصيص ← CSS إضافي ← الصق هذا الملف كاملاً.
-   لا يحتاج @import ولا خطوطاً خارجية.
+   لوح ملوّن لكل تصنيف + حافة إبداعية + الصورة تطفو فوقه.
+   النطاق: المنتجات فقط. لا يمسّ عرض الموقع أو الهيدر أو البحث أو الفوتر
+   أو الخطوط العامة أو أي إعداد في Theme Options.
+   الصق الملف كاملاً في: المظهر ← تخصيص ← CSS إضافي.
 
    الفهرس
-   00. إعدادات محلية (لا تؤثر خارج المنتجات)
-   01. بطاقة المنتج في الشبكة (متجر · تصنيف · ذات صلة)
-   02. الصورة ونسبتها الثابتة
-   03. الاسم · التقييم · السعر
-   04. زر الإضافة و"Read more"
-   05. الشارات · المفضلة · العرض السريع
-   06. تساوي الارتفاعات + عمودان على الجوال
-   07. صفحة المنتج المفردة
-   08. ترقيم الصفحات (داخل المتجر فقط)
+   00. الإعدادات المحلية + لوحة ألوان التصنيفات
+   01. البطاقة (بلا حدّ — اللوح الملوّن هو البطل)
+   02. اللوح الملوّن + الحافة الإبداعية
+   03. ربط اللون بالتصنيف الصحي  ← عدّل الأسماء اللاتينية لتطابق تصنيفاتك
+   04. أنماط الحواف: افتراضي مقوّس · jp-round · jp-blob
+   05. الاسم · السعر · التقييم
+   06. زر الإضافة و"Read more"
+   07. الشارات · المفضلة
+   08. تساوي الارتفاعات + عمودان على الجوال
+   09. صفحة المنتج المفردة
+   10. ترقيم صفحات المتجر
    ========================================================================== */
 
 /* ==========================================================================
-   00. إعدادات محلية — تُعرّف هنا وتُستخدم داخل المنتجات فقط
+   00. الإعدادات + لوحة الألوان (تُستخدم داخل المنتجات فقط)
    ========================================================================== */
 :root {
-  --jp-accent: var(--fs-color-primary, #079616); /* يرث لون علامتك */
-  --jp-ink:    #1f2421;   /* نص المنتج */
-  --jp-soft:   #6b746f;   /* نص ثانوي */
-  --jp-faint:  #a7ada8;   /* السعر المشطوب/التلميحات */
-  --jp-tile:   #f6f6f4;   /* خلفية خفيفة خلف صورة المنتج */
-  --jp-line:   #e8e8e4;   /* حدود خفيفة */
-  --jp-r:      12px;      /* استدارة البطاقة */
-  --jp-ease:   cubic-bezier(.4,0,.2,1);
+  --jp-accent: var(--fs-color-primary, #079616);
+  --jp-ink:    #1f2421;
+  --jp-soft:   #6b746f;
+  --jp-faint:  #a7ada8;
+  --jp-line:   #e8e8e4;
+  --jp-blend:  multiply;   /* اجعلها normal إن كانت صور منتجاتك PNG بخلفية شفافة */
+
+  /* حواف اللوح الافتراضية (مقوّسة من الأعلى) */
+  --jp-edge: 44px 44px 18px 18px;
+
+  /* لون لكل تصنيف صحي — غيّرها كما يحلو لك */
+  --jp-c-immune: #F4E2C6;   /* مناعة — كهرماني دافئ */
+  --jp-c-heart:  #F3D4D4;   /* قلب — وردي */
+  --jp-c-sugar:  #DBE8D0;   /* سكر — أخضر مريمية */
+  --jp-c-hair:   #F3DBE7;   /* شعر وبشرة — بينك */
+  --jp-c-brain:  #D8DEF3;   /* دماغ — أزرق بنفسجي */
+  --jp-c-sleep:  #DED8EF;   /* نوم — لافندر */
+  --jp-c-gut:    #F7E0CE;   /* هضم — خوخي */
+  --jp-c-bone:   #CFE3EC;   /* عظام ومفاصل — سماوي */
+  --jp-c-default:#EFEDE7;   /* لأي منتج بلا تصنيف مطابق */
 }
 
 /* ==========================================================================
-   01. بطاقة المنتج في الشبكة
+   01. البطاقة — بلا حدّ ولا ظلّ؛ اللوح الملوّن هو ما يميّزها
    ========================================================================== */
-.product-small.col {
-  padding-bottom: 1.5rem;
-}
-
 .product-small .box,
 .products .product .box {
   height: 100%;
   display: flex;
   flex-direction: column;
-  background: #fff;
-  border: 1px solid var(--jp-line);
-  border-radius: var(--jp-r);
-  overflow: hidden;
+  background: transparent;
+  border: 0;
   box-shadow: none;
-  transition: transform .25s var(--jp-ease), box-shadow .25s var(--jp-ease), border-color .25s var(--jp-ease);
-}
-.product-small .box:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 14px 30px rgba(20,30,25,.10);
-  border-color: transparent;
+  border-radius: 0;
+  overflow: visible;
 }
 
 .product-small .box-text,
 .products .product .box-text {
-  padding: 14px 14px 16px;
+  padding: 14px 6px 4px;
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 5px;
   flex: 1 1 auto;
   text-align: start;
 }
 
 /* ==========================================================================
-   02. الصورة — نسبة 1:1 ثابتة حتى تتساوى كل البطاقات مهما اختلفت الصور
+   02. اللوح الملوّن + الحافة الإبداعية + الصورة الطافية
    ========================================================================== */
 .product-small .box-image,
 .products .product .box-image {
-  background: var(--jp-tile);
+  background: var(--jp-c-default);
+  border-radius: var(--jp-edge);
   overflow: hidden;
+  transition: transform .3s cubic-bezier(.4,0,.2,1), box-shadow .3s cubic-bezier(.4,0,.2,1);
 }
+.product-small .box:hover .box-image {
+  transform: translateY(-6px);
+  box-shadow: 0 18px 34px rgba(20,30,25,.14);
+}
+
 .product-small .box-image img,
 .products .product .box-image img {
   aspect-ratio: 1 / 1;
   object-fit: contain;
   width: 100%;
   height: auto;
-  padding: 11%;
-  mix-blend-mode: multiply;   /* يخفي فروق خلفيات الصور البيضاء */
-  transition: transform .45s var(--jp-ease);
+  padding: 12%;
+  mix-blend-mode: var(--jp-blend);
+  transition: transform .5s cubic-bezier(.4,0,.2,1);
 }
-.product-small .box:hover .box-image img {
-  transform: scale(1.05);
-}
+.product-small .box:hover .box-image img { transform: scale(1.06) rotate(-1.5deg); }
+
 /* الصورة الناقصة (placeholder) لا تُبرز */
 .product-small img[src*="woocommerce-placeholder"],
 .product-small img[srcset*="woocommerce-placeholder"] {
-  padding: 24%;
-  opacity: .4;
+  padding: 26%;
+  opacity: .35;
   mix-blend-mode: normal;
 }
 
 /* ==========================================================================
-   03. الاسم · التقييم · السعر
+   03. ربط اللون بالتصنيف الصحي
+   WooCommerce يضيف كلاس product_cat-<slug> لكل منتج تلقائياً.
+   تأكّد أن الأسماء أدناه تطابق روابط تصنيفاتك:
+   افتح رابط التصنيف وانظر الجزء الأخير، مثال:
+   /product-category/immune-support/  →  product_cat-immune-support
+   ========================================================================== */
+.product_cat-immune-support   .box-image { background: var(--jp-c-immune); }
+.product_cat-heart-health     .box-image { background: var(--jp-c-heart);  }
+.product_cat-sugar-support    .box-image { background: var(--jp-c-sugar);  }
+.product_cat-hair-skin-nails  .box-image { background: var(--jp-c-hair);   }
+.product_cat-brain-cognitive  .box-image { background: var(--jp-c-brain);  }
+.product_cat-sleep            .box-image { background: var(--jp-c-sleep);  }
+.product_cat-gut-health       .box-image { background: var(--jp-c-gut);    }
+.product_cat-bone-joint-cartilage .box-image { background: var(--jp-c-bone); }
+
+/* --------------------------------------------------------------------------
+   بديل: لون متدرّج تلقائي حسب ترتيب المنتج (بلا اعتماد على التصنيف).
+   إن أردت هذا بدل الربط بالتصنيف، احذف كتلة القسم 03 أعلاه،
+   ثم احذف علامتَي التعليق حول الكتلة التالية.
+   -------------------------------------------------------------------------- */
+/*
+.products .product-small:nth-child(8n+1) .box-image { background: var(--jp-c-immune); }
+.products .product-small:nth-child(8n+2) .box-image { background: var(--jp-c-heart);  }
+.products .product-small:nth-child(8n+3) .box-image { background: var(--jp-c-sugar);  }
+.products .product-small:nth-child(8n+4) .box-image { background: var(--jp-c-hair);   }
+.products .product-small:nth-child(8n+5) .box-image { background: var(--jp-c-brain);  }
+.products .product-small:nth-child(8n+6) .box-image { background: var(--jp-c-sleep);  }
+.products .product-small:nth-child(8n+7) .box-image { background: var(--jp-c-gut);    }
+.products .product-small:nth-child(8n+8) .box-image { background: var(--jp-c-bone);   }
+*/
+
+/* ==========================================================================
+   04. أنماط الحواف — ضع الكلاس في خانة Class Name لعنصر Products في UX Builder
+   الافتراضي: مقوّس من الأعلى (--jp-edge). البدائل:
+   ========================================================================== */
+/* حواف دائرية متساوية وأنعم */
+.jp-round .product-small .box-image { border-radius: 26px; }
+
+/* حافة عضوية (blob) — الأكثر إبداعاً */
+.jp-blob .product-small .box-image {
+  border-radius: 46% 54% 48% 52% / 54% 46% 54% 46%;
+}
+.jp-blob .product-small .box:hover .box-image {
+  border-radius: 52% 48% 54% 46% / 46% 54% 46% 54%;
+}
+
+/* قوس كامل من الأعلى (نصف دائرة) */
+.jp-arch .product-small .box-image { border-radius: 999px 999px 20px 20px; }
+
+/* ==========================================================================
+   05. الاسم · السعر · التقييم
    ========================================================================== */
 .product-small .name.product-title,
 .products .product .product-title {
@@ -110,7 +166,7 @@
   font-weight: 600;
   line-height: 1.35;
   color: var(--jp-ink);
-  min-height: 2.7em;                       /* سطران — يوحّد ارتفاع الاسم */
+  min-height: 2.7em;
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
@@ -119,7 +175,7 @@
 .product-small .name.product-title a { color: inherit; }
 .product-small .name.product-title a:hover { color: var(--jp-accent); }
 
-.product-small .star-rating { font-size: 12px; margin: 2px 0; }
+.product-small .star-rating { font-size: 12px; margin: 1px 0; }
 
 .product-small .price,
 .product-small .woocommerce-Price-amount {
@@ -131,71 +187,37 @@
 .product-small .price ins { text-decoration: none; color: var(--jp-accent); }
 
 /* ==========================================================================
-   04. زر الإضافة — يملأ عرض البطاقة، ويظهر دائماً
+   06. زر الإضافة و"Read more"
    ========================================================================== */
 .product-small .add-to-cart-button,
-.product-small .box-text > .button {
-  width: 100%;
-  margin-top: auto;      /* يدفع الزر لأسفل البطاقة فتتساوى الصفوف */
-}
+.product-small .box-text > .button { width: 100%; margin-top: auto; }
+
 .product-small .add-to-cart-button .button {
-  width: 100%;
-  min-height: 42px;
-  border-radius: 8px;
-  font-weight: 600;
-  background: var(--jp-accent);
-  border-color: var(--jp-accent);
-  color: #fff;
-  margin: 0;
+  width: 100%; min-height: 42px; border-radius: 8px; font-weight: 600;
+  background: var(--jp-accent); border-color: var(--jp-accent); color: #fff; margin: 0;
 }
 .product-small .add-to-cart-button .button:hover { filter: brightness(.92); }
-.product-small .add-to-cart-button .button.added { opacity: .7; }
 
-/* منتج بلا سعر يظهر "Read more": نميّزه كزر ثانوي لا كزر شراء */
 .product-small .box-text > a.button[href*="/product/"] {
-  width: 100%;
-  min-height: 42px;
-  border-radius: 8px;
-  font-weight: 600;
-  background: #fff;
-  border: 1px solid var(--jp-line);
-  color: var(--jp-soft);
-  margin-top: auto;
+  width: 100%; min-height: 42px; border-radius: 8px; font-weight: 600;
+  background: #fff; border: 1px solid var(--jp-line); color: var(--jp-soft); margin-top: auto;
 }
 .product-small .box-text > a.button[href*="/product/"]:hover {
-  border-color: var(--jp-ink);
-  color: var(--jp-ink);
-  background: #fff;
+  border-color: var(--jp-ink); color: var(--jp-ink);
 }
 
 /* ==========================================================================
-   05. الشارات · المفضلة · العرض السريع
+   07. الشارات · المفضلة
    ========================================================================== */
 .product-small .badge-container .badge-inner,
 .product-small .callout .badge-inner {
-  border-radius: 8px;
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: .03em;
-  padding: 4px 9px;
-  min-width: 0;
-  min-height: 0;
-  line-height: 1.5;
+  border-radius: 8px; font-size: 11px; font-weight: 700; letter-spacing: .03em;
+  padding: 4px 9px; min-width: 0; min-height: 0; line-height: 1.5;
 }
-
-.product-small .yith-wcwl-add-to-wishlist {
-  position: absolute;
-  top: 10px;
-  inset-inline-end: 10px;
-  z-index: 3;
-  margin: 0;
-}
+.product-small .yith-wcwl-add-to-wishlist { position: absolute; top: 12px; inset-inline-end: 12px; z-index: 3; margin: 0; }
 .product-small .yith-wcwl-add-to-wishlist a {
-  width: 34px; height: 34px;
-  border-radius: 50%;
-  background: rgba(255,255,255,.92);
-  box-shadow: 0 1px 4px rgba(20,30,25,.12);
-  display: flex; align-items: center; justify-content: center;
+  width: 34px; height: 34px; border-radius: 50%; background: rgba(255,255,255,.9);
+  box-shadow: 0 1px 4px rgba(20,30,25,.12); display: flex; align-items: center; justify-content: center;
   color: var(--jp-soft); font-size: 14px;
 }
 .product-small .yith-wcwl-add-to-wishlist a:hover { color: #c0392b; }
@@ -203,110 +225,68 @@
 .product-small .yith-wcwl-wishlistaddedbrowse span,
 .product-small .yith-wcwl-wishlistexistsbrowse span { display: none; }
 
-.product-small .quick-view,
-.product-small .quick-view-added {
-  border-radius: 8px;
-  font-size: 12.5px;
-  font-weight: 600;
-}
-
 /* ==========================================================================
-   06. تساوي الارتفاعات + عمودان على الجوال
+   08. تساوي الارتفاعات + عمودان على الجوال
    ========================================================================== */
 .products.row.has-equal-box-heights .product-small .box { height: 100%; }
 
 @media (max-width: 549px) {
   .products.row > .product-small.col {
-    width: 50% !important;
-    max-width: 50% !important;
-    flex-basis: 50% !important;
+    width: 50% !important; max-width: 50% !important; flex-basis: 50% !important;
   }
-  .product-small .box-text { padding: 11px 11px 13px; }
+  .product-small .box-image { border-radius: 30px 30px 14px 14px; }
+  .jp-round .product-small .box-image { border-radius: 20px; }
+  .product-small .box-text { padding: 11px 4px 4px; }
   .product-small .name.product-title { font-size: 14px; }
   .product-small .price,
   .product-small .woocommerce-Price-amount { font-size: 15px; }
 }
 
 /* ==========================================================================
-   07. صفحة المنتج المفردة — العرض والتصميم فقط (لا سايدبار ولا layout)
+   09. صفحة المنتج المفردة — نفس روح اللوح الملوّن
    ========================================================================== */
 .single-product .product-gallery .woocommerce-product-gallery__image img,
 .single-product .product-images img {
-  border-radius: var(--jp-r);
-  background: var(--jp-tile);
+  border-radius: 32px 32px 18px 18px;
+  background: var(--jp-c-default);
 }
-.single-product .product-thumbnails img {
-  border-radius: 8px;
-  background: var(--jp-tile);
-}
+/* لون معرض صفحة المنتج حسب تصنيفه أيضاً */
+.single-product.product_cat-immune-support   .product-images img { background: var(--jp-c-immune); }
+.single-product.product_cat-heart-health     .product-images img { background: var(--jp-c-heart);  }
+.single-product.product_cat-sugar-support    .product-images img { background: var(--jp-c-sugar);  }
+.single-product.product_cat-hair-skin-nails  .product-images img { background: var(--jp-c-hair);   }
+.single-product.product_cat-brain-cognitive  .product-images img { background: var(--jp-c-brain);  }
+.single-product.product_cat-sleep            .product-images img { background: var(--jp-c-sleep);  }
+.single-product.product_cat-gut-health       .product-images img { background: var(--jp-c-gut);    }
+.single-product.product_cat-bone-joint-cartilage .product-images img { background: var(--jp-c-bone); }
+
+.single-product .product-thumbnails img { border-radius: 14px; background: var(--jp-c-default); }
 
 .single-product .product-info .price,
-.single-product div.product .price {
-  font-size: 24px;
-  font-weight: 700;
-  color: var(--jp-ink);
-}
+.single-product div.product .price { font-size: 24px; font-weight: 700; color: var(--jp-ink); }
 .single-product .product-info .price del { color: var(--jp-faint); font-weight: 400; font-size: 16px; }
 .single-product .product-info .price ins { text-decoration: none; color: var(--jp-accent); }
-
 .single-product .stock.in-stock { color: var(--jp-accent); font-weight: 600; font-size: 14px; }
-.single-product .stock.out-of-stock { color: var(--jp-faint); font-weight: 600; }
 
-/* خيارات المتغيّرات (المقاسات/النكهات) */
-.single-product .ux-swatch {
-  border-radius: 8px;
-  min-height: 42px;
-}
-.single-product .variations_form .ux-swatch.selected {
-  box-shadow: 0 0 0 2px var(--jp-accent);
-  border-color: var(--jp-accent);
-}
-
-/* عدّاد الكمية */
-.single-product .quantity {
-  border: 1px solid var(--jp-line);
-  border-radius: 8px;
-  overflow: hidden;
-  display: inline-flex;
-  align-items: center;
-}
+.single-product .ux-swatch { border-radius: 8px; min-height: 42px; }
+.single-product .variations_form .ux-swatch.selected { box-shadow: 0 0 0 2px var(--jp-accent); border-color: var(--jp-accent); }
+.single-product .quantity { border: 1px solid var(--jp-line); border-radius: 8px; overflow: hidden; display: inline-flex; align-items: center; }
 .single-product .quantity input.qty { border: 0; box-shadow: none; font-weight: 700; }
-
-/* زر الإضافة الرئيسي */
 .single-product .single_add_to_cart_button {
-  border-radius: 8px;
-  min-height: 50px;
-  font-weight: 600;
-  background: var(--jp-accent);
-  border-color: var(--jp-accent);
+  border-radius: 8px; min-height: 50px; font-weight: 600;
+  background: var(--jp-accent); border-color: var(--jp-accent);
 }
 .single-product .single_add_to_cart_button:hover { filter: brightness(.92); }
-
-/* التبويبات: وصف · مكوّنات · مراجعات */
-.single-product .woocommerce-tabs .tabs li a {
-  font-weight: 600;
-  text-transform: none;
-  letter-spacing: 0;
-}
+.single-product .woocommerce-tabs .tabs li a { font-weight: 600; text-transform: none; letter-spacing: 0; }
 .single-product .woocommerce-tabs .tabs li.active a { color: var(--jp-accent); }
 
-/* المنتجات ذات الصلة ترث تصميم البطاقة تلقائياً (أعلاه) */
-.single-product .related > h2,
-.single-product .up-sells > h2 { font-weight: 700; }
-
 /* ==========================================================================
-   08. ترقيم الصفحات داخل المتجر فقط
+   10. ترقيم صفحات المتجر
    ========================================================================== */
 .woocommerce-pagination .page-numbers li a,
 .woocommerce-pagination .page-numbers li span {
-  border-radius: 8px;
-  min-width: 42px;
-  height: 42px;
-  line-height: 40px;
-  font-weight: 600;
+  border-radius: 8px; min-width: 42px; height: 42px; line-height: 40px; font-weight: 600;
 }
 .woocommerce-pagination .page-numbers li .current {
-  background: var(--jp-accent);
-  border-color: var(--jp-accent);
-  color: #fff;
+  background: var(--jp-accent); border-color: var(--jp-accent); color: #fff;
 }
