@@ -187,6 +187,11 @@ strong, b { font-weight: 600; color: var(--jn-ink); }
 
 /* ==========================================================================
    03. الأزرار — استدارة 8px، ارتفاع 48px، خط عريض صغير
+
+   مهم: المظهر (الخط والاستدارة) يُطبَّق على كل الأزرار،
+   أما الحجم (الارتفاع والحشوة) فيُطبَّق على أزرار المحتوى فقط.
+   أزرار الأيقونات وإرسال البحث لها قاعدتها الخاصة أدناه، وإلا تضخّمت.
+   ولا نفرض `display` إطلاقاً حتى لا تظهر أزرار يخفيها القالب عمداً.
    ========================================================================== */
 .button, button, input[type="submit"], input[type="button"],
 .woocommerce .button, .wp-element-button, .add_to_cart_button {
@@ -197,17 +202,73 @@ strong, b { font-weight: 600; color: var(--jn-ink); }
   text-transform: none !important;
   line-height: 1.5 !important;
   border-radius: var(--jn-r) !important;
-  border: 1px solid transparent;
-  min-height: 48px;
-  padding: .75rem 2rem !important;
-  display: inline-flex !important;
-  align-items: center;
-  justify-content: center;
-  gap: 1ch;
   box-shadow: none !important;
   transition: background-color var(--jn-t), color var(--jn-t),
               border-color var(--jn-t), transform var(--jn-t);
 }
+
+/* الحجم — لأزرار المحتوى فقط */
+.entry-content .button,
+.product-info .button,
+.woocommerce .button:not(.ux-search-submit),
+.add_to_cart_button, .single_add_to_cart_button,
+.checkout-button, #place_order,
+.woocommerce form .form-row input[type="submit"],
+.section .button, .banner .button, .jn-hero .button,
+.button.primary, .button.is-outline, .button.secondary {
+  min-height: 48px;
+  padding: .75rem 2rem;
+  border: 1px solid transparent;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1ch;
+}
+
+/* الاستثناءات — عناصر يجب ألّا تتضخم أبداً */
+.header button,
+.header .button,
+.header input[type="submit"],
+.searchform button, .searchform input[type="submit"],
+.search-form button, .ux-search-submit, .ux-search-box .button,
+.dgwt-wcas-search-submit, .dgwt-wcas-close,
+.icon-button, .header-button .button.circle, .header-button .icon-button,
+.quantity .plus, .quantity .minus, .quantity input[type="button"],
+.mfp-close, .flickity-button, .flickity-prev-next-button,
+.wishlist-button, .yith-wcwl-add-to-wishlist a,
+.product-remove a.remove, .off-canvas .toggle {
+  min-height: 0 !important;
+  padding: 0 .625rem !important;
+  gap: .375rem;
+  width: auto;
+}
+
+/* زر إرسال البحث في الهيدر: أيقونة مربّعة صغيرة، لا زر بعرض الشاشة */
+.header .ux-search-submit,
+.header .searchform .submit-button,
+.header .searchform button[type="submit"],
+.dgwt-wcas-search-submit {
+  width: 44px !important;
+  height: 44px !important;
+  min-width: 0 !important;
+  padding: 0 !important;
+  border-radius: var(--jn-r) !important;
+  flex: 0 0 44px;
+  font-size: 0 !important;          /* يخفي كلمة Search ويُبقي الأيقونة */
+  overflow: hidden;
+}
+.header .ux-search-submit i,
+.header .searchform .submit-button i,
+.dgwt-wcas-search-submit svg { font-size: 1rem !important; }
+
+/* لا تُظهر أبداً زراً يخفيه القالب عمداً */
+button[hidden], .button[hidden],
+.hide-for-medium, .hide-for-small, .searchform .hidden { display: none !important; }
+
+/* الهيدر لا يلتفّ ولا يفيض */
+.header-main .flex-row { flex-wrap: nowrap; }
+.header-main .header-search-form, .header-main .searchform-wrapper { max-width: 460px; }
+.header-main .flex-col { min-width: 0; }
 
 .button.primary, .button.is-primary, .woocommerce .button.alt,
 .single_add_to_cart_button, .checkout-button, #place_order,
@@ -921,3 +982,75 @@ html[dir="rtl"] .product-small .box-text { text-align: right; }
 html[dir="rtl"] .price del { margin-inline-end: 0; margin-inline-start: .375rem; }
 html[dir="rtl"] .jn-more::after { content: "←"; }
 html[dir="rtl"] .jn-more:hover::after { transform: translateX(-4px); }
+
+/* ==========================================================================
+   17. إصلاحات توافق مع القالب الحالي
+   هذه القواعد تعالج ما ظهر على الموقع المباشر بعد التركيب.
+   ========================================================================== */
+
+/* --- شريط أدمن ووردبريس: لا يغطّيه الهيدر الثابت --- */
+body.admin-bar .header.stuck, body.admin-bar .header-wrapper.stuck { top: 32px; }
+@media screen and (max-width: 782px) {
+  body.admin-bar .header.stuck, body.admin-bar .header-wrapper.stuck { top: 46px; }
+}
+
+/* --- محاذاة نص بطاقة المنتج لليسار (Flatsome يوسّطه افتراضياً) --- */
+.product-small .box-text,
+.product-small .box-text.text-center,
+.products .product .box-text {
+  text-align: start !important;
+}
+.product-small .box-text .price,
+.product-small .box-text .star-rating { justify-content: flex-start; margin-inline: 0; }
+
+/* --- السايدبار: أزل ودجات المدونة من صفحات المتجر --- */
+.shop-sidebar .widget_recent_entries,
+.shop-sidebar .widget_recent_comments,
+.shop-sidebar .widget_calendar,
+.shop-sidebar .widget_archive,
+.shop-sidebar .widget_meta,
+.shop-sidebar .widget_rss,
+.single-product .shop-sidebar .widget_shopping_cart,
+.single-product #secondary, .single-product .sidebar-inner {
+  display: none !important;
+}
+/* صفحة المنتج بعرض كامل بعد إخفاء السايدبار */
+.single-product .content-area, .single-product .large-9 {
+  width: 100% !important; max-width: 100% !important; flex-basis: 100% !important;
+}
+
+/* --- زر "Read more" (منتج بلا سعر): واضح أنه ليس زر شراء --- */
+.product-small .add-to-cart-button .button,
+.product-small a.button[href*="/product/"] {
+  background: transparent !important;
+  color: var(--jn-ink) !important;
+  border: 1px solid var(--jn-ink) !important;
+  min-height: 44px;
+  padding: .625rem 1rem;
+}
+.product-small .add-to-cart-button .button:hover,
+.product-small a.button[href*="/product/"]:hover {
+  background: var(--jn-ink) !important;
+  color: var(--jn-canvas) !important;
+}
+
+/* --- صورة المنتج الناقصة: لا تُبرزها بالحجم الكامل --- */
+.product-small img[src*="woocommerce-placeholder"],
+.product-small img[srcset*="woocommerce-placeholder"] {
+  padding: 26% !important;
+  opacity: .35;
+  mix-blend-mode: normal;
+}
+
+/* --- بانرات الصور: لا تُقصّ الصورة داخل استدارة مزدوجة --- */
+.banner .banner-bg img, .banner-layers img { border-radius: 0; }
+
+/* --- أزرار بعرض كامل داخل البانرات: حدّها بعرض معقول --- */
+.banner .button, .jn-hero .button { width: auto; max-width: 100%; }
+
+/* --- روابط القائمة الجانبية للتصنيفات --- */
+.sidebar-menu .nav > li > a, .widget_product_categories li a {
+  font-family: var(--jn-body); font-size: 1rem; font-weight: 500;
+  color: var(--jn-ink); text-decoration: none; padding: .625rem 0;
+}
+.widget_product_categories li a:hover { color: var(--jn-accent); }
