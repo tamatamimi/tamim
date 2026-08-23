@@ -1247,3 +1247,58 @@ a.jn-arch:hover > img, .jn-archcard:hover .jn-arch > img { transform: scale(1.05
 .jn-dot-rule::before, .jn-dot-rule::after {
   content: ""; height: 1px; flex: 1; background: var(--jn-hairline);
 }
+
+/* ==========================================================================
+   19. شبكة أمان: القائمة الجانبية العمودية لا تختفي خلف الهيدر
+   السبب: عمود القائمة أطول من البانر المجاور، والصف محاذاته "وسط"،
+   فيفيض العمود من الأعلى ويدخل تحت الهيدر الثابت.
+   الحل الجذري في UX Builder: اضبط محاذاة الصف الرأسية على "Top".
+   هذه القاعدة تعالجها تلقائياً أيضاً.
+   ========================================================================== */
+
+/* ثبّت أي عمود يحوي قائمة عمودية إلى أعلى صفّه */
+.row > .col:has(.ux-menu-vertical),
+.row > .col:has(.nav-vertical),
+.row > .col:has(.widget_product_categories),
+.row > .col:has(.ux-menu[class*="vertical"]) {
+  align-self: flex-start !important;
+}
+
+/* وامنع أي قصّ رأسي على حاوية القائمة نفسها */
+.ux-menu-vertical, .nav-vertical,
+.widget_product_categories, .widget_nav_menu {
+  max-height: none !important;
+  overflow: visible !important;
+}
+
+/* مسافة أنيقة بين عناصر قائمة التصنيفات العمودية + توقيع الخط */
+.ux-menu-vertical .ux-menu-link__text,
+.nav-vertical > li > a,
+.widget_product_categories li a {
+  font-family: var(--jn-body);
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--jn-ink);
+  letter-spacing: 0;
+  text-transform: none;
+}
+.ux-menu-vertical .ux-menu-link,
+.nav-vertical > li,
+.widget_product_categories li {
+  border-bottom: 1px solid var(--jn-hairline);
+}
+.ux-menu-vertical .ux-menu-link:hover .ux-menu-link__text,
+.nav-vertical > li > a:hover,
+.widget_product_categories li a:hover { color: var(--jn-accent); }
+
+/* عدّاد عدد المنتجات بجانب التصنيف (widget WooCommerce) */
+.widget_product_categories .count {
+  color: var(--jn-ink-faint); font-weight: 600; font-size: .8125rem;
+  background: none; border: 0;
+}
+
+/* على الجوال: القائمة العمودية بعرض كامل فوق البانر لا بجانبه */
+@media (max-width: 849px) {
+  .row > .col:has(.ux-menu-vertical),
+  .row > .col:has(.nav-vertical) { align-self: auto !important; }
+}
