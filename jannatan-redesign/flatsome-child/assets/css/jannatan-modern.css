@@ -261,9 +261,11 @@ strong, b { font-weight: 600; color: var(--jn-ink); }
 .header .searchform .submit-button i,
 .dgwt-wcas-search-submit svg { font-size: 1rem !important; }
 
-/* لا تُظهر أبداً زراً يخفيه القالب عمداً */
-button[hidden], .button[hidden],
-.hide-for-medium, .hide-for-small, .searchform .hidden { display: none !important; }
+/* لا تُظهر أبداً زراً يخفيه القالب عمداً.
+   ملاحظة: لا تضع هنا .hide-for-medium أو .hide-for-small —
+   فهما كلاسا Flatsome للإخفاء على الجوال فقط، وإخفاؤهما دائماً
+   يحذف أي عنصر ضُبط على "إخفاء على الجوال" من الديسكتوب أيضاً. */
+button[hidden], .button[hidden], .searchform .hidden { display: none !important; }
 
 /* الهيدر لا يلتفّ ولا يفيض */
 .header-main .flex-row { flex-wrap: nowrap; }
