@@ -1,0 +1,370 @@
+<title>طقم أقسام جنّتان</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62.5..125,400..900&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap">
+<style>
+/* ================= رموز صفحة العرض (تتكيّف مع سمة القارئ) ================= */
+:root{
+  --pg:#EFEDE8; --pg-2:#E5E2DB; --card:#FFFFFF; --line:#D8D4CC;
+  --tx:#1A1A18; --tx-2:#4A4A46; --tx-3:#84837C;
+  --hi:#1A855B; --warn:#A6461F;
+  --sh:0 26px 70px rgba(20,20,18,.13);
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --pg:#111310; --pg-2:#181B17; --card:#1D211C; --line:#2E332C;
+    --tx:#EDEFEA; --tx-2:#B4B9B1; --tx-3:#7F847C;
+    --hi:#54C492; --warn:#E08A5E;
+    --sh:0 30px 80px rgba(0,0,0,.55);
+  }
+}
+:root[data-theme="dark"]{
+  --pg:#111310; --pg-2:#181B17; --card:#1D211C; --line:#2E332C;
+  --tx:#EDEFEA; --tx-2:#B4B9B1; --tx-3:#7F847C;
+  --hi:#54C492; --warn:#E08A5E;
+  --sh:0 30px 80px rgba(0,0,0,.55);
+}
+
+*{box-sizing:border-box}
+body{
+  margin:0; background:var(--pg); color:var(--tx); direction:rtl;
+  font-family:"IBM Plex Sans Arabic",system-ui,sans-serif;
+  font-size:16px; line-height:1.8; -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:1180px; margin:0 auto; padding:0 24px}
+p{margin:0}
+h1,h2,h3{margin:0; line-height:1.25; letter-spacing:-.01em; font-weight:700; text-wrap:balance}
+
+/* ---- الترويسة ---- */
+.top{padding:76px 0 44px}
+.tag{
+  display:inline-block; font-size:11.5px; font-weight:700; letter-spacing:.14em;
+  color:var(--hi); border:1px solid currentColor; padding:5px 13px; border-radius:6px; margin-bottom:22px;
+}
+.top h1{font-size:clamp(30px,5vw,50px); margin-bottom:18px}
+.top .lede{font-size:17px; color:var(--tx-2); max-width:64ch}
+
+/* ---- لوحة التشخيص ---- */
+.why{
+  background:var(--card); border:1px solid var(--line); border-radius:18px;
+  padding:28px; margin:44px 0 0;
+}
+.why h2{font-size:19px; margin-bottom:18px}
+.why ol{margin:0; padding-inline-start:20px; color:var(--tx-2); font-size:15px}
+.why li{margin-bottom:12px}
+.why li b{color:var(--tx)}
+.why .fix{
+  color:var(--hi); font-weight:600; display:inline-block; margin-inline-start:4px;
+}
+
+/* ---- عنوان كل كتلة ---- */
+.blk{margin:64px 0 0}
+.blk__head{display:flex; align-items:baseline; gap:14px; margin-bottom:16px; flex-wrap:wrap}
+.blk__n{
+  font-size:12px; font-weight:700; letter-spacing:.1em; color:var(--tx-3);
+  border:1px solid var(--line); border-radius:6px; padding:3px 9px;
+}
+.blk__head h3{font-size:21px}
+.blk__note{font-size:14.5px; color:var(--tx-2); margin-bottom:18px; max-width:70ch}
+.blk__note code{
+  font-family:ui-monospace,Menlo,monospace; font-size:13px;
+  background:var(--pg-2); padding:2px 6px; border-radius:5px; direction:ltr; display:inline-block;
+}
+
+/* إطار العرض الحيّ */
+.stage{
+  background:#fff; border-radius:18px; overflow:hidden; box-shadow:var(--sh);
+  direction:ltr; border:1px solid var(--line);
+}
+
+/* ================= رموز المتجر — ثابتة، فهي صورة المنتج النهائي ========== */
+.mk{
+  --ink:#191919; --soft:#5C5C58; --faint:#9A9A95;
+  --tile:#F4F1EC; --tile2:#EDE9E2; --hair:#E6E2DB;
+  --acc:#1A855B; --r:8px; --rt:24px;
+  font-family:"Poppins",system-ui,sans-serif; color:var(--ink); background:#fff;
+  font-size:15px; line-height:1.55;
+}
+.mk h1,.mk h2,.mk h3,.mk .disp{
+  font-family:"Archivo",sans-serif; font-stretch:78%; font-variation-settings:"wdth" 78;
+  font-weight:800; letter-spacing:-.03em; line-height:1.02; margin:0;
+}
+.mk p{color:var(--soft); margin:0}
+.mk a{text-decoration:none; color:inherit}
+.pad{padding:clamp(28px,5vw,64px)}
+.tile-bg{background:var(--tile)}
+.eyebrow{
+  display:inline-block; font-size:11px; font-weight:700; letter-spacing:.14em;
+  text-transform:uppercase; color:var(--acc); margin-bottom:14px;
+}
+.btn{
+  display:inline-flex; align-items:center; justify-content:center; gap:1ch;
+  background:var(--acc); color:#fff; border:1px solid var(--acc); border-radius:var(--r);
+  padding:13px 26px; font-size:13.5px; font-weight:700;
+}
+.btn.ghost{background:transparent; color:var(--ink); border-color:var(--ink)}
+.more{
+  display:inline-flex; align-items:center; gap:8px; font-size:13.5px; font-weight:700;
+  text-decoration:underline; text-underline-offset:4px; margin-top:18px;
+}
+.more::after{content:"→"}
+
+/* القوس */
+.arch{
+  border-radius:999px 999px var(--r) var(--r); overflow:hidden;
+  background:var(--tile); aspect-ratio:3/4; display:flex;
+  align-items:center; justify-content:center; position:relative;
+}
+.arch svg{width:52%; height:auto}
+
+/* الحبيبات */
+.grain{position:relative; isolation:isolate}
+.grain::after{
+  content:""; position:absolute; inset:0; z-index:-1; pointer-events:none; opacity:.55; mix-blend-mode:multiply;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='.16'/%3E%3C/svg%3E");
+}
+
+/* الشريط المتحرك */
+.marq{overflow:hidden; background:var(--ink); color:#fff; padding:15px 0}
+.marq--light{background:var(--tile); color:var(--ink)}
+.marq__t{display:flex; align-items:center; gap:48px; width:max-content; animation:mv 30s linear infinite}
+.marq:hover .marq__t{animation-play-state:paused}
+.marq__t>span{
+  display:inline-flex; align-items:center; gap:48px; white-space:nowrap;
+  font-size:12.5px; font-weight:700; letter-spacing:.16em; text-transform:uppercase;
+}
+.marq__t>span::after{content:"✱"; opacity:.5; font-size:11px; letter-spacing:0}
+@keyframes mv{to{transform:translateX(-50%)}}
+
+/* الهيرو */
+.hero{display:grid; grid-template-columns:1.05fr .95fr; gap:clamp(24px,5vw,64px); align-items:center; background:var(--tile); border-radius:var(--rt)}
+.hero h1{font-size:clamp(38px,6.4vw,74px); font-stretch:70%; font-variation-settings:"wdth" 70; line-height:.94; letter-spacing:-.038em; margin-bottom:18px}
+.hero .lead{font-size:16px; max-width:42ch; line-height:1.6}
+.hero__cta{display:flex; gap:12px; flex-wrap:wrap; margin-top:26px}
+.hero .arch{aspect-ratio:4/5; max-width:340px; margin-inline:auto; background:#fff}
+
+/* بلاطات التصنيفات */
+.agrid{display:grid; grid-template-columns:repeat(4,1fr); gap:20px}
+.acard{display:block; text-align:center}
+.acard .arch{margin-bottom:14px; background:#fff}
+.acard b{font-family:"Archivo",sans-serif; font-stretch:78%; font-variation-settings:"wdth" 78; font-size:19px; font-weight:800; letter-spacing:-.02em; display:block}
+.acard s{font-size:11.5px; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:var(--faint); text-decoration:none; display:block; margin-top:4px}
+.offset>*:nth-child(even){transform:translateY(34px)}
+
+/* تحريري */
+.edit{display:grid; grid-template-columns:1fr 1fr; gap:clamp(24px,5vw,72px); align-items:center}
+.edit h2{font-size:clamp(30px,4.6vw,54px); margin-bottom:14px; font-stretch:74%; font-variation-settings:"wdth" 74}
+.edit p{font-size:16px; line-height:1.62; max-width:44ch}
+.edit .arch{aspect-ratio:4/5; max-width:400px; margin-inline:auto}
+.edit--flip>*:first-child{order:2}
+
+/* خطوات */
+.steps{display:grid; grid-template-columns:repeat(3,1fr); gap:clamp(24px,4vw,56px)}
+.step .n{
+  font-family:"Archivo",sans-serif; font-stretch:70%; font-variation-settings:"wdth" 70;
+  font-size:clamp(56px,7vw,92px); font-weight:900; line-height:.8; letter-spacing:-.04em;
+  color:transparent; -webkit-text-stroke:1.5px var(--ink); display:block; margin-bottom:14px;
+}
+.step h3{font-size:23px; margin-bottom:8px}
+.step p{font-size:14.5px; max-width:32ch}
+
+/* اقتباس */
+.quote{
+  text-align:center; max-width:20ch; margin-inline:auto;
+  font-family:"Archivo",sans-serif; font-stretch:78%; font-variation-settings:"wdth" 78;
+  font-size:clamp(30px,4.4vw,52px); font-weight:800; line-height:1.04; letter-spacing:-.03em;
+}
+.quote s{display:block; margin-top:22px; font-family:"Poppins",sans-serif; font-size:11.5px; font-weight:700; letter-spacing:.13em; text-transform:uppercase; color:var(--faint); text-decoration:none}
+.stars{display:block; text-align:center; color:var(--acc); letter-spacing:.24em; font-size:14px; margin-bottom:18px}
+
+/* بطاقات منتجات */
+.pgrid{display:grid; grid-template-columns:repeat(4,1fr); gap:20px}
+.pcard .arch{margin-bottom:14px}
+.pcard .cat{font-size:10.5px; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:var(--faint)}
+.pcard .nm{font-family:"Archivo",sans-serif; font-stretch:85%; font-variation-settings:"wdth" 85; font-size:17px; font-weight:800; letter-spacing:-.02em; line-height:1.15; margin:4px 0 6px; display:block}
+.pcard .pr{font-size:15px; font-weight:700}
+.pcard .add{display:block; text-align:center; border:1px solid var(--ink); border-radius:var(--r); padding:10px; font-size:12.5px; font-weight:700; margin-top:12px}
+
+/* العلامة الضخمة */
+.wm{overflow:hidden; line-height:0; padding-top:26px}
+.wm span{
+  display:block; font-family:"Archivo",sans-serif; font-stretch:68%; font-variation-settings:"wdth" 68;
+  font-size:clamp(58px,17vw,190px); font-weight:900; letter-spacing:-.045em; line-height:.78;
+  color:var(--ink); opacity:.09; margin-bottom:-.16em; white-space:nowrap; text-align:center; user-select:none;
+}
+
+@media (max-width:820px){
+  .hero,.edit{grid-template-columns:1fr}
+  .edit--flip>*:first-child{order:0}
+  .agrid,.pgrid{grid-template-columns:repeat(2,1fr)}
+  .steps{grid-template-columns:1fr}
+  .offset>*:nth-child(even){transform:none}
+}
+@media (prefers-reduced-motion:reduce){
+  .marq__t{animation:none; width:100%; justify-content:center; flex-wrap:wrap; gap:20px}
+  .marq__t>span:nth-child(n+2){display:none}
+}
+
+/* ---- الذيل ---- */
+.end{padding:56px 0 80px; color:var(--tx-3); font-size:14px; text-align:center}
+.end b{color:var(--tx)}
+</style>
+
+<svg style="display:none" aria-hidden="true">
+  <symbol id="btl" viewBox="0 0 100 140">
+    <rect x="33" y="2" width="34" height="17" rx="4" fill="#2B3A33"/>
+    <rect x="37" y="17" width="26" height="9" fill="#3C4C44"/>
+    <rect x="19" y="24" width="62" height="112" rx="13" fill="currentColor"/>
+    <rect x="26" y="60" width="48" height="50" rx="7" fill="#fff" opacity=".93"/>
+    <rect x="32" y="70" width="36" height="4" rx="2" fill="currentColor" opacity=".55"/>
+    <rect x="32" y="79" width="24" height="3" rx="1.5" fill="#191919" opacity=".2"/>
+    <rect x="32" y="86" width="30" height="3" rx="1.5" fill="#191919" opacity=".13"/>
+    <circle cx="59" cy="97" r="7" fill="currentColor" opacity=".8"/>
+  </symbol>
+</svg>
+
+<div class="wrap">
+  <header class="top">
+    <span class="tag">جنّتان · طقم الأقسام</span>
+    <h1>التميّز يأتي من الأقسام، لا من الألوان</h1>
+    <p class="lede">ملف الـ CSS وحده أعاد تلوين هيكل موجود فبقي الشكل عادياً. هذه الكتل قائمة بذاتها:
+    تلصقها في UX Builder فتحمل التصميم معها. كل ما تراه أدناه معروض حيّاً — لا صور مسطّحة.</p>
+
+    <div class="why">
+      <h2>لماذا لم يظهر التصميم على موقعك</h2>
+      <ol>
+        <li><b>العنوان مطبوع داخل صورة البانر.</b> «Your Health. Our Priority.» جزء من ملف JPG، فالطباعة الضخمة — وهي توقيع التصميم كله — لا مكان لها تظهر فيه، ولا يقرأها محرك البحث. <span class="fix">← الكتلة 2</span></li>
+        <li><b>لا توجد أقسام تحريرية إطلاقاً.</b> الصفحة: بانر ثم شبكة منتجات ثم الفوتر. لا إيقاع ولا سرد. <span class="fix">← الكتل 4 و5 و6</span></li>
+        <li><b>التصنيفات قائمة نصّية بلا صور.</b> أقوى أداة تصفّح في متجر مكمّلات معروضة كقائمة عادية. <span class="fix">← الكتلة 3</span></li>
+        <li><b>لا يوجد أي عنصر حركة.</b> الصفحة ساكنة تماماً من أعلاها إلى أسفلها. <span class="fix">← الكتلة 1</span></li>
+        <li><b>تسعة منتجات بلا صورة ولا سعر.</b> بطاقة المنتج مصمَّمة حول التصوير — بلا صور تبقى فارغة مهما حُسّن الـ CSS. <span class="fix" style="color:var(--warn)">← لا يعالجه تصميم</span></li>
+      </ol>
+    </div>
+  </header>
+
+  <!-- ============ 1 ============ -->
+  <section class="blk">
+    <div class="blk__head"><span class="blk__n">01</span><h3>الشريط المتحرك</h3></div>
+    <p class="blk__note">أعلى أثر بأقل جهد. عنصر واحد أسفل الهيدر يجعل الموقع يبدو مصنوعاً لا مركّباً. يتوقف عند مرور المؤشر، ويصبح صفاً ثابتاً لمن يفضّل تقليل الحركة.</p>
+    <div class="stage"><div class="mk">
+      <div class="marq"><div class="marq__t">
+        <span>Third-Party Tested</span><span>Non-GMO</span><span>No Fillers</span><span>Free Shipping Over $50</span><span>Made in USA</span><span>Gluten Free</span>
+        <span>Third-Party Tested</span><span>Non-GMO</span><span>No Fillers</span><span>Free Shipping Over $50</span><span>Made in USA</span><span>Gluten Free</span>
+      </div></div>
+    </div></div>
+  </section>
+
+  <!-- ============ 2 ============ -->
+  <section class="blk">
+    <div class="blk__head"><span class="blk__n">02</span><h3>الهيرو بنصّ حيّ</h3></div>
+    <p class="blk__note">العنوان نصّ حقيقي بحجم يصل 74px، لا حروف مطبوعة داخل صورة. يتكيّف مع الجوال، ويقرأه محرك البحث، وهو المكان الذي يظهر فيه الخط المضغوط أخيراً.</p>
+    <div class="stage"><div class="mk">
+      <div class="hero grain pad">
+        <div>
+          <span class="eyebrow">Pure · Tested · Effective</span>
+          <h1>Your health.<br>Our formula.</h1>
+          <p class="lead">Carefully selected supplements made with premium ingredients to support your health and wellness — naturally.</p>
+          <div class="hero__cta"><a class="btn">Shop all products</a><a class="btn ghost">Why Jannatan</a></div>
+        </div>
+        <div class="arch"><svg style="color:#C8801B"><use href="#btl"/></svg></div>
+      </div>
+    </div></div>
+  </section>
+
+  <!-- ============ 3 ============ -->
+  <section class="blk">
+    <div class="blk__head"><span class="blk__n">03</span><h3>بلاطات التصنيفات المقوّسة</h3></div>
+    <p class="blk__note">القوس هو التوقيع البصري: شكل الصيدلية والنبات، ولا يوجد في أي قالب جاهز. البلاطات الزوجية منزاحة للأسفل قليلاً فتُكسر رتابة الصف المستقيم.</p>
+    <div class="stage"><div class="mk">
+      <div class="pad tile-bg grain">
+        <div class="agrid offset">
+          <a class="acard"><span class="arch"><svg style="color:#1A855B"><use href="#btl"/></svg></span><b>Immune Support</b><s>6 products</s></a>
+          <a class="acard"><span class="arch"><svg style="color:#3B4E7A"><use href="#btl"/></svg></span><b>Sleep</b><s>4 products</s></a>
+          <a class="acard"><span class="arch"><svg style="color:#A6461F"><use href="#btl"/></svg></span><b>Heart Health</b><s>4 products</s></a>
+          <a class="acard"><span class="arch"><svg style="color:#7A6A3B"><use href="#btl"/></svg></span><b>Gut Health</b><s>3 products</s></a>
+        </div>
+      </div>
+    </div></div>
+  </section>
+
+  <!-- ============ 4 ============ -->
+  <section class="blk">
+    <div class="blk__head"><span class="blk__n">04</span><h3>قسمان تحريريان متناوبان</h3></div>
+    <p class="blk__note">هنا يُبنى سبب الشراء. الثاني معكوس الاتجاه وبخلفية بيج — التناوب بين الأبيض والبيج هو ما يعطي الصفحة إيقاعها.</p>
+    <div class="stage"><div class="mk">
+      <div class="pad edit">
+        <div>
+          <span class="eyebrow">Our promise</span>
+          <h2>Tested, not just trusted.</h2>
+          <p>Every batch goes to an independent lab before it reaches you. We publish the certificate on each product page — so you never have to take our word for it.</p>
+          <a class="more">Read our standards</a>
+        </div>
+        <div class="arch"><svg style="color:#1A855B"><use href="#btl"/></svg></div>
+      </div>
+      <div class="pad edit edit--flip tile-bg grain">
+        <div class="arch" style="background:#fff"><svg style="color:#C8801B"><use href="#btl"/></svg></div>
+        <div>
+          <span class="eyebrow">What's inside</span>
+          <h2>No fillers. Ever.</h2>
+          <p>No artificial colors, no unnecessary binders, no proprietary blends that hide the real dose. The label is the whole story.</p>
+          <a class="more">Browse the range</a>
+        </div>
+      </div>
+    </div></div>
+  </section>
+
+  <!-- ============ 5 ============ -->
+  <section class="blk">
+    <div class="blk__head"><span class="blk__n">05</span><h3>الخطوات الثلاث</h3></div>
+    <p class="blk__note">الأرقام مفرّغة بخط خارجي فقط — حضور بلا ثِقل. الترقيم هنا يعني تسلسلاً حقيقياً، فلا تستخدمه لقائمة مزايا غير مرتّبة.</p>
+    <div class="stage"><div class="mk">
+      <div class="pad steps">
+        <div class="step"><span class="n">01</span><h3>Pick your goal</h3><p>Sleep, immunity, joints — browse by what you actually want to improve.</p></div>
+        <div class="step"><span class="n">02</span><h3>Check the label</h3><p>Full ingredient list and lab certificate on every product page.</p></div>
+        <div class="step"><span class="n">03</span><h3>Get it in 24h</h3><p>Shipped from New York, tracked to your door.</p></div>
+      </div>
+    </div></div>
+  </section>
+
+  <!-- ============ 6 ============ -->
+  <section class="blk">
+    <div class="blk__head"><span class="blk__n">06</span><h3>الاقتباس الضخم</h3></div>
+    <p class="blk__note">جملة عميل واحدة بحجم عنوان. أقوى من ثلاث بطاقات مراجعات صغيرة — بشرط أن تكون حقيقية.</p>
+    <div class="stage"><div class="mk">
+      <div class="pad tile-bg grain">
+        <span class="stars">★★★★★</span>
+        <blockquote class="quote">The only brand my whole family actually takes.<s>Rosen P. · Verified buyer</s></blockquote>
+      </div>
+    </div></div>
+  </section>
+
+  <!-- ============ 7 ============ -->
+  <section class="blk">
+    <div class="blk__head"><span class="blk__n">07</span><h3>شبكة المنتجات المقوّسة</h3></div>
+    <p class="blk__note">نفس عنصر Products في Flatsome، يكفي أن تضع الكلاس <code>jn-pcards</code> في خانة Class Name. الصور تصبح أقواساً، وزر الإضافة ينزلق للأعلى عند المرور.</p>
+    <div class="stage"><div class="mk">
+      <div class="pad">
+        <div class="pgrid">
+          <a class="pcard"><span class="arch"><svg style="color:#1A855B"><use href="#btl"/></svg></span><span class="cat">Immune Support</span><span class="nm">Zinc with Vitamin C</span><span class="pr">$18.00</span><span class="add">Add to cart</span></a>
+          <a class="pcard"><span class="arch"><svg style="color:#C8801B"><use href="#btl"/></svg></span><span class="cat">Heart Health</span><span class="nm">Coq10 · 200mg</span><span class="pr">$29.00</span><span class="add">Add to cart</span></a>
+          <a class="pcard"><span class="arch"><svg style="color:#3B4E7A"><use href="#btl"/></svg></span><span class="cat">Sleep</span><span class="nm">Magnesium Glycinate</span><span class="pr">$24.00</span><span class="add">Add to cart</span></a>
+          <a class="pcard"><span class="arch"><svg style="color:#7A6A3B"><use href="#btl"/></svg></span><span class="cat">Gut Health</span><span class="nm">Probiotic 50B CFU</span><span class="pr">$34.00</span><span class="add">Add to cart</span></a>
+        </div>
+      </div>
+    </div></div>
+  </section>
+
+  <!-- ============ 8 ============ -->
+  <section class="blk">
+    <div class="blk__head"><span class="blk__n">08</span><h3>علامة الفوتر الضخمة</h3></div>
+    <p class="blk__note">آخر عنصر قبل الفوتر. الاسم مقصوص عند الحافة السفلى — تفصيلة صغيرة تُشعر بأن الموقع مصمَّم لا مركَّب.</p>
+    <div class="stage"><div class="mk">
+      <div style="padding:0 24px"><div class="wm"><span>JANNATAN</span></div></div>
+    </div></div>
+  </section>
+
+  <footer class="end">
+    <p>كل الكتل معروضة حيّاً بنفس الكود الذي ستلصقه · الأكواد في <b>docs/07-كتل-جاهزة.md</b></p>
+    <p style="margin-top:6px">تبقى الخطوة التي لا يحلّها أي تصميم: <b>أسعار وصور المنتجات التسعة</b></p>
+  </footer>
+</div>

@@ -1,0 +1,1253 @@
+@import url('https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62.5..125,400..900&family=Poppins:wght@400;500;600;700&family=Tajawal:wght@400;500;700;800;900&display=swap');
+
+/* ==========================================================================
+   واجهة عصرية لـ Flatsome + WooCommerce
+   لغة تصميم مستوحاة من naturesbakery.com — بألوانك أنت
+   الصق هذا الملف كاملاً في: المظهر ← تخصيص ← CSS إضافي
+   ملاحظة: يجب أن يبقى سطر @import في الأعلى تماماً.
+
+   الفهرس
+   00. المتغيرات — عدّل هنا فقط
+   01. الأساس والطباعة الضخمة
+   02. الحاويات وإيقاع الأقسام
+   03. الأزرار
+   04. الروابط
+   05. الحقول والنماذج
+   06. الهيدر والقائمة
+   07. البانرات والهيرو
+   08. بطاقة المنتج وشبكة المنتجات
+   09. شريط المزايا والتصنيفات
+   10. صفحة المنتج
+   11. السلة والدفع
+   12. الفوتر
+   13. الجوال
+   14. الحركة والوصولية
+   15. كلاسات جاهزة لـ UX Builder
+   16. دعم RTL
+   ========================================================================== */
+
+/* ==========================================================================
+   00. المتغيرات — كل ما تحتاج تعديله موجود هنا
+   ========================================================================== */
+:root {
+  /* --- اللون: يرث ألوان قالبك تلقائياً، غيّرها من Flatsome لا من هنا --- */
+  --jn-accent:      var(--fs-color-primary, #079616);   /* لون الفعل: الأزرار والروابط */
+  --jn-accent-ink:  #FFFFFF;                            /* النص فوق لون الفعل */
+  --jn-ink:         #191919;                            /* النص الأساسي — رمادي داكن لا أسود */
+  --jn-ink-soft:    #5C5C58;                            /* النص الثانوي */
+  --jn-ink-faint:   #9A9A95;                            /* التلميحات والأسعار المشطوبة */
+  --jn-canvas:      #FFFFFF;                            /* الخلفية الأساسية */
+  /* الخلفيات: أبيض كالافتراضي في Flatsome.
+     أردت إرجاع البيج؟ اجعل --jn-tile: #F4F1EC و --jn-tile-2: #EDE9E2 */
+  --jn-tile:        #FFFFFF;                            /* كان بيج — الآن أبيض */
+  --jn-tile-2:      #F4F4F2;                            /* فاصل خفيف جداً للحوامات والصناديق */
+  --jn-hairline:    #E6E6E3;                            /* خط فاصل رمادي محايد */
+
+  /* --- الخطوط --- */
+  --jn-display:     "Archivo", "Archivo Narrow", "Helvetica Neue", Impact, sans-serif;
+  --jn-body:        "Poppins", "Tajawal", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --jn-wdth:        78;   /* درجة ضغط خط العناوين: 62.5 = شديد الضغط · 100 = بلا ضغط */
+  --jn-head-weight: 800;  /* وزن العناوين */
+  --jn-head-track:  -.025em; /* تتبّع العناوين */
+
+  /* ------------------------------------------------------------------
+     بديل جاهز: خط Tajawal لكل الموقع (عربي + إنجليزي)
+     احذف علامتَي التعليق حول الكتلة التالية ليصبح Tajawal هو الخط.
+     ملاحظة: Tajawal ليس خطاً مضغوطاً، لذا تُعوَّض الحدّة بوزن 900
+     وتتبّع أضيق. غيّر --jn-wdth لن يؤثر عليه.
+     ------------------------------------------------------------------ */
+  /*
+  --jn-display:     "Tajawal", "Poppins", sans-serif;
+  --jn-body:        "Tajawal", "Poppins", sans-serif;
+  --jn-wdth:        100;
+  --jn-head-weight: 900;
+  --jn-head-track:  -.02em;
+  */
+
+  /* --- سلم الطباعة (يتضخم تلقائياً مع عرض الشاشة) --- */
+  --jn-fs-xl:  clamp(2.75rem, 7vw, 6rem);      /* 44 → 96px  عنوان الهيرو */
+  --jn-fs-lg:  clamp(2.25rem, 5.4vw, 4.5rem);  /* 36 → 72px  عناوين الأقسام */
+  --jn-fs-ml:  clamp(1.75rem, 3.6vw, 3rem);    /* 28 → 48px */
+  --jn-fs-md:  clamp(1.375rem, 2.4vw, 2rem);   /* 22 → 32px */
+  --jn-fs-sm:  1.25rem;
+  --jn-fs-body: 1rem;
+  --jn-fs-small: .875rem;
+  --jn-fs-btn:  .875rem;
+
+  /* --- الاستدارة: قيمة واحدة، والباقي مشتق منها --- */
+  --jn-r:       8px;
+  --jn-r-tile:  calc(1rem + var(--jn-r));   /* 24px — للحاويات الكبيرة */
+  --jn-r-inner: calc(var(--jn-r) / 2);      /* 4px  — للعناصر الصغيرة */
+
+  /* --- إيقاع الأقسام --- */
+  --jn-pad:  2rem;
+  --jn-gut:  1.25rem;
+  --jn-max:  1320px;
+
+  --jn-ease: cubic-bezier(.4, 0, .2, 1);
+  --jn-t:    .2s var(--jn-ease);
+}
+
+@media (min-width: 720px)  { :root { --jn-pad: 3rem; --jn-gut: 1.5rem; } }
+@media (min-width: 1024px) { :root { --jn-pad: 4rem; --jn-gut: 2rem; } }
+
+/* ==========================================================================
+   01. الأساس والطباعة — العناوين الضخمة هي توقيع هذا التصميم
+   ========================================================================== */
+body {
+  font-family: var(--jn-body);
+  font-size: var(--jn-fs-body);
+  line-height: 1.5;
+  color: var(--jn-ink);
+  background: var(--jn-canvas);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3, h4, h5, h6,
+.heading-font, .is-title, .entry-title, .product-title, .widget-title {
+  font-family: var(--jn-display);
+  font-stretch: calc(var(--jn-wdth) * 1%); font-variation-settings: "wdth" var(--jn-wdth);
+  font-weight: var(--jn-head-weight);
+  color: var(--jn-ink);
+  line-height: 1.08;
+  letter-spacing: var(--jn-head-track);
+  text-transform: none;
+  text-wrap: balance;
+  margin-bottom: .5em;
+}
+
+h1, .h1 { font-size: var(--jn-fs-xl); line-height: 1.02; }
+h2, .h2 { font-size: var(--jn-fs-lg); }
+h3, .h3 { font-size: var(--jn-fs-ml); }
+h4, .h4 { font-size: var(--jn-fs-md); }
+h5, .h5 { font-size: var(--jn-fs-sm); }
+h6, .h6 { font-size: 1rem; letter-spacing: 0; }
+
+/* العنوان الضخم للهيرو — استخدم الكلاس jn-mega على أي عنوان في UX Builder */
+.jn-mega {
+  font-size: var(--jn-fs-xl) !important;
+  line-height: .95 !important;
+  letter-spacing: -.03em !important;
+  font-stretch: 70%; font-variation-settings: "wdth" 70;
+}
+
+p { color: var(--jn-ink-soft); margin-bottom: 1rem; }
+strong, b { font-weight: 600; color: var(--jn-ink); }
+
+/* سطر تمهيدي فوق العنوان */
+.jn-eyebrow {
+  display: inline-block;
+  font-family: var(--jn-body);
+  font-size: .75rem;
+  font-weight: 700;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--jn-accent);
+  margin-bottom: .75rem;
+}
+
+/* نص تمهيدي كبير تحت العنوان */
+.jn-lead {
+  font-size: clamp(1rem, 1.4vw, 1.25rem);
+  line-height: 1.55;
+  color: var(--jn-ink-soft);
+  max-width: 58ch;
+}
+
+/* ==========================================================================
+   02. الحاويات وإيقاع الأقسام
+   ========================================================================== */
+.container-width, .container, .row, .full-width .ubermenu-nav {
+  max-width: var(--jn-max) !important;
+  width: 100% !important;
+  padding-left: var(--jn-gut) !important;
+  padding-right: var(--jn-gut) !important;
+  margin-left: auto;
+  margin-right: auto;
+}
+.row.row-collapse, .row.row-small, .row.row-large { max-width: var(--jn-max) !important; }
+.row .row { padding-left: 0 !important; padding-right: 0 !important; }
+.row-full-width, .section-content > .row.row-full-width { max-width: 100% !important; }
+
+.section { padding-top: var(--jn-pad); padding-bottom: var(--jn-pad); }
+
+/* تناوب الخلفيات: أبيض ← بيج ← أبيض. هذا ما يعطي الصفحة إيقاعها */
+.jn-tile-bg   { background: var(--jn-tile); }
+.jn-tile-bg-2 { background: var(--jn-tile-2); }
+.jn-ink-bg    { background: var(--jn-ink); }
+.jn-ink-bg, .jn-ink-bg h1, .jn-ink-bg h2, .jn-ink-bg h3, .jn-ink-bg p { color: #fff; }
+.jn-accent-bg { background: var(--jn-accent); }
+.jn-accent-bg, .jn-accent-bg h1, .jn-accent-bg h2, .jn-accent-bg h3, .jn-accent-bg p { color: var(--jn-accent-ink); }
+
+/* ترويسة قسم: عنوان ضخم يميناً ورابط صغير يساراً */
+.jn-sec-head {
+  display: flex; align-items: flex-end; justify-content: space-between;
+  gap: 1.5rem; flex-wrap: wrap; margin-bottom: 2rem;
+}
+.jn-sec-head h2, .jn-sec-head h3 { margin: 0; }
+
+/* ==========================================================================
+   03. الأزرار — استدارة 8px، ارتفاع 48px، خط عريض صغير
+
+   مهم: المظهر (الخط والاستدارة) يُطبَّق على كل الأزرار،
+   أما الحجم (الارتفاع والحشوة) فيُطبَّق على أزرار المحتوى فقط.
+   أزرار الأيقونات وإرسال البحث لها قاعدتها الخاصة أدناه، وإلا تضخّمت.
+   ولا نفرض `display` إطلاقاً حتى لا تظهر أزرار يخفيها القالب عمداً.
+   ========================================================================== */
+.button, button, input[type="submit"], input[type="button"],
+.woocommerce .button, .wp-element-button, .add_to_cart_button {
+  font-family: var(--jn-body) !important;
+  font-size: var(--jn-fs-btn) !important;
+  font-weight: 700 !important;
+  letter-spacing: 0 !important;
+  text-transform: none !important;
+  line-height: 1.5 !important;
+  border-radius: var(--jn-r) !important;
+  box-shadow: none !important;
+  transition: background-color var(--jn-t), color var(--jn-t),
+              border-color var(--jn-t), transform var(--jn-t);
+}
+
+/* الحجم — لأزرار المحتوى فقط */
+.entry-content .button,
+.product-info .button,
+.woocommerce .button:not(.ux-search-submit),
+.add_to_cart_button, .single_add_to_cart_button,
+.checkout-button, #place_order,
+.woocommerce form .form-row input[type="submit"],
+.section .button, .banner .button, .jn-hero .button,
+.button.primary, .button.is-outline, .button.secondary {
+  min-height: 48px;
+  padding: .75rem 2rem;
+  border: 1px solid transparent;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1ch;
+}
+
+/* الاستثناءات — عناصر يجب ألّا تتضخم أبداً */
+.header button,
+.header .button,
+.header input[type="submit"],
+.searchform button, .searchform input[type="submit"],
+.search-form button, .ux-search-submit, .ux-search-box .button,
+.dgwt-wcas-search-submit, .dgwt-wcas-close,
+.icon-button, .header-button .button.circle, .header-button .icon-button,
+.quantity .plus, .quantity .minus, .quantity input[type="button"],
+.mfp-close, .flickity-button, .flickity-prev-next-button,
+.wishlist-button, .yith-wcwl-add-to-wishlist a,
+.product-remove a.remove, .off-canvas .toggle {
+  min-height: 0 !important;
+  padding: 0 .625rem !important;
+  gap: .375rem;
+  width: auto;
+}
+
+/* زر إرسال البحث في الهيدر: أيقونة مربّعة صغيرة، لا زر بعرض الشاشة */
+.header .ux-search-submit,
+.header .searchform .submit-button,
+.header .searchform button[type="submit"],
+.dgwt-wcas-search-submit {
+  width: 44px !important;
+  height: 44px !important;
+  min-width: 0 !important;
+  padding: 0 !important;
+  border-radius: var(--jn-r) !important;
+  flex: 0 0 44px;
+  font-size: 0 !important;          /* يخفي كلمة Search ويُبقي الأيقونة */
+  overflow: hidden;
+}
+.header .ux-search-submit i,
+.header .searchform .submit-button i,
+.dgwt-wcas-search-submit svg { font-size: 1rem !important; }
+
+/* لا تُظهر أبداً زراً يخفيه القالب عمداً.
+   ملاحظة: لا تضع هنا .hide-for-medium أو .hide-for-small —
+   فهما كلاسا Flatsome للإخفاء على الجوال فقط، وإخفاؤهما دائماً
+   يحذف أي عنصر ضُبط على "إخفاء على الجوال" من الديسكتوب أيضاً. */
+button[hidden], .button[hidden], .searchform .hidden { display: none !important; }
+
+/* الهيدر لا يلتفّ ولا يفيض */
+.header-main .flex-row { flex-wrap: nowrap; }
+.header-main .header-search-form, .header-main .searchform-wrapper { max-width: 460px; }
+.header-main .flex-col { min-width: 0; }
+
+.button.primary, .button.is-primary, .woocommerce .button.alt,
+.single_add_to_cart_button, .checkout-button, #place_order,
+input[type="submit"], .add_to_cart_button {
+  background-color: var(--jn-accent) !important;
+  border-color: var(--jn-accent) !important;
+  color: var(--jn-accent-ink) !important;
+}
+.button.primary:hover, .woocommerce .button.alt:hover,
+.single_add_to_cart_button:hover, .checkout-button:hover,
+#place_order:hover, input[type="submit"]:hover, .add_to_cart_button:hover {
+  filter: brightness(.9);
+  transform: translateY(-2px);
+}
+
+/* زر ثانوي: شفاف بحد رفيع */
+.button.is-outline, .button.secondary.is-outline {
+  background: transparent !important;
+  color: var(--jn-ink) !important;
+  border-color: currentColor !important;
+}
+.button.is-outline:hover {
+  background: var(--jn-ink) !important;
+  color: var(--jn-canvas) !important;
+  border-color: var(--jn-ink) !important;
+  transform: translateY(-2px);
+}
+
+/* زر فوق خلفية داكنة أو صورة */
+.jn-ink-bg .button.is-outline, .jn-accent-bg .button.is-outline,
+.banner .button.is-outline { color: #fff !important; }
+.jn-ink-bg .button.is-outline:hover, .banner .button.is-outline:hover {
+  background: #fff !important; color: var(--jn-ink) !important; border-color: #fff !important;
+}
+
+.button.is-small { min-height: 40px; padding: .5rem 1.25rem !important; font-size: .8125rem !important; }
+.button.is-large { min-height: 56px; padding: 1rem 2.5rem !important; font-size: 1rem !important; }
+.button.is-link  { min-height: 0; padding: 0 !important; border: 0; }
+.button:active   { transform: translateY(0); }
+
+/* ==========================================================================
+   04. الروابط — التسطير يبتعد عند المرور (تفصيلة صغيرة تُشعر بالجودة)
+   ========================================================================== */
+p a, .entry-content a:not(.button), .woocommerce-info a, .widget a {
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 4px;
+  transition: text-underline-offset var(--jn-t), color var(--jn-t);
+}
+@media (hover: hover) and (pointer: fine) {
+  p a:hover, .entry-content a:not(.button):hover, .widget a:hover {
+    text-underline-offset: 6px;
+    color: var(--jn-accent);
+  }
+}
+
+/* رابط "المزيد" بسهم يتحرك */
+.jn-more {
+  display: inline-flex; align-items: center; gap: .5rem;
+  font-family: var(--jn-body); font-size: .875rem; font-weight: 700;
+  color: var(--jn-ink); text-decoration: underline; text-underline-offset: 4px;
+}
+.jn-more::after { content: "→"; transition: transform var(--jn-t); }
+.jn-more:hover { color: var(--jn-accent); }
+.jn-more:hover::after { transform: translateX(4px); }
+
+/* ==========================================================================
+   05. الحقول والنماذج
+   ========================================================================== */
+input[type="text"], input[type="email"], input[type="tel"], input[type="number"],
+input[type="password"], input[type="search"], input[type="url"], select, textarea,
+.woocommerce form .form-row input.input-text,
+.woocommerce form .form-row textarea,
+.select2-container--default .select2-selection--single {
+  font-family: var(--jn-body);
+  font-size: var(--jn-fs-body);
+  color: var(--jn-ink);
+  background: var(--jn-canvas);
+  border: 1px solid var(--jn-hairline);
+  border-radius: var(--jn-r);
+  box-shadow: none;
+  min-height: 48px;
+  padding: .75rem 1rem;
+  transition: border-color var(--jn-t);
+}
+input:focus, select:focus, textarea:focus {
+  border-color: var(--jn-ink);
+  box-shadow: none;
+  outline: none;
+}
+::placeholder { color: var(--jn-ink-faint); }
+label, .woocommerce form .form-row label {
+  font-size: .8125rem; font-weight: 600; color: var(--jn-ink);
+  margin-bottom: .375rem; display: block;
+}
+textarea { min-height: 8em; }
+
+/* ==========================================================================
+   06. الهيدر والقائمة — منخفض، أبيض، بلا زخرفة
+   ========================================================================== */
+.header-main   { height: 72px !important; }
+.stuck .header-main { height: 64px !important; }
+#logo img      { max-height: 40px !important; width: auto; }
+.header-bg-color, .header-wrapper .header-bg-color { background: var(--jn-canvas) !important; }
+.header:not(.transparent) .header-main { border-bottom: 1px solid var(--jn-hairline); }
+.header-bottom { background: var(--jn-canvas) !important; min-height: 0; border-bottom: 1px solid var(--jn-hairline); }
+.header-top    { background: var(--jn-ink) !important; min-height: 40px; }
+.header-top, .header-top a, .header-top .nav > li > a {
+  color: #fff !important; font-size: .8125rem; letter-spacing: .01em;
+}
+
+@media (max-width: 549px) {
+  .header-main { height: 60px !important; }
+  #logo img { max-height: 32px !important; }
+}
+
+.header .nav > li > a {
+  font-family: var(--jn-body);
+  font-size: .9375rem;
+  font-weight: 600;
+  color: var(--jn-ink);
+  text-transform: none;
+  letter-spacing: 0;
+  padding: 0 1rem;
+  text-decoration: none;
+}
+.header .nav > li > a:hover,
+.header .nav > li.current-menu-item > a { color: var(--jn-accent); }
+.nav-line-bottom > li > a:before, .nav-line-grow > li > a:before {
+  background: var(--jn-ink); height: 2px;
+}
+
+.nav-dropdown {
+  border: 0 !important;
+  border-radius: var(--jn-r-tile) !important;
+  box-shadow: 0 18px 48px rgba(25,25,25,.12) !important;
+  padding: .75rem !important;
+  font-size: .9375rem;
+}
+.nav-dropdown > li > a {
+  border-radius: var(--jn-r) !important;
+  padding: .625rem .875rem !important;
+  color: var(--jn-ink-soft);
+  font-weight: 500;
+  text-decoration: none;
+}
+.nav-dropdown > li > a:hover { background: var(--jn-tile); color: var(--jn-ink); }
+
+/* البحث — أبيض بحدّ رفيع كالافتراضي في Flatsome */
+.header .searchform input.search-field,
+.dgwt-wcas-search-wrapp .dgwt-wcas-search-input {
+  background: #FFFFFF !important;
+  border: 1px solid var(--jn-hairline) !important;
+  border-radius: var(--jn-r) !important;
+  height: 44px; min-height: 44px;
+  font-size: .875rem;
+}
+.header .searchform input.search-field:focus,
+.dgwt-wcas-search-wrapp .dgwt-wcas-search-input:focus {
+  background: var(--jn-canvas) !important;
+  border-color: var(--jn-ink) !important;
+}
+.dgwt-wcas-suggestions-wrapp {
+  border: 0 !important; border-radius: var(--jn-r-tile) !important;
+  box-shadow: 0 18px 48px rgba(25,25,25,.14) !important;
+}
+
+/* شارة عدد السلة */
+.cart-icon strong {
+  border-color: var(--jn-ink) !important; color: var(--jn-ink) !important;
+  font-family: var(--jn-body); font-weight: 700; font-size: .75rem;
+}
+.cart-icon strong:after { border-color: var(--jn-ink) !important; }
+
+/* القائمة الجانبية */
+.off-canvas-left .mfp-content, .off-canvas-right .mfp-content { --drawer-width: 340px; }
+.off-canvas .nav-sidebar > li > a {
+  font-family: var(--jn-display);
+  font-stretch: calc(var(--jn-wdth) * 1%); font-variation-settings: "wdth" var(--jn-wdth);
+  font-size: 1.5rem; font-weight: 800; letter-spacing: -.02em;
+  padding: .875rem 1rem; border-bottom: 1px solid var(--jn-hairline);
+  text-transform: none; text-decoration: none;
+}
+
+/* ==========================================================================
+   07. البانرات والهيرو — صورة بعرض الكتلة واستدارة كبيرة
+   ========================================================================== */
+.banner, .banner-layers, .slider-wrapper .banner {
+  border-radius: var(--jn-r-tile);
+  overflow: hidden;
+}
+.banner .banner-layers h1, .banner .banner-layers h2 {
+  letter-spacing: -.03em; line-height: .98;
+}
+
+/* كتلة هيرو جاهزة — الصق كـ HTML في UX Builder */
+.jn-hero {
+  display: grid;
+  grid-template-columns: 1.05fr .95fr;
+  align-items: center;
+  gap: clamp(1.5rem, 4vw, 4rem);
+  background: var(--jn-tile);
+  border-radius: var(--jn-r-tile);
+  padding: clamp(1.5rem, 4vw, 4rem);
+  overflow: hidden;
+}
+.jn-hero__media {
+  aspect-ratio: 4 / 3;
+  border-radius: var(--jn-r);
+  overflow: hidden;
+  background: var(--jn-tile-2);
+}
+.jn-hero__media img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.jn-hero__cta { display: flex; gap: .75rem; flex-wrap: wrap; margin-top: 1.5rem; }
+@media (max-width: 849px) { .jn-hero { grid-template-columns: 1fr; } }
+
+/* شريط الادعاءات: whole grains · plant based · nut free … */
+.jn-claims {
+  display: flex; flex-wrap: wrap; justify-content: center;
+  gap: .5rem 2.5rem;
+  padding: 1.25rem var(--jn-gut);
+  font-family: var(--jn-body);
+  font-size: .8125rem; font-weight: 700;
+  letter-spacing: .08em; text-transform: uppercase;
+  color: var(--jn-ink);
+}
+.jn-claims span { display: inline-flex; align-items: center; gap: .5rem; white-space: nowrap; }
+.jn-claims span::before {
+  content: ""; width: 6px; height: 6px; border-radius: 50%;
+  background: var(--jn-accent); flex: 0 0 6px;
+}
+
+/* شريط متحرك اختياري للادعاءات على الجوال */
+@media (max-width: 649px) {
+  .jn-claims {
+    flex-wrap: nowrap; overflow-x: auto; justify-content: flex-start;
+    scrollbar-width: none; -webkit-overflow-scrolling: touch;
+  }
+  .jn-claims::-webkit-scrollbar { display: none; }
+}
+
+/* ==========================================================================
+   08. بطاقة المنتج — بلا حد وبلا ظل: الصورة على كتلة بيج
+   ========================================================================== */
+.products.row { margin-bottom: 0; }
+
+.product-small .box, .products .product .box {
+  background: transparent;
+  border: 0 !important;
+  border-radius: 0;
+  box-shadow: none !important;
+  height: 100%;
+  display: flex; flex-direction: column;
+}
+
+.product-small .box-image, .products .product .box-image {
+  background: var(--jn-tile);
+  border-radius: var(--jn-r-tile);
+  overflow: hidden;
+  transition: background-color var(--jn-t);
+}
+.product-small .box:hover .box-image { background: var(--jn-tile-2); }
+
+.product-small .box-image img, .products .product .box-image img {
+  aspect-ratio: 1 / 1;
+  object-fit: contain;
+  width: 100%;
+  padding: 12%;
+  mix-blend-mode: multiply;
+  transition: transform .45s var(--jn-ease);
+}
+.product-small .box:hover .box-image img { transform: scale(1.06) rotate(-1.5deg); }
+
+.product-small .box-text, .products .product .box-text {
+  padding: 1rem .25rem 0;
+  text-align: start;
+  display: flex; flex-direction: column; gap: .25rem; flex: 1;
+}
+
+.product-small .box-text .category {
+  font-family: var(--jn-body);
+  font-size: .6875rem; font-weight: 700; letter-spacing: .1em;
+  text-transform: uppercase; color: var(--jn-ink-faint); margin: 0;
+}
+
+.product-small .name.product-title, .products .product .product-title {
+  font-family: var(--jn-display);
+  font-stretch: 85%; font-variation-settings: "wdth" 85;
+  font-size: 1.125rem;
+  font-weight: 800;
+  letter-spacing: -.015em;
+  line-height: 1.15;
+  color: var(--jn-ink);
+  margin: 0;
+  min-height: 2.3em;
+}
+.product-small .name.product-title a { color: inherit; text-decoration: none; }
+.product-small .name.product-title a:hover { color: var(--jn-accent); }
+
+.product-small .star-rating { font-size: .75rem; margin: .125rem 0; }
+
+.product-small .price, .woocommerce-Price-amount {
+  font-family: var(--jn-body);
+  font-size: 1rem; font-weight: 700; color: var(--jn-ink);
+}
+.price del { color: var(--jn-ink-faint); font-weight: 400; font-size: .875rem; margin-inline-end: .375rem; }
+.price ins { text-decoration: none; }
+
+/* الزر يملأ عرض البطاقة ويظهر دائماً */
+.product-small .add-to-cart-button, .product-small .box-text .button {
+  width: 100%; margin-top: auto; padding-top: .625rem;
+}
+.product-small .add-to-cart-button .button {
+  width: 100%;
+  background: transparent !important;
+  color: var(--jn-ink) !important;
+  border: 1px solid var(--jn-ink) !important;
+  min-height: 44px;
+}
+.product-small .add-to-cart-button .button:hover {
+  background: var(--jn-ink) !important; color: var(--jn-canvas) !important; transform: none;
+}
+
+/* الشارات */
+.badge-container .badge-inner, .callout .badge-inner {
+  border-radius: var(--jn-r) !important;
+  font-family: var(--jn-body);
+  font-size: .6875rem; font-weight: 700; letter-spacing: .04em;
+  padding: .3rem .625rem; min-height: 0; min-width: 0; line-height: 1.4;
+  background: var(--jn-ink); color: #fff;
+}
+.badge.top .badge-inner { background: var(--jn-ink); }
+
+/* المفضلة */
+.product-small .yith-wcwl-add-to-wishlist { position: absolute; top: .75rem; inset-inline-end: .75rem; z-index: 3; margin: 0; }
+.product-small .yith-wcwl-add-to-wishlist a {
+  width: 36px; height: 36px; border-radius: 50%;
+  background: rgba(255,255,255,.9); display: flex; align-items: center; justify-content: center;
+  color: var(--jn-ink); font-size: .875rem;
+}
+.product-small .yith-wcwl-add-to-wishlist .feedback,
+.product-small .yith-wcwl-wishlistaddedbrowse span,
+.product-small .yith-wcwl-wishlistexistsbrowse span { display: none; }
+
+/* عمودان على الجوال */
+@media (max-width: 549px) {
+  .products.row > .product-small.col { width: 50% !important; max-width: 50% !important; flex-basis: 50% !important; }
+  .product-small .name.product-title { font-size: 1rem; }
+  .product-small .box-text { padding: .75rem .125rem 0; }
+}
+
+/* شريط أدوات المتجر */
+.woocommerce-breadcrumb, .breadcrumbs {
+  font-size: .8125rem; color: var(--jn-ink-faint); text-transform: none; letter-spacing: 0;
+}
+.woocommerce-breadcrumb a { color: var(--jn-ink-faint); text-decoration: none; }
+.shop-page-title .page-title-inner { padding-top: var(--jn-pad); padding-bottom: 1rem; min-height: 0; }
+.woocommerce-ordering select { border-radius: var(--jn-r); font-size: .875rem; }
+.page-numbers li a, .page-numbers li span {
+  border-radius: var(--jn-r); min-width: 44px; height: 44px; line-height: 42px;
+  border: 1px solid var(--jn-hairline); color: var(--jn-ink); font-weight: 700; font-size: .875rem;
+}
+.page-numbers li .current { background: var(--jn-ink); border-color: var(--jn-ink); color: #fff; }
+
+/* ==========================================================================
+   09. بطاقات التصنيفات — كتل بيج كبيرة بلا حدود
+   ========================================================================== */
+.jn-cats { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--jn-gut); }
+@media (max-width: 1023px) { .jn-cats { grid-template-columns: repeat(3, 1fr); } }
+@media (max-width: 649px)  { .jn-cats { grid-template-columns: repeat(2, 1fr); } }
+
+.jn-cat {
+  display: flex; flex-direction: column; justify-content: flex-end;
+  aspect-ratio: 4 / 5;
+  padding: 1.25rem;
+  background: var(--jn-tile);
+  border-radius: var(--jn-r-tile);
+  overflow: hidden; position: relative;
+  text-decoration: none;
+  transition: background-color var(--jn-t), transform var(--jn-t);
+}
+.jn-cat:hover { background: var(--jn-tile-2); transform: translateY(-4px); }
+.jn-cat img {
+  position: absolute; inset: 0; width: 100%; height: 100%;
+  object-fit: cover; transition: transform .5s var(--jn-ease);
+}
+.jn-cat:hover img { transform: scale(1.05); }
+.jn-cat__name {
+  position: relative; z-index: 2;
+  font-family: var(--jn-display);
+  font-stretch: calc(var(--jn-wdth) * 1%); font-variation-settings: "wdth" var(--jn-wdth);
+  font-size: 1.375rem; font-weight: 800; letter-spacing: -.02em; line-height: 1.1;
+  color: var(--jn-ink);
+}
+.jn-cat--dark .jn-cat__name { color: #fff; }
+
+/* تصنيفات Flatsome الافتراضية */
+.product-category .box-image img { border-radius: var(--jn-r-tile); }
+.product-category .box-text .header-title {
+  font-family: var(--jn-display); font-stretch: calc(var(--jn-wdth) * 1%); font-variation-settings: "wdth" var(--jn-wdth);
+  font-size: 1.25rem; font-weight: 800; letter-spacing: -.02em;
+}
+
+/* ==========================================================================
+   10. صفحة المنتج
+   ========================================================================== */
+.product-main { padding-top: 1.5rem; padding-bottom: var(--jn-pad); }
+
+.product-gallery .woocommerce-product-gallery__image img,
+.product-images img, .product-gallery-slider img {
+  border-radius: var(--jn-r-tile);
+  background: var(--jn-tile);
+}
+.product-thumbnails img { border-radius: var(--jn-r); border: 0; background: var(--jn-tile); }
+.product-thumbnails .is-nav-selected img { box-shadow: 0 0 0 2px var(--jn-ink); }
+
+.product-info .product-title, .product-title.product_title {
+  font-size: var(--jn-fs-ml) !important;
+  line-height: 1.02;
+  letter-spacing: -.03em;
+  min-height: 0;
+  margin-bottom: .5rem;
+}
+.product-info .price, .single-product .product-info .price {
+  font-family: var(--jn-body);
+  font-size: 1.5rem; font-weight: 700; color: var(--jn-ink);
+  margin-bottom: 1rem;
+}
+.product-info .woocommerce-product-details__short-description {
+  font-size: 1rem; color: var(--jn-ink-soft);
+  border-top: 1px solid var(--jn-hairline);
+  padding-top: 1.25rem; margin-bottom: 1.25rem;
+}
+.stock.in-stock { color: var(--jn-accent); font-weight: 700; font-size: .875rem; }
+.stock.out-of-stock { color: var(--jn-ink-faint); font-weight: 700; }
+
+/* الخيارات كأزرار مربّعة الحواف */
+.variations { border: 0; }
+.variations td, .variations th { padding: 0 0 .75rem; border: 0; }
+.ux-swatch {
+  border-radius: var(--jn-r) !important;
+  border: 1px solid var(--jn-hairline) !important;
+  min-height: 46px; font-weight: 600;
+}
+.variations_form .ux-swatch.selected {
+  box-shadow: 0 0 0 2px var(--jn-ink) !important;
+  border-color: var(--jn-ink) !important;
+}
+
+/* عدّاد الكمية */
+.quantity {
+  display: inline-flex; align-items: center; height: 48px;
+  border: 1px solid var(--jn-hairline); border-radius: var(--jn-r); overflow: hidden;
+}
+.quantity .minus, .quantity .plus, .quantity input[type="button"] {
+  width: 44px; height: 46px; border: 0; background: transparent;
+  color: var(--jn-ink); font-size: 1.125rem; font-weight: 600;
+  min-height: 0; padding: 0; border-radius: 0;
+}
+.quantity .minus:hover, .quantity .plus:hover { background: var(--jn-tile); }
+.quantity input.qty {
+  width: 48px; height: 46px; text-align: center; border: 0; box-shadow: none;
+  min-height: 0; padding: 0; font-weight: 700; background: transparent;
+}
+form.cart { display: flex; flex-wrap: wrap; gap: .75rem; align-items: center; margin-bottom: 1.25rem; }
+.single_add_to_cart_button { flex: 1 1 200px; min-height: 52px !important; font-size: 1rem !important; }
+
+/* شارات ثقة */
+.jn-pdp-trust {
+  display: grid; grid-template-columns: repeat(2, 1fr); gap: .5rem;
+  background: var(--jn-tile); border-radius: var(--jn-r-tile);
+  padding: 1.25rem; margin: 1.25rem 0;
+}
+.jn-pdp-trust div {
+  display: flex; align-items: center; gap: .625rem;
+  font-size: .8125rem; font-weight: 600; color: var(--jn-ink);
+}
+
+/* جدول الحقائق */
+.jn-facts { width: 100%; border-collapse: collapse; margin: 1.25rem 0; font-size: .875rem; }
+.jn-facts th, .jn-facts td { padding: .75rem 0; border-bottom: 1px solid var(--jn-hairline); text-align: start; }
+.jn-facts th { color: var(--jn-ink-faint); font-weight: 500; width: 45%; }
+.jn-facts td { color: var(--jn-ink); font-weight: 700; }
+
+/* التبويبات */
+.woocommerce-tabs .tabs { border-bottom: 1px solid var(--jn-hairline); margin-bottom: 2rem; }
+.woocommerce-tabs .tabs li a {
+  font-family: var(--jn-body); font-size: .9375rem; font-weight: 700;
+  text-transform: none; letter-spacing: 0; color: var(--jn-ink-faint);
+  padding: .875rem .25rem; text-decoration: none;
+}
+.woocommerce-tabs .tabs li.active a {
+  color: var(--jn-ink); border-bottom: 2px solid var(--jn-ink);
+}
+.woocommerce-tabs .panel { font-size: 1rem; color: var(--jn-ink-soft); }
+.related h3, .up-sells h3, .related h2, .up-sells h2 { font-size: var(--jn-fs-md); }
+
+/* ==========================================================================
+   11. السلة والدفع
+   ========================================================================== */
+.woocommerce-cart-form__contents { border: 0; }
+.woocommerce-cart-form__contents th {
+  background: transparent; border-bottom: 1px solid var(--jn-ink);
+  font-family: var(--jn-body); font-size: .6875rem; font-weight: 700;
+  letter-spacing: .1em; text-transform: uppercase; color: var(--jn-ink); padding: .75rem 0;
+}
+.woocommerce-cart-form__contents td {
+  padding: 1.25rem .75rem 1.25rem 0; border-color: var(--jn-hairline); vertical-align: middle;
+}
+.cart_item .product-thumbnail img { border-radius: var(--jn-r); background: var(--jn-tile); width: 80px; }
+.cart_item .product-name a {
+  font-family: var(--jn-display); font-stretch: 85%; font-variation-settings: "wdth" 85;
+  font-size: 1.0625rem; font-weight: 800; color: var(--jn-ink); text-decoration: none;
+}
+.product-remove a.remove {
+  color: var(--jn-ink-faint) !important; font-size: 1.25rem;
+  width: 32px; height: 32px; line-height: 30px; border-radius: var(--jn-r);
+}
+.product-remove a.remove:hover { background: var(--jn-tile) !important; color: var(--jn-ink) !important; }
+
+.cart-collaterals .cart_totals, .woocommerce-checkout-review-order {
+  background: var(--jn-tile);
+  border: 0;
+  border-radius: var(--jn-r-tile);
+  padding: 1.75rem;
+}
+.cart_totals h3, .woocommerce-checkout-review-order h3 { font-size: var(--jn-fs-md); margin-bottom: 1rem; }
+.cart_totals table td, .cart_totals table th,
+.woocommerce-checkout-review-order table td, .woocommerce-checkout-review-order table th {
+  padding: .75rem 0; border-color: var(--jn-hairline); font-size: .9375rem;
+}
+.cart_totals .order-total .amount, .woocommerce-checkout-review-order .order-total .amount {
+  font-size: 1.5rem; font-weight: 700; color: var(--jn-ink);
+}
+.checkout-button, #place_order { width: 100%; min-height: 56px !important; font-size: 1rem !important; margin-top: 1rem; }
+
+/* مؤشّر الشحن المجاني */
+.jn-freeship {
+  background: var(--jn-tile); border: 0; border-radius: var(--jn-r-tile);
+  padding: 1.25rem; margin-bottom: 1.25rem; font-size: .875rem; color: var(--jn-ink);
+}
+.jn-freeship__bar { height: 6px; background: var(--jn-canvas); border-radius: 99px; overflow: hidden; margin-top: .75rem; }
+.jn-freeship__fill { height: 100%; background: var(--jn-accent); border-radius: 99px; transition: width .5s var(--jn-ease); }
+
+/* الرسائل */
+.woocommerce-message, .woocommerce-info, .woocommerce-error {
+  border: 0; border-radius: var(--jn-r-tile);
+  background: var(--jn-tile); color: var(--jn-ink);
+  font-size: .9375rem; padding: 1rem 1.25rem;
+}
+.woocommerce-error { background: #FBEAE7; }
+.coupon-form, .checkout_coupon { border: 1px solid var(--jn-hairline); border-radius: var(--jn-r-tile); padding: 1.25rem; }
+
+/* ==========================================================================
+   12. الفوتر
+   ========================================================================== */
+.footer-wrapper { border: 0; }
+#footer .footer-1, .footer-1 { background: var(--jn-tile); padding-top: var(--jn-pad); padding-bottom: 2rem; }
+#footer .footer-2, .footer-2 { background: var(--jn-tile); }
+.absolute-footer {
+  background: var(--jn-tile); color: var(--jn-ink-faint);
+  font-size: .75rem; letter-spacing: .04em; text-transform: uppercase; padding: 1.25rem 0;
+  border-top: 1px solid var(--jn-hairline);
+}
+.absolute-footer a { color: var(--jn-ink-soft); text-decoration: none; }
+
+#footer .widget-title, .footer .widget-title {
+  font-family: var(--jn-body);
+  font-size: .6875rem; font-weight: 700; letter-spacing: .12em;
+  text-transform: uppercase; color: var(--jn-ink); margin-bottom: 1rem;
+}
+#footer ul li { border: 0; padding: .25rem 0; }
+#footer ul li a { color: var(--jn-ink-soft); font-size: .9375rem; text-decoration: none; }
+#footer ul li a:hover { color: var(--jn-ink); text-decoration: underline; text-underline-offset: 4px; }
+
+/* عنوان ضخم في الفوتر — الصقه ككتلة نص */
+.jn-footer-mega {
+  font-family: var(--jn-display); font-stretch: 70%; font-variation-settings: "wdth" 70;
+  font-size: clamp(3rem, 12vw, 11rem); font-weight: 900;
+  letter-spacing: -.04em; line-height: .85; color: var(--jn-ink);
+  margin: 0; opacity: .1; user-select: none; pointer-events: none;
+}
+
+/* ودجات لا مكان لها في متجر */
+#footer .widget_calendar, #footer .widget_archive, #footer .widget_meta,
+#footer .widget_recent_comments, #footer .widget_rss { display: none; }
+
+/* ==========================================================================
+   13. الجوال — شريط تنقل سفلي وشريط شراء ثابت
+   ========================================================================== */
+.jn-bottom-nav {
+  position: fixed; inset-inline: 0; bottom: 0; z-index: 997;
+  display: none; background: rgba(255,255,255,.98);
+  backdrop-filter: saturate(1.5) blur(10px);
+  border-top: 1px solid var(--jn-hairline);
+  padding-bottom: env(safe-area-inset-bottom);
+}
+.jn-bottom-nav ul { display: flex; margin: 0; padding: 0; list-style: none; }
+.jn-bottom-nav li { flex: 1; }
+.jn-bottom-nav a {
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: .1875rem; padding: .5rem .125rem .4375rem;
+  font-size: .625rem; font-weight: 700; letter-spacing: .02em;
+  color: var(--jn-ink-faint); min-height: 56px; position: relative; text-decoration: none;
+}
+.jn-bottom-nav a .jn-ico { font-size: 1.1875rem; line-height: 1; }
+.jn-bottom-nav a.is-active { color: var(--jn-ink); }
+.jn-cart-count {
+  position: absolute; top: .25rem; inset-inline-end: 22%;
+  min-width: 16px; height: 16px; padding: 0 .25rem;
+  background: var(--jn-accent); color: var(--jn-accent-ink);
+  border-radius: 99px; font-size: .625rem; font-weight: 700;
+  display: flex; align-items: center; justify-content: center;
+}
+
+.jn-sticky-atc {
+  position: fixed; inset-inline: 0; bottom: 0; z-index: 998;
+  background: var(--jn-canvas); border-top: 1px solid var(--jn-hairline);
+  padding: .625rem var(--jn-gut) calc(.625rem + env(safe-area-inset-bottom));
+  display: none; align-items: center; gap: .75rem;
+  transform: translateY(110%); transition: transform .3s var(--jn-ease);
+}
+.jn-sticky-atc.is-visible { transform: translateY(0); }
+.jn-sticky-atc__info { flex: 1; min-width: 0; }
+.jn-sticky-atc__name {
+  font-size: .8125rem; font-weight: 700; color: var(--jn-ink);
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.jn-sticky-atc__price { font-size: .9375rem; font-weight: 700; color: var(--jn-ink); }
+.jn-sticky-atc .button { margin: 0; flex: 0 0 auto; }
+
+@media (max-width: 849px) {
+  .jn-bottom-nav { display: block; }
+  body.jn-has-bottom-nav { padding-bottom: 60px; }
+  .single-product .jn-sticky-atc { display: flex; }
+  .single-product .jn-bottom-nav { display: none; }
+  .whatsapp-button, .joinchat { bottom: 72px !important; }
+}
+
+/* ==========================================================================
+   14. الحركة والوصولية
+   ========================================================================== */
+:focus-visible {
+  outline: 2px solid var(--jn-ink);
+  outline-offset: 3px;
+  border-radius: var(--jn-r-inner);
+}
+.screen-reader-text, .sr-only {
+  position: absolute !important; width: 1px; height: 1px; overflow: hidden;
+  clip: rect(1px,1px,1px,1px); white-space: nowrap;
+}
+
+/* ظهور تدريجي عند التمرير — أضف الكلاس jn-reveal لأي قسم */
+@media (prefers-reduced-motion: no-preference) {
+  .jn-reveal { animation: jn-fade-up .7s var(--jn-ease) both; animation-timeline: view(); animation-range: entry 0% cover 22%; }
+}
+@keyframes jn-fade-up { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: none; } }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .01ms !important; animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important; scroll-behavior: auto !important;
+  }
+  .product-small .box:hover .box-image img { transform: none; }
+}
+
+/* ==========================================================================
+   15. كلاسات جاهزة للاستخدام داخل UX Builder
+   ضعها في خانة "Class Name" لأي عنصر
+   ========================================================================== */
+.jn-tight   { line-height: 1.02 !important; letter-spacing: -.03em !important; }
+.jn-wide    { --jn-wdth: 100; }
+.jn-narrow  { --jn-wdth: 65; }
+.jn-round   { border-radius: var(--jn-r-tile) !important; overflow: hidden; }
+.jn-flat    { border: 0 !important; box-shadow: none !important; }
+.jn-center  { text-align: center; }
+.jn-center .jn-lead { margin-inline: auto; }
+.jn-stack   { display: flex; flex-direction: column; gap: 1rem; }
+.jn-pill {
+  display: inline-flex; align-items: center; gap: .375rem;
+  background: var(--jn-tile); color: var(--jn-ink);
+  border-radius: var(--jn-r); padding: .375rem .75rem;
+  font-size: .75rem; font-weight: 700; letter-spacing: .04em; text-transform: uppercase;
+}
+.jn-media-4-5  { aspect-ratio: 4 / 5;  object-fit: cover; width: 100%; border-radius: var(--jn-r-tile); }
+.jn-media-16-9 { aspect-ratio: 16 / 9; object-fit: cover; width: 100%; border-radius: var(--jn-r-tile); }
+.jn-media-1-1  { aspect-ratio: 1 / 1;  object-fit: cover; width: 100%; border-radius: var(--jn-r-tile); }
+
+/* شبكة ثلاثية جاهزة */
+.jn-grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--jn-gut); }
+.jn-grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--jn-gut); }
+@media (max-width: 849px) { .jn-grid-3, .jn-grid-2 { grid-template-columns: 1fr; } }
+
+/* ==========================================================================
+   16. دعم RTL — يعمل تلقائياً عند تفعيل اللغة العربية
+   ========================================================================== */
+html[dir="rtl"] body, html[lang^="ar"] body {
+  font-family: "Tajawal", "IBM Plex Sans Arabic", "Noto Kufi Arabic", sans-serif;
+}
+html[dir="rtl"] h1, html[dir="rtl"] h2, html[dir="rtl"] h3,
+html[dir="rtl"] .product-title, html[dir="rtl"] .jn-mega,
+html[lang^="ar"] h1, html[lang^="ar"] h2, html[lang^="ar"] h3 {
+  font-family: "Tajawal", "IBM Plex Sans Arabic", "Noto Kufi Arabic", sans-serif;
+  font-stretch: normal; font-variation-settings: normal;
+  font-weight: 900;
+  letter-spacing: 0;      /* التتبّع السالب يضرّ باتصال الحروف العربية */
+  line-height: 1.25;      /* العربية تحتاج تنفّساً أكثر من اللاتينية */
+}
+html[dir="rtl"] .product-small .box-text { text-align: right; }
+html[dir="rtl"] .price del { margin-inline-end: 0; margin-inline-start: .375rem; }
+html[dir="rtl"] .jn-more::after { content: "←"; }
+html[dir="rtl"] .jn-more:hover::after { transform: translateX(-4px); }
+
+/* ==========================================================================
+   17. إصلاحات توافق مع القالب الحالي
+   هذه القواعد تعالج ما ظهر على الموقع المباشر بعد التركيب.
+   ========================================================================== */
+
+/* --- شريط أدمن ووردبريس: لا يغطّيه الهيدر الثابت --- */
+body.admin-bar .header.stuck, body.admin-bar .header-wrapper.stuck { top: 32px; }
+@media screen and (max-width: 782px) {
+  body.admin-bar .header.stuck, body.admin-bar .header-wrapper.stuck { top: 46px; }
+}
+
+/* --- محاذاة نص بطاقة المنتج لليسار (Flatsome يوسّطه افتراضياً) --- */
+.product-small .box-text,
+.product-small .box-text.text-center,
+.products .product .box-text {
+  text-align: start !important;
+}
+.product-small .box-text .price,
+.product-small .box-text .star-rating { justify-content: flex-start; margin-inline: 0; }
+
+/* --- السايدبار: أزل ودجات المدونة من صفحات المتجر --- */
+.shop-sidebar .widget_recent_entries,
+.shop-sidebar .widget_recent_comments,
+.shop-sidebar .widget_calendar,
+.shop-sidebar .widget_archive,
+.shop-sidebar .widget_meta,
+.shop-sidebar .widget_rss,
+.single-product .shop-sidebar .widget_shopping_cart,
+.single-product #secondary, .single-product .sidebar-inner {
+  display: none !important;
+}
+/* صفحة المنتج بعرض كامل بعد إخفاء السايدبار */
+.single-product .content-area, .single-product .large-9 {
+  width: 100% !important; max-width: 100% !important; flex-basis: 100% !important;
+}
+
+/* --- زر "Read more" (منتج بلا سعر): واضح أنه ليس زر شراء --- */
+.product-small .add-to-cart-button .button,
+.product-small a.button[href*="/product/"] {
+  background: transparent !important;
+  color: var(--jn-ink) !important;
+  border: 1px solid var(--jn-ink) !important;
+  min-height: 44px;
+  padding: .625rem 1rem;
+}
+.product-small .add-to-cart-button .button:hover,
+.product-small a.button[href*="/product/"]:hover {
+  background: var(--jn-ink) !important;
+  color: var(--jn-canvas) !important;
+}
+
+/* --- صورة المنتج الناقصة: لا تُبرزها بالحجم الكامل --- */
+.product-small img[src*="woocommerce-placeholder"],
+.product-small img[srcset*="woocommerce-placeholder"] {
+  padding: 26% !important;
+  opacity: .35;
+  mix-blend-mode: normal;
+}
+
+/* --- بانرات الصور: لا تُقصّ الصورة داخل استدارة مزدوجة --- */
+.banner .banner-bg img, .banner-layers img { border-radius: 0; }
+
+/* --- أزرار بعرض كامل داخل البانرات: حدّها بعرض معقول --- */
+.banner .button, .jn-hero .button { width: auto; max-width: 100%; }
+
+/* --- روابط القائمة الجانبية للتصنيفات --- */
+.sidebar-menu .nav > li > a, .widget_product_categories li a {
+  font-family: var(--jn-body); font-size: 1rem; font-weight: 500;
+  color: var(--jn-ink); text-decoration: none; padding: .625rem 0;
+}
+.widget_product_categories li a:hover { color: var(--jn-accent); }
+
+/* ==========================================================================
+   18. طقم الأقسام — الكتل التي تصنع التميّز فعلاً
+   لا يكفي إعادة تلوين هيكل القالب. هذه كتل قائمة بذاتها
+   تُلصق كـ HTML داخل UX Builder فتحمل التصميم معها.
+   الأكواد الجاهزة في ملف: sections.html
+   ========================================================================== */
+
+/* --- التوقيع البصري 1: القوس (Arch) ---------------------------------------
+   شكل الصيدلية/النبات: صورة بقمة مقوّسة. يميّز البطاقة فوراً
+   ويجعلها غير قابلة للخلط بأي قالب جاهز. -------------------------------- */
+.jn-arch {
+  border-radius: 999px 999px var(--jn-r) var(--jn-r);
+  overflow: hidden;
+  background: var(--jn-tile);
+  aspect-ratio: 3 / 4;
+  display: block;
+  position: relative;
+}
+.jn-arch > img {
+  width: 100%; height: 100%; object-fit: cover; display: block;
+  transition: transform .6s var(--jn-ease);
+}
+.jn-arch--contain > img { object-fit: contain; padding: 14%; mix-blend-mode: multiply; }
+a.jn-arch:hover > img, .jn-archcard:hover .jn-arch > img { transform: scale(1.05); }
+
+/* --- التوقيع البصري 2: نسيج حبيبي خفيف على الكتل البيج ------------------- */
+.jn-grain { position: relative; isolation: isolate; }
+.jn-grain::after {
+  content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none;
+  opacity: .5; mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='.16'/%3E%3C/svg%3E");
+}
+
+/* --- التوقيع البصري 3: شريط متحرك بالادعاءات ---------------------------- */
+.jn-marquee {
+  overflow: hidden;
+  background: var(--jn-ink);
+  color: #fff;
+  padding: .9375rem 0;
+  --jn-marquee-speed: 34s;
+}
+.jn-marquee--light { background: var(--jn-tile); color: var(--jn-ink); }
+.jn-marquee--accent { background: var(--jn-accent); color: var(--jn-accent-ink); }
+.jn-marquee__track {
+  display: flex; align-items: center; gap: 3rem;
+  width: max-content;
+  animation: jn-marquee var(--jn-marquee-speed) linear infinite;
+}
+.jn-marquee:hover .jn-marquee__track { animation-play-state: paused; }
+.jn-marquee__track > span {
+  display: inline-flex; align-items: center; gap: 3rem;
+  font-family: var(--jn-body);
+  font-size: .8125rem; font-weight: 700;
+  letter-spacing: .16em; text-transform: uppercase; white-space: nowrap;
+}
+.jn-marquee__track > span::after {
+  content: "✱"; opacity: .5; font-size: .75rem; letter-spacing: 0;
+}
+@keyframes jn-marquee { to { transform: translateX(-50%); } }
+@media (prefers-reduced-motion: reduce) {
+  .jn-marquee__track { animation: none; justify-content: center; width: 100%; flex-wrap: wrap; gap: 1.5rem; }
+  .jn-marquee__track > span:nth-child(n+2) { display: none; }
+}
+
+/* --- قسم تحريري: عنوان ضخم + صورة مقوّسة، متناوب ------------------------ */
+.jn-editorial {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: clamp(1.5rem, 5vw, 5rem);
+}
+.jn-editorial--flip > *:first-child { order: 2; }
+.jn-editorial h2 {
+  font-size: var(--jn-fs-lg);
+  margin-bottom: 1rem;
+}
+.jn-editorial p { font-size: 1.0625rem; line-height: 1.6; max-width: 46ch; }
+.jn-editorial .jn-arch { aspect-ratio: 4 / 5; max-width: 460px; margin-inline: auto; }
+@media (max-width: 849px) {
+  .jn-editorial { grid-template-columns: 1fr; }
+  .jn-editorial--flip > *:first-child { order: 0; }
+}
+
+/* --- بلاطات التصنيفات بقمة مقوّسة --------------------------------------- */
+.jn-archgrid {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--jn-gut);
+}
+@media (max-width: 1023px) { .jn-archgrid { grid-template-columns: repeat(3, 1fr); } }
+@media (max-width: 649px)  { .jn-archgrid { grid-template-columns: repeat(2, 1fr); } }
+
+.jn-archcard { display: block; text-decoration: none; text-align: center; }
+.jn-archcard .jn-arch { margin-bottom: .875rem; }
+.jn-archcard__name {
+  font-family: var(--jn-display);
+  font-stretch: calc(var(--jn-wdth) * 1%); font-variation-settings: "wdth" var(--jn-wdth);
+  font-size: 1.25rem; font-weight: 800; letter-spacing: -.02em; line-height: 1.1;
+  color: var(--jn-ink); display: block;
+}
+.jn-archcard__meta {
+  font-size: .75rem; font-weight: 600; letter-spacing: .08em;
+  text-transform: uppercase; color: var(--jn-ink-faint); margin-top: .25rem; display: block;
+}
+.jn-archcard:hover .jn-archcard__name { color: var(--jn-accent); }
+
+/* --- خطوات مرقّمة بأرقام مفرّغة (الترقيم هنا يعني تسلسلاً حقيقياً) ------- */
+.jn-steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(1.5rem, 4vw, 3.5rem); }
+@media (max-width: 849px) { .jn-steps { grid-template-columns: 1fr; } }
+.jn-step__n {
+  font-family: var(--jn-display);
+  font-stretch: 70%; font-variation-settings: "wdth" 70;
+  font-size: clamp(3.5rem, 8vw, 6.5rem);
+  font-weight: 900; line-height: .8; letter-spacing: -.04em;
+  color: transparent;
+  -webkit-text-stroke: 1.5px var(--jn-ink);
+  display: block; margin-bottom: .75rem;
+}
+.jn-step h3 { font-size: var(--jn-fs-md); margin-bottom: .5rem; }
+.jn-step p { font-size: .9375rem; max-width: 34ch; }
+
+/* --- اقتباس ضخم --------------------------------------------------------- */
+.jn-quote {
+  text-align: center;
+  max-width: 22ch;
+  margin-inline: auto;
+  font-family: var(--jn-display);
+  font-stretch: calc(var(--jn-wdth) * 1%); font-variation-settings: "wdth" var(--jn-wdth);
+  font-size: var(--jn-fs-ml);
+  font-weight: 800; line-height: 1.05; letter-spacing: -.03em;
+  color: var(--jn-ink);
+}
+.jn-quote__by {
+  display: block; margin-top: 1.25rem;
+  font-family: var(--jn-body); font-size: .75rem; font-weight: 700;
+  letter-spacing: .12em; text-transform: uppercase; color: var(--jn-ink-faint);
+}
+.jn-stars { color: var(--jn-accent); letter-spacing: .2em; font-size: .875rem; margin-bottom: 1rem; display: block; text-align: center; }
+
+/* --- شبكة مزاحة: تكسر رتابة الصف المستقيم ------------------------------- */
+@media (min-width: 850px) {
+  .jn-offset > *:nth-child(even) { transform: translateY(2.5rem); }
+}
+
+/* --- علامة الفوتر الضخمة المقصوصة --------------------------------------- */
+.jn-wordmark {
+  overflow: hidden;
+  line-height: 0;
+  padding-top: 2rem;
+}
+.jn-wordmark span {
+  display: block;
+  font-family: var(--jn-display);
+  font-stretch: 68%; font-variation-settings: "wdth" 68;
+  font-size: clamp(4rem, 19vw, 17rem);
+  font-weight: 900;
+  letter-spacing: -.045em;
+  line-height: .78;
+  color: var(--jn-ink);
+  opacity: .08;
+  margin-bottom: -.16em;   /* يقصّ أسفل الحروف عند حافة الصفحة */
+  user-select: none;
+  white-space: nowrap;
+  text-align: center;
+}
+
+/* --- بطاقة المنتج: نسخة مقوّسة مع زر ينزلق عند المرور -------------------- */
+.jn-pcards .product-small .box-image,
+.jn-pcards .products .product .box-image {
+  border-radius: 999px 999px var(--jn-r) var(--jn-r);
+  aspect-ratio: 3 / 4;
+}
+.jn-pcards .product-small .box-image img { aspect-ratio: auto; height: 100%; padding: 16%; }
+
+@media (min-width: 850px) and (hover: hover) {
+  .jn-pcards .product-small .add-to-cart-button {
+    opacity: 0; transform: translateY(6px);
+    transition: opacity var(--jn-t), transform var(--jn-t);
+  }
+  .jn-pcards .product-small .box:hover .add-to-cart-button,
+  .jn-pcards .product-small .box:focus-within .add-to-cart-button {
+    opacity: 1; transform: none;
+  }
+}
+
+/* --- فاصل بصري خفيف بين الأقسام ----------------------------------------- */
+.jn-rule { height: 1px; background: var(--jn-hairline); border: 0; margin: 0; }
+.jn-dot-rule {
+  display: flex; align-items: center; justify-content: center; gap: .75rem;
+  color: var(--jn-ink-faint); font-size: .625rem; padding: 1.5rem 0;
+}
+.jn-dot-rule::before, .jn-dot-rule::after {
+  content: ""; height: 1px; flex: 1; background: var(--jn-hairline);
+}
