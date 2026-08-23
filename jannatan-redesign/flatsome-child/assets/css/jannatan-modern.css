@@ -1054,3 +1054,196 @@ body.admin-bar .header.stuck, body.admin-bar .header-wrapper.stuck { top: 32px; 
   color: var(--jn-ink); text-decoration: none; padding: .625rem 0;
 }
 .widget_product_categories li a:hover { color: var(--jn-accent); }
+
+/* ==========================================================================
+   18. طقم الأقسام — الكتل التي تصنع التميّز فعلاً
+   لا يكفي إعادة تلوين هيكل القالب. هذه كتل قائمة بذاتها
+   تُلصق كـ HTML داخل UX Builder فتحمل التصميم معها.
+   الأكواد الجاهزة في ملف: sections.html
+   ========================================================================== */
+
+/* --- التوقيع البصري 1: القوس (Arch) ---------------------------------------
+   شكل الصيدلية/النبات: صورة بقمة مقوّسة. يميّز البطاقة فوراً
+   ويجعلها غير قابلة للخلط بأي قالب جاهز. -------------------------------- */
+.jn-arch {
+  border-radius: 999px 999px var(--jn-r) var(--jn-r);
+  overflow: hidden;
+  background: var(--jn-tile);
+  aspect-ratio: 3 / 4;
+  display: block;
+  position: relative;
+}
+.jn-arch > img {
+  width: 100%; height: 100%; object-fit: cover; display: block;
+  transition: transform .6s var(--jn-ease);
+}
+.jn-arch--contain > img { object-fit: contain; padding: 14%; mix-blend-mode: multiply; }
+a.jn-arch:hover > img, .jn-archcard:hover .jn-arch > img { transform: scale(1.05); }
+
+/* --- التوقيع البصري 2: نسيج حبيبي خفيف على الكتل البيج ------------------- */
+.jn-grain { position: relative; isolation: isolate; }
+.jn-grain::after {
+  content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none;
+  opacity: .5; mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='.16'/%3E%3C/svg%3E");
+}
+
+/* --- التوقيع البصري 3: شريط متحرك بالادعاءات ---------------------------- */
+.jn-marquee {
+  overflow: hidden;
+  background: var(--jn-ink);
+  color: #fff;
+  padding: .9375rem 0;
+  --jn-marquee-speed: 34s;
+}
+.jn-marquee--light { background: var(--jn-tile); color: var(--jn-ink); }
+.jn-marquee--accent { background: var(--jn-accent); color: var(--jn-accent-ink); }
+.jn-marquee__track {
+  display: flex; align-items: center; gap: 3rem;
+  width: max-content;
+  animation: jn-marquee var(--jn-marquee-speed) linear infinite;
+}
+.jn-marquee:hover .jn-marquee__track { animation-play-state: paused; }
+.jn-marquee__track > span {
+  display: inline-flex; align-items: center; gap: 3rem;
+  font-family: var(--jn-body);
+  font-size: .8125rem; font-weight: 700;
+  letter-spacing: .16em; text-transform: uppercase; white-space: nowrap;
+}
+.jn-marquee__track > span::after {
+  content: "✱"; opacity: .5; font-size: .75rem; letter-spacing: 0;
+}
+@keyframes jn-marquee { to { transform: translateX(-50%); } }
+@media (prefers-reduced-motion: reduce) {
+  .jn-marquee__track { animation: none; justify-content: center; width: 100%; flex-wrap: wrap; gap: 1.5rem; }
+  .jn-marquee__track > span:nth-child(n+2) { display: none; }
+}
+
+/* --- قسم تحريري: عنوان ضخم + صورة مقوّسة، متناوب ------------------------ */
+.jn-editorial {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: clamp(1.5rem, 5vw, 5rem);
+}
+.jn-editorial--flip > *:first-child { order: 2; }
+.jn-editorial h2 {
+  font-size: var(--jn-fs-lg);
+  margin-bottom: 1rem;
+}
+.jn-editorial p { font-size: 1.0625rem; line-height: 1.6; max-width: 46ch; }
+.jn-editorial .jn-arch { aspect-ratio: 4 / 5; max-width: 460px; margin-inline: auto; }
+@media (max-width: 849px) {
+  .jn-editorial { grid-template-columns: 1fr; }
+  .jn-editorial--flip > *:first-child { order: 0; }
+}
+
+/* --- بلاطات التصنيفات بقمة مقوّسة --------------------------------------- */
+.jn-archgrid {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--jn-gut);
+}
+@media (max-width: 1023px) { .jn-archgrid { grid-template-columns: repeat(3, 1fr); } }
+@media (max-width: 649px)  { .jn-archgrid { grid-template-columns: repeat(2, 1fr); } }
+
+.jn-archcard { display: block; text-decoration: none; text-align: center; }
+.jn-archcard .jn-arch { margin-bottom: .875rem; }
+.jn-archcard__name {
+  font-family: var(--jn-display);
+  font-stretch: calc(var(--jn-wdth) * 1%); font-variation-settings: "wdth" var(--jn-wdth);
+  font-size: 1.25rem; font-weight: 800; letter-spacing: -.02em; line-height: 1.1;
+  color: var(--jn-ink); display: block;
+}
+.jn-archcard__meta {
+  font-size: .75rem; font-weight: 600; letter-spacing: .08em;
+  text-transform: uppercase; color: var(--jn-ink-faint); margin-top: .25rem; display: block;
+}
+.jn-archcard:hover .jn-archcard__name { color: var(--jn-accent); }
+
+/* --- خطوات مرقّمة بأرقام مفرّغة (الترقيم هنا يعني تسلسلاً حقيقياً) ------- */
+.jn-steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(1.5rem, 4vw, 3.5rem); }
+@media (max-width: 849px) { .jn-steps { grid-template-columns: 1fr; } }
+.jn-step__n {
+  font-family: var(--jn-display);
+  font-stretch: 70%; font-variation-settings: "wdth" 70;
+  font-size: clamp(3.5rem, 8vw, 6.5rem);
+  font-weight: 900; line-height: .8; letter-spacing: -.04em;
+  color: transparent;
+  -webkit-text-stroke: 1.5px var(--jn-ink);
+  display: block; margin-bottom: .75rem;
+}
+.jn-step h3 { font-size: var(--jn-fs-md); margin-bottom: .5rem; }
+.jn-step p { font-size: .9375rem; max-width: 34ch; }
+
+/* --- اقتباس ضخم --------------------------------------------------------- */
+.jn-quote {
+  text-align: center;
+  max-width: 22ch;
+  margin-inline: auto;
+  font-family: var(--jn-display);
+  font-stretch: calc(var(--jn-wdth) * 1%); font-variation-settings: "wdth" var(--jn-wdth);
+  font-size: var(--jn-fs-ml);
+  font-weight: 800; line-height: 1.05; letter-spacing: -.03em;
+  color: var(--jn-ink);
+}
+.jn-quote__by {
+  display: block; margin-top: 1.25rem;
+  font-family: var(--jn-body); font-size: .75rem; font-weight: 700;
+  letter-spacing: .12em; text-transform: uppercase; color: var(--jn-ink-faint);
+}
+.jn-stars { color: var(--jn-accent); letter-spacing: .2em; font-size: .875rem; margin-bottom: 1rem; display: block; text-align: center; }
+
+/* --- شبكة مزاحة: تكسر رتابة الصف المستقيم ------------------------------- */
+@media (min-width: 850px) {
+  .jn-offset > *:nth-child(even) { transform: translateY(2.5rem); }
+}
+
+/* --- علامة الفوتر الضخمة المقصوصة --------------------------------------- */
+.jn-wordmark {
+  overflow: hidden;
+  line-height: 0;
+  padding-top: 2rem;
+}
+.jn-wordmark span {
+  display: block;
+  font-family: var(--jn-display);
+  font-stretch: 68%; font-variation-settings: "wdth" 68;
+  font-size: clamp(4rem, 19vw, 17rem);
+  font-weight: 900;
+  letter-spacing: -.045em;
+  line-height: .78;
+  color: var(--jn-ink);
+  opacity: .08;
+  margin-bottom: -.16em;   /* يقصّ أسفل الحروف عند حافة الصفحة */
+  user-select: none;
+  white-space: nowrap;
+  text-align: center;
+}
+
+/* --- بطاقة المنتج: نسخة مقوّسة مع زر ينزلق عند المرور -------------------- */
+.jn-pcards .product-small .box-image,
+.jn-pcards .products .product .box-image {
+  border-radius: 999px 999px var(--jn-r) var(--jn-r);
+  aspect-ratio: 3 / 4;
+}
+.jn-pcards .product-small .box-image img { aspect-ratio: auto; height: 100%; padding: 16%; }
+
+@media (min-width: 850px) and (hover: hover) {
+  .jn-pcards .product-small .add-to-cart-button {
+    opacity: 0; transform: translateY(6px);
+    transition: opacity var(--jn-t), transform var(--jn-t);
+  }
+  .jn-pcards .product-small .box:hover .add-to-cart-button,
+  .jn-pcards .product-small .box:focus-within .add-to-cart-button {
+    opacity: 1; transform: none;
+  }
+}
+
+/* --- فاصل بصري خفيف بين الأقسام ----------------------------------------- */
+.jn-rule { height: 1px; background: var(--jn-hairline); border: 0; margin: 0; }
+.jn-dot-rule {
+  display: flex; align-items: center; justify-content: center; gap: .75rem;
+  color: var(--jn-ink-faint); font-size: .625rem; padding: 1.5rem 0;
+}
+.jn-dot-rule::before, .jn-dot-rule::after {
+  content: ""; height: 1px; flex: 1; background: var(--jn-hairline);
+}
