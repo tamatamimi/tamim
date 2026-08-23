@@ -420,10 +420,13 @@ textarea { min-height: 8em; }
 }
 .nav-dropdown > li > a:hover { background: var(--jn-tile); color: var(--jn-ink); }
 
-/* البحث */
+/* البحث — خلفية تدرّج فاتح من لون الشعار (--jn-accent) نفسه.
+   color-mix يمزج 12% من لون علامتك مع الأبيض، فيبقى النص مقروءاً
+   ويتغيّر تلقائياً إن غيّرت اللون الأساسي من إعدادات Flatsome. */
 .header .searchform input.search-field,
 .dgwt-wcas-search-wrapp .dgwt-wcas-search-input {
-  background: var(--jn-tile) !important;
+  background: #EDF6F0 !important;                                   /* بديل للمتصفحات القديمة */
+  background: color-mix(in srgb, var(--jn-accent) 12%, #fff) !important;
   border: 1px solid transparent !important;
   border-radius: var(--jn-r) !important;
   height: 44px; min-height: 44px;
