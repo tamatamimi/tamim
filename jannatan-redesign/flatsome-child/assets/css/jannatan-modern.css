@@ -37,9 +37,11 @@
   --jn-ink-soft:    #5C5C58;                            /* النص الثانوي */
   --jn-ink-faint:   #9A9A95;                            /* التلميحات والأسعار المشطوبة */
   --jn-canvas:      #FFFFFF;                            /* الخلفية الأساسية */
-  --jn-tile:        #F4F1EC;                            /* كتلة فاتحة: خلفيات الأقسام والصور */
-  --jn-tile-2:      #EDE9E2;                            /* كتلة أغمق قليلاً للتناوب */
-  --jn-hairline:    #E6E2DB;                            /* خط فاصل — يُستخدم بأقل قدر ممكن */
+  /* الخلفيات: أبيض كالافتراضي في Flatsome.
+     أردت إرجاع البيج؟ اجعل --jn-tile: #F4F1EC و --jn-tile-2: #EDE9E2 */
+  --jn-tile:        #FFFFFF;                            /* كان بيج — الآن أبيض */
+  --jn-tile-2:      #F4F4F2;                            /* فاصل خفيف جداً للحوامات والصناديق */
+  --jn-hairline:    #E6E6E3;                            /* خط فاصل رمادي محايد */
 
   /* --- الخطوط --- */
   --jn-display:     "Archivo", "Archivo Narrow", "Helvetica Neue", Impact, sans-serif;
@@ -420,14 +422,11 @@ textarea { min-height: 8em; }
 }
 .nav-dropdown > li > a:hover { background: var(--jn-tile); color: var(--jn-ink); }
 
-/* البحث — خلفية تدرّج فاتح من لون الشعار (--jn-accent) نفسه.
-   color-mix يمزج 12% من لون علامتك مع الأبيض، فيبقى النص مقروءاً
-   ويتغيّر تلقائياً إن غيّرت اللون الأساسي من إعدادات Flatsome. */
+/* البحث — أبيض بحدّ رفيع كالافتراضي في Flatsome */
 .header .searchform input.search-field,
 .dgwt-wcas-search-wrapp .dgwt-wcas-search-input {
-  background: #EDF6F0 !important;                                   /* بديل للمتصفحات القديمة */
-  background: color-mix(in srgb, var(--jn-accent) 12%, #fff) !important;
-  border: 1px solid transparent !important;
+  background: #FFFFFF !important;
+  border: 1px solid var(--jn-hairline) !important;
   border-radius: var(--jn-r) !important;
   height: 44px; min-height: 44px;
   font-size: .875rem;
