@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62.5..125,400..900&family=Poppins:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62.5..125,400..900&family=Poppins:wght@400;500;600;700&family=Tajawal:wght@400;500;700;800;900&display=swap');
 
 /* ==========================================================================
    واجهة عصرية لـ Flatsome + WooCommerce
@@ -42,9 +42,25 @@
   --jn-hairline:    #E6E2DB;                            /* خط فاصل — يُستخدم بأقل قدر ممكن */
 
   /* --- الخطوط --- */
-  --jn-display: "Archivo", "Archivo Narrow", "Helvetica Neue", Impact, sans-serif;
-  --jn-body:    "Poppins", "IBM Plex Sans Arabic", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  --jn-wdth:    78;      /* درجة ضغط خط العناوين: 62.5 = شديد الضغط · 100 = عادي */
+  --jn-display:     "Archivo", "Archivo Narrow", "Helvetica Neue", Impact, sans-serif;
+  --jn-body:        "Poppins", "Tajawal", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --jn-wdth:        78;   /* درجة ضغط خط العناوين: 62.5 = شديد الضغط · 100 = بلا ضغط */
+  --jn-head-weight: 800;  /* وزن العناوين */
+  --jn-head-track:  -.025em; /* تتبّع العناوين */
+
+  /* ------------------------------------------------------------------
+     بديل جاهز: خط Tajawal لكل الموقع (عربي + إنجليزي)
+     احذف علامتَي التعليق حول الكتلة التالية ليصبح Tajawal هو الخط.
+     ملاحظة: Tajawal ليس خطاً مضغوطاً، لذا تُعوَّض الحدّة بوزن 900
+     وتتبّع أضيق. غيّر --jn-wdth لن يؤثر عليه.
+     ------------------------------------------------------------------ */
+  /*
+  --jn-display:     "Tajawal", "Poppins", sans-serif;
+  --jn-body:        "Tajawal", "Poppins", sans-serif;
+  --jn-wdth:        100;
+  --jn-head-weight: 900;
+  --jn-head-track:  -.02em;
+  */
 
   /* --- سلم الطباعة (يتضخم تلقائياً مع عرض الشاشة) --- */
   --jn-fs-xl:  clamp(2.75rem, 7vw, 6rem);      /* 44 → 96px  عنوان الهيرو */
@@ -90,10 +106,10 @@ h1, h2, h3, h4, h5, h6,
 .heading-font, .is-title, .entry-title, .product-title, .widget-title {
   font-family: var(--jn-display);
   font-stretch: calc(var(--jn-wdth) * 1%); font-variation-settings: "wdth" var(--jn-wdth);
-  font-weight: 800;
+  font-weight: var(--jn-head-weight);
   color: var(--jn-ink);
   line-height: 1.08;
-  letter-spacing: -.025em;
+  letter-spacing: var(--jn-head-track);
   text-transform: none;
   text-wrap: balance;
   margin-bottom: .5em;
@@ -890,16 +906,16 @@ form.cart { display: flex; flex-wrap: wrap; gap: .75rem; align-items: center; ma
    16. دعم RTL — يعمل تلقائياً عند تفعيل اللغة العربية
    ========================================================================== */
 html[dir="rtl"] body, html[lang^="ar"] body {
-  font-family: "IBM Plex Sans Arabic", "Noto Kufi Arabic", var(--jn-body);
+  font-family: "Tajawal", "IBM Plex Sans Arabic", "Noto Kufi Arabic", sans-serif;
 }
 html[dir="rtl"] h1, html[dir="rtl"] h2, html[dir="rtl"] h3,
 html[dir="rtl"] .product-title, html[dir="rtl"] .jn-mega,
 html[lang^="ar"] h1, html[lang^="ar"] h2, html[lang^="ar"] h3 {
-  font-family: "IBM Plex Sans Arabic", "Noto Kufi Arabic", sans-serif;
+  font-family: "Tajawal", "IBM Plex Sans Arabic", "Noto Kufi Arabic", sans-serif;
   font-stretch: normal; font-variation-settings: normal;
-  font-weight: 700;
-  letter-spacing: 0;
-  line-height: 1.25;
+  font-weight: 900;
+  letter-spacing: 0;      /* التتبّع السالب يضرّ باتصال الحروف العربية */
+  line-height: 1.25;      /* العربية تحتاج تنفّساً أكثر من اللاتينية */
 }
 html[dir="rtl"] .product-small .box-text { text-align: right; }
 html[dir="rtl"] .price del { margin-inline-end: 0; margin-inline-start: .375rem; }

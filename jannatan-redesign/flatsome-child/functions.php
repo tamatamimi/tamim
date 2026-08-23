@@ -20,7 +20,7 @@ function jannatan_enqueue_assets() {
 	// الخطوط (احذف هذا السطر إن رفعت الخطوط محلياً — أسرع وأفضل للخصوصية).
 	wp_enqueue_style(
 		'jannatan-fonts',
-		'https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62.5..125,400..900&family=Poppins:wght@400;500;600;700&display=swap',
+		'https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62.5..125,400..900&family=Poppins:wght@400;500;600;700&family=Tajawal:wght@400;500;700;800;900&display=swap',
 		array(),
 		null
 	);
