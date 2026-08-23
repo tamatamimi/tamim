@@ -1,7 +1,7 @@
 <title>تصميم متجر جنّتان</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62.5..125,400..900&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap">
 <style>
 /* ============ رموز العرض (chrome) ============ */
 :root{
@@ -36,8 +36,8 @@
 .mock{
   --g900:#0B3D2C; --g700:#146B4A; --g600:#1A855B; --g100:#E4F2EB; --g50:#F2F9F5;
   --h600:#C8801B; --h100:#FDF1DD;
-  --i900:#14211C; --i700:#37453F; --i500:#64726B; --i300:#A7B2AC;
-  --ln:#E4E8E5; --cream:#FBF9F4; --sale:#C4372B;
+  --i900:#191919; --i700:#5C5C58; --i500:#9A9A95; --i300:#B5B2AC;
+  --ln:#E6E2DB; --cream:#F4F1EC; --sale:#191919;
 }
 
 *{box-sizing:border-box}
@@ -48,7 +48,7 @@ body{
   -webkit-font-smoothing:antialiased;
 }
 .wrap{max-width:1120px; margin:0 auto; padding:0 24px}
-h1,h2,h3{font-family:"Fraunces",Georgia,serif; line-height:1.2; text-wrap:balance; margin:0}
+h1,h2,h3{font-family:"IBM Plex Sans Arabic",sans-serif; font-weight:700; letter-spacing:-.01em; line-height:1.25; text-wrap:balance; margin:0}
 p{margin:0}
 a{color:inherit}
 .mono{font-family:"IBM Plex Sans Arabic",monospace; font-variant-numeric:tabular-nums}
@@ -80,14 +80,14 @@ section{padding:64px 0; border-bottom:1px solid var(--line)}
   background:var(--surface); border:1px solid var(--line); border-radius:var(--r);
   padding:20px; display:flex; flex-direction:column; gap:6px;
 }
-.issue .n{font-family:"Fraunces",serif; font-size:34px; font-weight:600; color:var(--bad); line-height:1}
+.issue .n{font-family:"Archivo",sans-serif; font-stretch:75%; font-size:44px; font-weight:800; letter-spacing:-.03em; color:var(--bad); line-height:1}
 .issue .t{font-weight:600; font-size:15px}
 .issue .d{font-size:13.5px; color:var(--ink-3); line-height:1.6}
 
 /* ============ نظام التصميم ============ */
 .tokens{display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:24px}
 .panel{background:var(--surface); border:1px solid var(--line); border-radius:var(--r); padding:22px}
-.panel h3{font-size:15px; font-family:"IBM Plex Sans Arabic",sans-serif; font-weight:600; margin-bottom:16px}
+.panel h3{font-size:13px; font-family:"IBM Plex Sans Arabic",sans-serif; font-weight:700; letter-spacing:.06em; margin-bottom:16px}
 .swatches{display:flex; flex-wrap:wrap; gap:10px}
 .sw{width:100%; display:flex; align-items:center; gap:12px; font-size:13px; color:var(--ink-2)}
 .sw i{width:34px; height:34px; border-radius:9px; flex:0 0 34px; border:1px solid rgba(0,0,0,.08)}
@@ -95,8 +95,8 @@ section{padding:64px 0; border-bottom:1px solid var(--line)}
 .typerow{display:flex; align-items:baseline; gap:14px; padding:9px 0; border-bottom:1px solid var(--line)}
 .typerow:last-child{border:0}
 .typerow span:last-child{margin-inline-start:auto; font-size:12px; color:var(--ink-3)}
-.tp-h{font-family:"Fraunces",serif; font-weight:600; color:var(--ink)}
-.tp-b{font-family:"Inter",sans-serif; color:var(--ink)}
+.tp-h{font-family:"Archivo",sans-serif; font-stretch:75%; font-weight:800; letter-spacing:-.03em; color:var(--ink)}
+.tp-b{font-family:"Poppins",sans-serif; color:var(--ink)}
 .scale{display:flex; align-items:flex-end; gap:6px; height:80px; margin-top:6px}
 .scale i{background:var(--accent); border-radius:3px 3px 0 0; flex:1; opacity:.85}
 .scale-l{display:flex; gap:6px; font-size:11px; color:var(--ink-3); margin-top:6px}
@@ -120,8 +120,12 @@ section{padding:64px 0; border-bottom:1px solid var(--line)}
 }
 .viewport{background:#fff; direction:ltr; overflow-x:auto}
 .mock{
-  font-family:"Inter",system-ui,sans-serif; color:var(--i900);
-  font-size:14px; line-height:1.55; min-width:940px;
+  font-family:"Poppins",system-ui,sans-serif; color:var(--i900);
+  font-size:14px; line-height:1.5; min-width:940px;
+}
+.mock h1,.mock h2,.mock h3,.mock h4{
+  font-family:"Archivo",sans-serif; font-stretch:78%; font-weight:800;
+  letter-spacing:-.03em; line-height:1.02; margin:0;
 }
 .notes{
   display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:12px; margin-top:18px;
@@ -133,20 +137,21 @@ section{padding:64px 0; border-bottom:1px solid var(--line)}
 }
 
 /* ============ عناصر المتجر داخل النماذج ============ */
-.m-top{background:#0B3D2C; color:#fff; font-size:11.5px; text-align:center; padding:8px}
-.m-top b{color:#E39B2E}
+.m-top{background:#191919; color:#fff; font-size:11px; letter-spacing:.06em; text-align:center; padding:10px}
+.m-top b{color:#fff; text-decoration:underline; text-underline-offset:3px}
 .m-head{
   display:flex; align-items:center; gap:22px; padding:14px 28px;
   border-bottom:1px solid var(--ln); background:#fff;
 }
-.m-logo{font-family:"Fraunces",serif; font-weight:600; font-size:19px; color:#0B3D2C; letter-spacing:-.01em}
+.m-logo{font-family:"Archivo",sans-serif; font-stretch:70%; font-weight:900; font-size:22px; color:#191919; letter-spacing:-.03em; text-transform:uppercase}
 .m-logo span{color:#1A855B}
+.m-head{border-bottom:1px solid var(--ln)}
 .m-search{
-  flex:1; max-width:380px; background:#F2F9F5; border:1px solid #E4E8E5; border-radius:99px;
-  padding:9px 16px; font-size:12.5px; color:#A7B2AC; display:flex; align-items:center; gap:8px;
+  flex:1; max-width:380px; background:#F4F1EC; border:0; border-radius:8px;
+  padding:11px 16px; font-size:12.5px; color:#9A9A95; display:flex; align-items:center; gap:8px;
 }
-.m-nav{display:flex; gap:20px; font-size:13.5px; color:#37453F; font-weight:500}
-.m-nav b{color:#146B4A; font-weight:600}
+.m-nav{display:flex; gap:22px; font-size:13.5px; color:#191919; font-weight:600}
+.m-nav b{color:#1A855B; font-weight:600}
 .m-icons{display:flex; gap:14px; margin-inline-start:auto; align-items:center; font-size:15px; color:#37453F}
 .m-cart{position:relative}
 .m-cart em{
@@ -156,53 +161,52 @@ section{padding:64px 0; border-bottom:1px solid var(--line)}
 }
 
 .m-hero{
-  display:grid; grid-template-columns:1.05fr .95fr; gap:36px; align-items:center;
-  padding:48px 28px; background:linear-gradient(135deg,#F2F9F5,#FBF9F4 60%,#FDF1DD);
+  display:grid; grid-template-columns:1.05fr .95fr; gap:40px; align-items:center;
+  padding:52px 28px; background:#F4F1EC;
 }
-.m-eyebrow{font-size:10.5px; font-weight:600; letter-spacing:.14em; color:#1A855B; margin-bottom:12px}
-.m-hero h1{font-family:"Fraunces",serif; font-size:38px; font-weight:600; line-height:1.12; color:#14211C; letter-spacing:-.015em; margin-bottom:14px}
-.m-hero p{font-size:15px; color:#37453F; max-width:44ch; margin-bottom:22px}
+.m-eyebrow{font-size:10.5px; font-weight:700; letter-spacing:.14em; color:#1A855B; margin-bottom:14px}
+.m-hero h1{font-size:64px !important; line-height:.94 !important; color:#191919; letter-spacing:-.035em; margin-bottom:16px; font-stretch:70%}
+.m-hero p{font-size:15px; color:#5C5C58; max-width:42ch; margin-bottom:24px; line-height:1.55}
 .m-btns{display:flex; gap:12px}
 .m-btn{
-  background:#1A855B; color:#fff; border-radius:99px; padding:12px 26px;
-  font-size:13.5px; font-weight:600; display:inline-block;
+  background:#1A855B; color:#fff; border-radius:8px; padding:14px 28px;
+  font-size:13.5px; font-weight:700; display:inline-block;
 }
-.m-btn.ghost{background:transparent; color:#146B4A; border:1px solid #C9D6CE}
+.m-btn.ghost{background:transparent; color:#191919; border:1px solid #191919}
 .m-bottle-wrap{display:flex; justify-content:center; gap:14px; align-items:flex-end}
 
 .m-trust{
-  display:grid; grid-template-columns:repeat(4,1fr); gap:16px;
-  padding:22px 28px; border-bottom:1px solid var(--ln);
+  display:flex; flex-wrap:wrap; justify-content:center; gap:8px 40px;
+  padding:20px 28px; border-bottom:1px solid var(--ln);
 }
-.m-trust div{display:flex; gap:11px; align-items:center}
-.m-trust i{
-  width:34px; height:34px; flex:0 0 34px; border-radius:99px; background:#E4F2EB; color:#146B4A;
-  display:flex; align-items:center; justify-content:center; font-style:normal; font-size:15px;
-}
-.m-trust b{display:block; font-size:12.5px; font-weight:600; line-height:1.3}
-.m-trust s{display:block; font-size:11px; color:#64726B; text-decoration:none}
+.m-trust div{display:inline-flex; gap:9px; align-items:center;
+  font-size:11.5px; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:#191919}
+.m-trust div::before{content:""; width:6px; height:6px; border-radius:50%; background:#1A855B; flex:0 0 6px}
+.m-trust i{display:none}
+.m-trust b{font-weight:700}
+.m-trust s{display:none}
 
-.m-sec{padding:40px 28px}
-.m-sec.cream{background:#FBF9F4}
+.m-sec{padding:56px 28px}
+.m-sec.cream{background:#F4F1EC}
 .m-sechead{display:flex; align-items:flex-end; justify-content:space-between; margin-bottom:22px}
-.m-sechead h2{font-family:"Fraunces",serif; font-size:24px; font-weight:600; color:#14211C; letter-spacing:-.01em}
-.m-sechead a{font-size:12.5px; font-weight:600; color:#146B4A; border-bottom:1px solid currentColor; text-decoration:none}
+.m-sechead h2{font-size:42px !important; color:#191919; letter-spacing:-.035em; font-stretch:74%}
+.m-sechead a{font-size:12.5px; font-weight:700; color:#191919; text-decoration:underline; text-underline-offset:4px}
 
 .m-cats{display:grid; grid-template-columns:repeat(4,1fr); gap:14px}
 .m-cat{
-  background:#fff; border:1px solid #E4E8E5; border-radius:14px; padding:20px 12px;
-  text-align:center; display:flex; flex-direction:column; align-items:center; gap:9px;
+  background:#F4F1EC; border:0; border-radius:24px; padding:26px 12px;
+  text-align:center; display:flex; flex-direction:column; align-items:center; gap:11px;
 }
 .m-cat i{
-  width:46px; height:46px; border-radius:99px; background:#F2F9F5;
+  width:48px; height:48px; border-radius:50%; background:#fff;
   display:flex; align-items:center; justify-content:center; font-size:20px; font-style:normal;
 }
-.m-cat b{font-size:12.5px; font-weight:600}
-.m-cat s{font-size:11px; color:#64726B; text-decoration:none}
+.m-cat b{font-family:"Archivo",sans-serif; font-stretch:80%; font-size:15px; font-weight:800; letter-spacing:-.02em}
+.m-cat s{font-size:11px; color:#9A9A95; text-decoration:none}
 
 .m-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:16px}
 .m-card{
-  background:#fff; border:1px solid #E4E8E5; border-radius:14px; overflow:hidden;
+  background:transparent; border:0; border-radius:0;
   display:flex; flex-direction:column; position:relative;
 }
 .m-card .fav{
@@ -211,89 +215,89 @@ section{padding:64px 0; border-bottom:1px solid var(--line)}
   display:flex; align-items:center; justify-content:center; font-size:11px; color:#64726B; z-index:2;
 }
 .m-card .badge{
-  position:absolute; top:11px; left:11px; background:#C4372B; color:#fff;
-  font-size:9.5px; font-weight:700; padding:3px 9px; border-radius:99px; z-index:2; letter-spacing:.03em;
+  position:absolute; top:12px; left:12px; background:#191919; color:#fff;
+  font-size:9.5px; font-weight:700; padding:4px 10px; border-radius:8px; z-index:2; letter-spacing:.04em;
 }
 .m-card .badge.new{background:#1A855B}
-.m-shot{background:#FBF9F4; display:flex; align-items:center; justify-content:center; padding:18px; aspect-ratio:1/1}
-.m-body{padding:14px; display:flex; flex-direction:column; gap:5px; flex:1}
-.m-kicker{font-size:9.5px; font-weight:600; letter-spacing:.1em; color:#1A855B; text-transform:uppercase}
-.m-name{font-size:13.5px; font-weight:600; line-height:1.35; color:#14211C; min-height:2.6em}
+.m-shot{background:#F4F1EC; border-radius:24px; overflow:hidden; display:flex; align-items:center; justify-content:center; padding:22px; aspect-ratio:1/1}
+.m-body{padding:14px 2px 0; display:flex; flex-direction:column; gap:5px; flex:1}
+.m-kicker{font-size:9.5px; font-weight:700; letter-spacing:.1em; color:#9A9A95; text-transform:uppercase}
+.m-name{font-family:"Archivo",sans-serif; font-stretch:85%; font-size:16px; font-weight:800; letter-spacing:-.02em; line-height:1.15; color:#191919; min-height:2.3em}
 .m-stars{font-size:10.5px; color:#E39B2E; letter-spacing:.5px}
 .m-stars span{color:#64726B; letter-spacing:0}
 .m-price{font-size:15px; font-weight:700; color:#14211C}
 .m-price del{color:#A7B2AC; font-weight:400; font-size:12.5px; margin-inline-end:5px}
 .m-add{
-  margin-top:8px; background:#1A855B; color:#fff; border-radius:99px; text-align:center;
-  padding:9px; font-size:12.5px; font-weight:600;
+  margin-top:10px; background:transparent; color:#191919; border:1px solid #191919; border-radius:8px;
+  text-align:center; padding:10px; font-size:12.5px; font-weight:700;
 }
-.m-add.out{background:#fff; color:#64726B; border:1px solid #E4E8E5}
+.m-add.out{background:#fff; color:#9A9A95; border:1px solid #E6E2DB}
 
 .m-why{display:grid; grid-template-columns:repeat(3,1fr); gap:26px; text-align:center}
 .m-why i{
-  width:42px; height:42px; margin:0 auto 12px; border-radius:99px; background:#1A855B; color:#fff;
-  display:flex; align-items:center; justify-content:center; font-style:normal; font-weight:700; font-size:15px;
+  width:44px; height:44px; margin:0 auto 14px; border-radius:8px; background:#191919; color:#fff;
+  display:flex; align-items:center; justify-content:center; font-style:normal; font-weight:800; font-size:15px;
 }
-.m-why h4{font-family:"Fraunces",serif; font-size:16px; font-weight:600; margin:0 0 6px; color:#14211C}
-.m-why p{font-size:12.5px; color:#64726B; line-height:1.6; margin:0}
+.m-why h4{font-size:22px !important; margin:0 0 8px; color:#191919; font-stretch:80%}
+.m-why p{font-size:12.5px; color:#5C5C58; line-height:1.6; margin:0}
 
-.m-foot{background:#0B3D2C; color:rgba(255,255,255,.7); padding:26px 28px; font-size:11.5px; display:flex; justify-content:space-between; align-items:center}
+.m-foot{background:#F4F1EC; color:#9A9A95; border-top:1px solid var(--ln); padding:28px; font-size:10.5px; letter-spacing:.06em; text-transform:uppercase; display:flex; justify-content:space-between; align-items:center}
 .m-pay{display:flex; gap:6px}
-.m-pay span{border:1px solid rgba(255,255,255,.22); border-radius:5px; padding:3px 8px; font-size:9.5px; font-weight:700; letter-spacing:.02em}
+.m-pay span{border:1px solid #E6E2DB; background:#fff; border-radius:4px; padding:3px 8px; font-size:9.5px; font-weight:700; letter-spacing:.02em}
 </style>
 <style>
 /* ---- صفحة التصنيف ---- */
-.m-crumbs{padding:16px 28px 0; font-size:11.5px; color:#64726B}
-.m-pagehead{padding:10px 28px 18px}
-.m-pagehead h1{font-family:"Fraunces",serif; font-size:27px; font-weight:600; color:#14211C; margin:0 0 6px}
-.m-pagehead p{font-size:12.5px; color:#64726B; margin:0}
+.m-crumbs{padding:18px 28px 0; font-size:11.5px; color:#9A9A95}
+.m-pagehead{padding:14px 28px 24px}
+.m-pagehead h1{font-size:56px !important; color:#191919; letter-spacing:-.035em; margin:0 0 10px; font-stretch:72%}
+.m-pagehead p{font-size:13px; color:#5C5C58; margin:0; max-width:52ch; line-height:1.55}
 .m-toolbar{
   display:flex; align-items:center; gap:10px; padding:12px 28px;
   border-top:1px solid var(--ln); border-bottom:1px solid var(--ln);
 }
 .m-chip{
-  border:1px solid #E4E8E5; border-radius:99px; padding:7px 15px; font-size:12px;
-  font-weight:500; color:#37453F; background:#fff; white-space:nowrap;
+  border:1px solid #E6E2DB; border-radius:8px; padding:8px 15px; font-size:12px;
+  font-weight:600; color:#191919; background:#fff; white-space:nowrap;
 }
-.m-chip.on{background:#1A855B; border-color:#1A855B; color:#fff; font-weight:600}
-.m-toolbar .right{margin-inline-start:auto; display:flex; gap:10px; align-items:center; font-size:12px; color:#64726B}
+.m-chip.on{background:#191919; border-color:#191919; color:#fff; font-weight:700}
+.m-toolbar .right{margin-inline-start:auto; display:flex; gap:10px; align-items:center; font-size:12px; color:#9A9A95}
 
 /* ---- صفحة المنتج ---- */
 .m-pdp{display:grid; grid-template-columns:1fr 1fr; gap:36px; padding:26px 28px 34px}
 .m-gal{display:flex; gap:12px}
 .m-thumbs{display:flex; flex-direction:column; gap:9px}
 .m-thumbs i{
-  width:56px; height:56px; border:1px solid #E4E8E5; border-radius:9px; background:#FBF9F4;
+  width:60px; height:60px; border:0; border-radius:8px; background:#F4F1EC;
   display:flex; align-items:center; justify-content:center;
 }
-.m-thumbs i.on{border-color:#1A855B; border-width:2px}
+.m-thumbs i.on{box-shadow:0 0 0 2px #191919}
 .m-main-img{
-  flex:1; background:#FBF9F4; border-radius:18px; display:flex;
-  align-items:center; justify-content:center; min-height:320px;
+  flex:1; background:#F4F1EC; border-radius:24px; display:flex;
+  align-items:center; justify-content:center; min-height:340px;
 }
-.m-pdp h1{font-family:"Fraunces",serif; font-size:29px; font-weight:600; color:#14211C; line-height:1.15; margin:6px 0 10px}
-.m-instock{font-size:12px; font-weight:600; color:#1A855B; margin-bottom:14px}
-.m-pdp-price{font-size:27px; font-weight:700; color:#14211C; margin-bottom:6px}
-.m-pdp-price small{font-size:12px; font-weight:500; color:#64726B}
-.m-desc{font-size:13.5px; color:#37453F; border-top:1px solid #E4E8E5; padding-top:14px; margin:14px 0}
+.m-pdp h1{font-size:46px !important; color:#191919; line-height:.98; letter-spacing:-.035em; margin:8px 0 12px; font-stretch:74%}
+.m-instock{font-size:12px; font-weight:700; color:#1A855B; margin-bottom:16px}
+.m-pdp-price{font-size:26px; font-weight:700; color:#191919; margin-bottom:8px}
+.m-pdp-price small{font-size:12px; font-weight:500; color:#9A9A95}
+.m-desc{font-size:13.5px; color:#5C5C58; line-height:1.6; border-top:1px solid #E6E2DB; padding-top:16px; margin:16px 0}
 .m-opts{display:flex; gap:9px; margin-bottom:16px}
-.m-opt{border:1px solid #E4E8E5; border-radius:9px; padding:9px 16px; font-size:12.5px; font-weight:500}
-.m-opt.on{border-color:#1A855B; box-shadow:0 0 0 1px #1A855B; color:#146B4A; font-weight:600}
+.m-opt{border:1px solid #E6E2DB; border-radius:8px; padding:10px 16px; font-size:12.5px; font-weight:600}
+.m-opt.on{border-color:#191919; box-shadow:0 0 0 1px #191919; color:#191919; font-weight:700}
 .m-buy{display:flex; gap:12px; align-items:center; margin-bottom:14px}
 .m-qty{
-  display:flex; align-items:center; border:1px solid #E4E8E5; border-radius:99px;
+  display:flex; align-items:center; border:1px solid #E6E2DB; border-radius:8px;
   overflow:hidden; height:48px;
 }
 .m-qty span{width:40px; text-align:center; font-size:15px; color:#37453F}
 .m-qty b{width:38px; text-align:center; font-size:14px}
 .m-buy .m-btn{flex:1; text-align:center; padding:15px; font-size:14px}
-.m-pdptrust{display:grid; grid-template-columns:1fr 1fr; gap:9px; background:#F2F9F5; border-radius:14px; padding:15px; font-size:12px; color:#37453F}
+.m-pdptrust{display:grid; grid-template-columns:1fr 1fr; gap:9px; background:#F4F1EC; border-radius:24px; padding:18px; font-size:12px; font-weight:600; color:#191919}
 .m-pdptrust div{display:flex; gap:8px; align-items:center}
 .m-facts{width:100%; border-collapse:collapse; font-size:12.5px; margin-top:16px}
-.m-facts th{text-align:left; color:#64726B; font-weight:500; padding:9px 0; border-bottom:1px solid #E4E8E5; width:44%}
-.m-facts td{text-align:left; font-weight:600; padding:9px 0; border-bottom:1px solid #E4E8E5}
-.m-tabs{display:flex; gap:24px; border-bottom:1px solid #E4E8E5; padding:0 28px; font-size:13px; font-weight:600; color:#64726B}
-.m-tabs b{color:#146B4A; border-bottom:2px solid #1A855B; padding-bottom:11px; margin-bottom:-1px}
+.m-facts th{text-align:left; color:#9A9A95; font-weight:500; padding:10px 0; border-bottom:1px solid #E6E2DB; width:44%}
+.m-facts td{text-align:left; font-weight:700; padding:10px 0; border-bottom:1px solid #E6E2DB}
+.m-tabs{display:flex; gap:26px; border-bottom:1px solid #E6E2DB; padding:0 28px; font-size:13px; font-weight:700; color:#9A9A95}
+.m-tabs b{color:#191919; border-bottom:2px solid #191919; padding-bottom:12px; margin-bottom:-1px}
 .m-tabs span{padding-bottom:11px}
 
 /* ---- الجوال ---- */
@@ -306,37 +310,37 @@ section{padding:64px 0; border-bottom:1px solid var(--line)}
   position:absolute; top:0; left:50%; transform:translateX(-50%);
   width:88px; height:19px; background:var(--ink); border-radius:0 0 12px 12px; z-index:9;
 }
-.pscreen{direction:ltr; font-family:"Inter",sans-serif; color:#14211C; height:520px; overflow:hidden; position:relative; background:#fff; font-size:12px}
+.pscreen{direction:ltr; font-family:"Poppins",sans-serif; color:#14211C; height:520px; overflow:hidden; position:relative; background:#fff; font-size:12px}
 .p-head{display:flex; align-items:center; gap:8px; padding:22px 12px 10px; border-bottom:1px solid #E4E8E5}
 .p-head .m-logo{font-size:14px}
 .p-head .ic{margin-inline-start:auto; display:flex; gap:10px; font-size:13px}
-.p-search{margin:9px 12px; background:#F2F9F5; border:1px solid #E4E8E5; border-radius:99px; padding:8px 12px; font-size:11px; color:#A7B2AC}
-.p-hero{background:linear-gradient(135deg,#F2F9F5,#FDF1DD); padding:18px 14px; text-align:center}
-.p-hero h2{font-family:"Fraunces",serif; font-size:19px; font-weight:600; margin:0 0 7px; line-height:1.15}
-.p-hero p{font-size:11px; color:#37453F; margin:0 0 12px}
-.p-hero .m-btn{font-size:11.5px; padding:9px 20px}
+.p-search{margin:9px 12px; background:#F4F1EC; border:0; border-radius:8px; padding:10px 12px; font-size:11px; color:#9A9A95}
+.p-hero{background:#F4F1EC; margin:0 12px; border-radius:24px; padding:24px 16px; text-align:center}
+.p-hero h2{font-family:"Archivo",sans-serif; font-stretch:70%; font-size:30px; font-weight:800; letter-spacing:-.035em; margin:0 0 9px; line-height:.98}
+.p-hero p{font-size:11px; color:#5C5C58; margin:0 0 14px}
+.p-hero .m-btn{font-size:11.5px; padding:11px 22px}
 .p-cats{display:flex; gap:7px; padding:12px; overflow:hidden}
 .p-cats span{
-  flex:0 0 auto; border:1px solid #E4E8E5; border-radius:99px; padding:6px 12px; font-size:10.5px; font-weight:500;
+  flex:0 0 auto; border:1px solid #E6E2DB; border-radius:8px; padding:7px 12px; font-size:10.5px; font-weight:600;
 }
-.p-cats span:first-child{background:#1A855B; border-color:#1A855B; color:#fff; font-weight:600}
+.p-cats span:first-child{background:#191919; border-color:#191919; color:#fff; font-weight:700}
 .p-grid{display:grid; grid-template-columns:1fr 1fr; gap:10px; padding:0 12px 12px}
-.p-card{border:1px solid #E4E8E5; border-radius:11px; overflow:hidden; position:relative}
-.p-shot{background:#FBF9F4; aspect-ratio:1/1; display:flex; align-items:center; justify-content:center; padding:9px}
-.p-body{padding:9px; display:flex; flex-direction:column; gap:3px}
-.p-name{font-size:11px; font-weight:600; line-height:1.3}
+.p-card{border:0; position:relative}
+.p-shot{background:#F4F1EC; border-radius:16px; aspect-ratio:1/1; display:flex; align-items:center; justify-content:center; padding:11px}
+.p-body{padding:8px 1px 0; display:flex; flex-direction:column; gap:3px}
+.p-name{font-family:"Archivo",sans-serif; font-stretch:85%; font-size:12.5px; font-weight:800; letter-spacing:-.02em; line-height:1.15}
 .p-price{font-size:12.5px; font-weight:700}
-.p-add{background:#1A855B; color:#fff; border-radius:99px; text-align:center; padding:6px; font-size:10.5px; font-weight:600; margin-top:4px}
+.p-add{background:transparent; color:#191919; border:1px solid #191919; border-radius:8px; text-align:center; padding:6px; font-size:10.5px; font-weight:700; margin-top:5px}
 .p-sechead{display:flex; justify-content:space-between; align-items:center; padding:6px 12px 8px}
-.p-sechead h3{font-family:"Fraunces",serif; font-size:15px; font-weight:600; margin:0}
-.p-sechead a{font-size:10.5px; color:#146B4A; font-weight:600; text-decoration:none}
+.p-sechead h3{font-family:"Archivo",sans-serif; font-stretch:75%; font-size:22px; font-weight:800; letter-spacing:-.03em; margin:0}
+.p-sechead a{font-size:10.5px; color:#191919; font-weight:700; text-decoration:underline; text-underline-offset:3px}
 .p-bottom{
   position:absolute; left:0; right:0; bottom:0; background:rgba(255,255,255,.98);
   border-top:1px solid #E4E8E5; display:flex; padding:7px 0 9px;
 }
 .p-bottom div{flex:1; text-align:center; font-size:8.5px; color:#64726B; font-weight:600; position:relative}
 .p-bottom div i{display:block; font-size:15px; font-style:normal; margin-bottom:2px}
-.p-bottom div.on{color:#146B4A}
+.p-bottom div.on{color:#191919}
 .p-bottom em{
   position:absolute; top:-2px; right:26%; background:#C8801B; color:#fff; font-style:normal;
   font-size:8px; font-weight:700; width:14px; height:14px; border-radius:99px;
@@ -348,11 +352,11 @@ section{padding:64px 0; border-bottom:1px solid var(--line)}
   box-shadow:0 -4px 14px rgba(20,33,28,.08);
 }
 .p-sticky b{display:block; font-size:10.5px}
-.p-sticky s{display:block; font-size:11.5px; color:#146B4A; font-weight:700; text-decoration:none}
+.p-sticky s{display:block; font-size:11.5px; color:#191919; font-weight:700; text-decoration:none}
 .p-sticky .m-btn{font-size:11.5px; padding:9px 18px}
-.p-pdp-img{background:#FBF9F4; height:170px; display:flex; align-items:center; justify-content:center; margin:0 12px; border-radius:14px}
+.p-pdp-img{background:#F4F1EC; height:180px; display:flex; align-items:center; justify-content:center; margin:0 12px; border-radius:24px}
 .p-pdp-body{padding:12px}
-.p-pdp-body h2{font-family:"Fraunces",serif; font-size:17px; font-weight:600; margin:0 0 5px; line-height:1.15}
+.p-pdp-body h2{font-family:"Archivo",sans-serif; font-stretch:74%; font-size:26px; font-weight:800; letter-spacing:-.035em; margin:0 0 6px; line-height:.98}
 .phone-cap{text-align:center; font-size:12.5px; color:var(--ink-3); margin-top:14px; direction:rtl}
 
 /* ---- الخطوات ---- */
@@ -406,12 +410,12 @@ footer.end b{color:var(--ink)}
   <header class="hero">
     <span class="kicker">Jannatan Naturals · إعادة تصميم الواجهة</span>
     <h1>متجر يبدو موثوقاً بقدر ما تبيعه</h1>
-    <p class="lead">تصميم جديد لواجهة jannatan.com مبني على القالب الحالي (Flatsome + WooCommerce)، بلا هجرة ولا إعادة بناء. كل ما تراه هنا مطبَّق في قالب ابن جاهز للرفع، وكل مشكلة مذكورة موثّقة من الموقع المباشر.</p>
+    <p class="lead">لغة بصرية جديدة لواجهة jannatan.com، مستوحاة من naturesbakery.com — بألوانك أنت. مبنية على القالب الحالي (Flatsome + WooCommerce) بلا هجرة ولا إعادة بناء، وكل ما تراه هنا في ملف CSS واحد جاهز للّصق.</p>
     <div class="meta">
       <span>القالب <b>Flatsome 3.20.9</b></span>
       <span>المنصّة <b>WooCommerce</b></span>
-      <span>التنفيذ <b>قالب ابن — بلا تعديل ملفات القالب</b></span>
-      <span>وقت التطبيق <b>~15 دقيقة</b></span>
+      <span>التنفيذ <b>ملف CSS واحد</b></span>
+      <span>المرجع البصري <b>naturesbakery.com</b></span>
     </div>
   </header>
 
@@ -441,29 +445,30 @@ footer.end b{color:var(--ink)}
       <div class="panel">
         <h3>اللون</h3>
         <div class="swatches">
-          <span class="sw"><i style="background:#1A855B"></i> أساسي — الأزرار والروابط <code>#1A855B</code></span>
-          <span class="sw"><i style="background:#0B3D2C"></i> داكن — الهيدر والفوتر <code>#0B3D2C</code></span>
-          <span class="sw"><i style="background:#C8801B"></i> تمييز — الشارات والعروض <code>#C8801B</code></span>
-          <span class="sw"><i style="background:#FBF9F4"></i> خلفية دافئة للأقسام <code>#FBF9F4</code></span>
-          <span class="sw"><i style="background:#14211C"></i> النص الأساسي — تباين 15.8:1 <code>#14211C</code></span>
-          <span class="sw"><i style="background:#C4372B"></i> الخصم والتنبيه فقط <code>#C4372B</code></span>
+          <span class="sw"><i style="background:#1A855B"></i> لون علامتك — موروث من إعدادات القالب <code>var()</code></span>
+          <span class="sw"><i style="background:#191919"></i> النص والأزرار الثانوية <code>#191919</code></span>
+          <span class="sw"><i style="background:#5C5C58"></i> النص الثانوي <code>#5C5C58</code></span>
+          <span class="sw"><i style="background:#F4F1EC"></i> الكتلة البيج — خلفية الصور والأقسام <code>#F4F1EC</code></span>
+          <span class="sw"><i style="background:#E6E2DB"></i> الخط الشعري الوحيد المسموح <code>#E6E2DB</code></span>
+          <span class="sw"><i style="background:#FFFFFF;border-color:#E6E2DB"></i> الأبيض — يتناوب مع البيج <code>#FFFFFF</code></span>
         </div>
+        <p style="font-size:12.5px;color:var(--ink-3);margin-top:14px;line-height:1.6">تغيير اللون الأساسي من إعدادات Flatsome يغيّر كل الأزرار والروابط فوراً — الملف يرثه ولا يفرض لوناً.</p>
       </div>
       <div class="panel">
         <h3>الطباعة</h3>
-        <div class="typerow"><span class="tp-h" style="font-size:26px">Aa</span><span>Fraunces · العناوين</span><span>600</span></div>
-        <div class="typerow"><span class="tp-b" style="font-size:20px">Aa</span><span>Inter · النصوص والأزرار</span><span>400/600</span></div>
-        <div class="typerow"><span class="tp-h" style="font-size:15px">Supplements your body recognizes</span><span></span><span>H1</span></div>
-        <div class="typerow"><span class="tp-b" style="font-size:12.5px">Third-party tested · Non-GMO</span><span></span><span>13px</span></div>
+        <div class="typerow"><span class="tp-h" style="font-size:30px">Aa</span><span>Archivo · مضغوط 78% · العناوين</span><span>800</span></div>
+        <div class="typerow"><span class="tp-b" style="font-size:20px">Aa</span><span>Poppins · النصوص والأزرار</span><span>400/700</span></div>
+        <div class="typerow"><span class="tp-h" style="font-size:22px;line-height:.95">SUPPLEMENTS YOUR BODY RECOGNIZES</span><span></span><span>96px</span></div>
+        <div class="typerow"><span class="tp-b" style="font-size:12.5px">Third-party tested · Non-GMO</span><span></span><span>16px</span></div>
       </div>
       <div class="panel">
-        <h3>المسافات — سلم 8px</h3>
+        <h3>الاستدارة والمسافات</h3>
         <div class="scale">
           <i style="height:8%"></i><i style="height:14%"></i><i style="height:22%"></i><i style="height:32%"></i>
           <i style="height:46%"></i><i style="height:62%"></i><i style="height:78%"></i><i style="height:100%"></i>
         </div>
         <div class="scale-l"><span>4</span><span>8</span><span>12</span><span>16</span><span>24</span><span>32</span><span>48</span><span>64</span></div>
-        <p style="font-size:12.5px;color:var(--ink-3);margin-top:14px;line-height:1.6">كل هامش وحشوة وارتفاع زر مشتق من هذا السلم. أهداف اللمس 48px في كل الأزرار والحقول.</p>
+        <p style="font-size:12.5px;color:var(--ink-3);margin-top:14px;line-height:1.6">استدارة واحدة <b style="color:var(--ink)">8px</b> للأزرار والحقول، و<b style="color:var(--ink)">24px</b> للحاويات (<code style="font-family:monospace;font-size:11px">1rem + 8px</code>). حشوة الأقسام تتدرّج 2rem ← 3rem ← 4rem. أهداف اللمس 48px.</p>
       </div>
     </div>
   </section>
@@ -565,10 +570,10 @@ footer.end b{color:var(--ink)}
       </div>
       <div class="notes">
         <span class="note"><b>1</b>قائمة تنقل حقيقية + بحث بارز في المنتصف — البحث هو أسرع طريق في متجر مكمّلات.</span>
-        <span class="note"><b>2</b>وعد واحد وزر أساسي واحد. الزرّان المتساويان في البروز يشلّان القرار.</span>
-        <span class="note"><b>3</b>إشارات الثقة فوق الطية — حرجة في فئة المكمّلات الغذائية.</span>
+        <span class="note"><b>2</b>العنوان الضخم المضغوط (حتى 96px) هو مصدر التميّز كله — لا تصغّره.</span>
+        <span class="note"><b>3</b>شريط ادعاءات بأحرف كبيرة متباعدة بدل صناديق أيقونات — أهدأ وأكثر ثقة.</span>
         <span class="note"><b>4</b>التصفّح حسب الهدف الصحي (نوم، مناعة، مفاصل) لا حسب اسم المادة.</span>
-        <span class="note"><b>5</b>بطاقة المنتج: تصنيف، اسم، تقييم، سعر، زر — بترتيب ثابت وارتفاع موحّد.</span>
+        <span class="note"><b>5</b>بطاقة المنتج بلا حد وبلا ظل — الصورة تجلس على كتلة بيج مستديرة 24px.</span>
         <span class="note"><b>6</b>قسم «لماذا Jannatan» يحلّ محل الصناديق الأربعة الفارغة الحالية.</span>
       </div>
     </div>
@@ -816,17 +821,17 @@ footer.end b{color:var(--ink)}
       <p>الأثر الأكبر ليس في التصميم بل في الخطوة الخامسة. التصميم يجعل المتجر جديراً بالثقة، والمحتوى يجعله قابلاً للشراء.</p>
     </div>
     <div class="steps">
-      <div class="step"><i>1</i><span><b>ارفع القالب الابن وفعّله</b><p>ملف ZIP واحد من المظهر ← القوالب. لا يعدّل أي ملف في Flatsome الأصلي، والتراجع بضغطة واحدة.</p></span><span class="tag auto">تلقائي</span></div>
+      <div class="step"><i>1</i><span><b>الصق ملف الـ CSS</b><p>افتح <code style="font-family:monospace;font-size:12px">jannatan-modern.css</code>، انسخه كاملاً، والصقه في المظهر ← تخصيص ← CSS إضافي. سطر <code style="font-family:monospace;font-size:12px">@import</code> يجب أن يبقى في الأعلى.</p></span><span class="tag auto">دقيقة</span></div>
       <div class="step"><i>2</i><span><b>احذف كتلة الـ CSS القديمة</b><p>القاعدة التي تفرض <code style="font-family:monospace;font-size:12px">max-width:100%!important</code> وحشوة صفر — هي سبب التصاق المحتوى بالحواف.</p></span><span class="tag">دقيقتان</span></div>
-      <div class="step"><i>3</i><span><b>طبّق قيم Theme Options</b><p>العرض 1240، الألوان الجديدة، الخطوط، وعمودان للمنتجات على الجوال. القيم مذكورة حقلاً بحقل في الدليل.</p></span><span class="tag">10 دقائق</span></div>
+      <div class="step"><i>3</i><span><b>طبّق قيم Theme Options</b><p>العرض 1320، وعمودان للمنتجات على الجوال، وأزرار باستدارة 8px. القيم مذكورة حقلاً بحقل في الدليل.</p></span><span class="tag">10 دقائق</span></div>
       <div class="step"><i>4</i><span><b>أنشئ القائمة الرئيسية وأعد بناء الرئيسية</b><p>ثمانية تصنيفات في قائمة منسدلة، وحذف البانر التجريبي والصناديق الفارغة.</p></span><span class="tag">ساعة</span></div>
       <div class="step"><i>5</i><span><b>أضف الأسعار والصور والأوصاف</b><p>تسعة منتجات لا يمكن شراؤها اليوم. هذه الخطوة وحدها تفوق أثر كل ما سبقها مجتمعاً.</p></span><span class="tag">الأهم</span></div>
     </div>
   </section>
 
   <footer class="end">
-    <p>التصميم مبني على فحص jannatan.com بتاريخ 22 أغسطس 2026 · الأسعار والتقييمات في المعاينة أمثلة توضيحية</p>
-    <p style="margin-top:6px">الحزمة الكاملة في مستودعك على فرع <b>claude/ecommerce-ui-redesign-cm5o2h</b> ضمن مجلد <b>jannatan-redesign/</b></p>
+    <p>اللغة البصرية مستخرجة من naturesbakery.com · التصميم مبني على فحص jannatan.com · الأسعار والتقييمات أمثلة توضيحية</p>
+    <p style="margin-top:6px">الملف الجاهز للّصق: <b>jannatan-redesign/flatsome-child/assets/css/jannatan-modern.css</b> على فرع <b>claude/ecommerce-ui-redesign-cm5o2h</b></p>
   </footer>
 </div>
 

@@ -24,14 +24,16 @@
 
 | الحقل | القيمة |
 |-------|--------|
-| Body Font | `Inter` — Weight `400` |
+| Body Font | `Poppins` — Weight `400` |
 | Body Font Size | `100%` ← (كانت 120%) |
-| Headings Font | `Fraunces` — Weight `600` |
+| Headings Font | `Archivo` — Weight `800` |
 | Headings Color | `#14211C` ← (كانت `#252fea`) |
-| Nav Font | `Inter` — Weight `500` |
+| Nav Font | `Poppins` — Weight `600` |
 | Text Transform (Headings) | `None` |
 
-**لماذا:** خط عريض للعناوين (Fraunces) يعطي إحساس «طبيعي/مميز»، وخط واضح للنصوص (Inter). العناوين الملوّنة بالأزرق كانت تقلّل قابلية القراءة.
+**لماذا:** خط مضغوط عريض للعناوين (Archivo) يعطي العناوين الضخمة حضورها، وخط هندسي واضح للنصوص (Poppins). العناوين الملوّنة بالأزرق كانت تقلّل قابلية القراءة.
+
+> ملف `jannatan-modern.css` يضبط الخطوط بنفسه، فهذه الحقول احتياط في حال لم ترفع القالب الابن.
 
 ---
 
@@ -39,7 +41,7 @@
 
 | الحقل | القيمة |
 |-------|--------|
-| Site Width | `1240` ← (كانت **530** وهي جذر مشكلة التخطيط) |
+| Site Width | `1320` ← (كانت **530** وهي جذر مشكلة التخطيط) |
 | Row Gutter | `20` |
 | Site Layout | `Full Width` |
 | Boxed | `Off` |
@@ -158,7 +160,7 @@ Contact         → /contact/
 
 | الحقل | القيمة |
 |-------|--------|
-| Button Style | `Round` |
+| Button Style | `Rounded` — نصف قطر `8px` (وليس Pill) |
 | Button Text Transform | `None` ← (بدل UPPERCASE) |
 | Primary Button Color | `#1A855B` |
 | Secondary Button Color | `#C8801B` |

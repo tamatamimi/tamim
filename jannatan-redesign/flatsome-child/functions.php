@@ -10,7 +10,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-define( 'JANNATAN_VERSION', '1.0.0' );
+define( 'JANNATAN_VERSION', '2.0.0' );
 
 /* -------------------------------------------------------------------------
  * 1) تحميل الأنماط والسكربتات
@@ -20,7 +20,7 @@ function jannatan_enqueue_assets() {
 	// الخطوط (احذف هذا السطر إن رفعت الخطوط محلياً — أسرع وأفضل للخصوصية).
 	wp_enqueue_style(
 		'jannatan-fonts',
-		'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,500;9..144,600&display=swap',
+		'https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62.5..125,400..900&family=Poppins:wght@400;500;600;700&display=swap',
 		array(),
 		null
 	);
@@ -28,7 +28,7 @@ function jannatan_enqueue_assets() {
 	// نظام التصميم — يُحمّل بعد ستايل Flatsome الأساسي.
 	wp_enqueue_style(
 		'jannatan-ui',
-		get_stylesheet_directory_uri() . '/assets/css/jannatan-ui.css',
+		get_stylesheet_directory_uri() . '/assets/css/jannatan-modern.css',
 		array( 'flatsome-main' ),
 		JANNATAN_VERSION
 	);
