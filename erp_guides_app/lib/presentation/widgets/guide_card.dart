@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
+import '../../core/state/favorites_state.dart';
 import '../../data/models/guide.dart';
 import 'type_badge.dart';
 
@@ -27,7 +29,13 @@ class GuideCard extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              TypeBadge(type: guide.type, isArabic: isArabic),
+              Row(
+                children: [
+                  TypeBadge(type: guide.type, isArabic: isArabic),
+                  const Spacer(),
+                  _FavoriteButton(guideId: guide.id),
+                ],
+              ),
               const SizedBox(height: 10),
               Text(
                 guide.title(isArabic),
@@ -59,6 +67,29 @@ class GuideCard extends StatelessWidget {
           ),
         ),
       ),
+    );
+  }
+}
+
+/// Compact, reactive star toggle used on cards and lists.
+class _FavoriteButton extends StatelessWidget {
+  const _FavoriteButton({required this.guideId});
+
+  final int guideId;
+
+  @override
+  Widget build(BuildContext context) {
+    final favorites = context.watch<FavoritesState>();
+    final isFavorite = favorites.isFavorite(guideId);
+    return IconButton(
+      visualDensity: VisualDensity.compact,
+      padding: EdgeInsets.zero,
+      constraints: const BoxConstraints(minWidth: 36, minHeight: 36),
+      icon: Icon(
+        isFavorite ? Icons.star : Icons.star_border,
+        color: isFavorite ? const Color(0xFFB4690E) : null,
+      ),
+      onPressed: () => context.read<FavoritesState>().toggle(guideId),
     );
   }
 }

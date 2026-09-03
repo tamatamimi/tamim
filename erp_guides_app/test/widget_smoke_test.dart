@@ -1,6 +1,7 @@
 import 'package:erp_guides_app/core/localization/app_strings.dart';
 import 'package:erp_guides_app/data/models/guide.dart';
 import 'package:erp_guides_app/data/models/guide_type.dart';
+import 'package:erp_guides_app/data/repositories/guide_repository.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
@@ -49,6 +50,40 @@ void main() {
       expect(guide.title(true), 'عنوان');
       expect(guide.title(false), 'Title');
       expect(guide.toMap()['tags'], 'a,b,c');
+    });
+
+    test('fromJson parses list tags and localized fields', () {
+      final guide = Guide.fromJson({
+        'id': 3,
+        'category_id': 2,
+        'type': 'dataFlow',
+        'title_ar': 'مخطط',
+        'title_en': 'Diagram',
+        'summary_ar': 'ملخص',
+        'summary_en': 'Summary',
+        'content_ar': 'محتوى',
+        'content_en': 'Content',
+        'tags': ['dfd', ' تدفق ', ''],
+        'image_asset': null,
+        'updated_at': '2026-08-25',
+      });
+      expect(guide.type, GuideType.dataFlow);
+      expect(guide.tags, ['dfd', 'تدفق']); // trimmed, empties dropped
+    });
+  });
+
+  group('FTS match-query builder', () {
+    test('quotes tokens and adds prefix wildcard, ANDed', () {
+      expect(GuideRepository.buildMatchQuery('journal قيد'),
+          '"journal"* "قيد"*');
+    });
+
+    test('empty / whitespace input yields empty query', () {
+      expect(GuideRepository.buildMatchQuery('   '), '');
+    });
+
+    test('escapes embedded double quotes', () {
+      expect(GuideRepository.buildMatchQuery('a"b'), '"a""b"*');
     });
   });
 }

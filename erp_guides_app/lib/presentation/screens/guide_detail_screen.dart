@@ -6,6 +6,7 @@ import 'package:provider/provider.dart';
 
 import '../../core/localization/app_strings.dart';
 import '../../core/state/app_state.dart';
+import '../../core/state/favorites_state.dart';
 import '../../data/models/guide.dart';
 import '../../data/repositories/guide_repository.dart';
 import '../widgets/type_badge.dart';
@@ -22,8 +23,25 @@ class GuideDetailScreen extends StatelessWidget {
     final theme = Theme.of(context);
     final isArabic = appState.isArabic;
 
+    final favorites = context.watch<FavoritesState>();
+    final isFavorite = favorites.isFavorite(guide.id);
+
     return Scaffold(
-      appBar: AppBar(title: Text(guide.title(isArabic))),
+      appBar: AppBar(
+        title: Text(guide.title(isArabic)),
+        actions: [
+          IconButton(
+            tooltip: isFavorite
+                ? s.t('removeFromFavorites')
+                : s.t('addToFavorites'),
+            icon: Icon(
+              isFavorite ? Icons.star : Icons.star_border,
+              color: isFavorite ? const Color(0xFFB4690E) : null,
+            ),
+            onPressed: () => context.read<FavoritesState>().toggle(guide.id),
+          ),
+        ],
+      ),
       body: ListView(
         padding: const EdgeInsets.all(16),
         children: [

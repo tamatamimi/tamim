@@ -16,9 +16,10 @@ guides, procedures, data-flow diagrams, and use cases.
 |---|---|---|
 | Framework | **Flutter** | One codebase (iOS/Android), mature **RTL/Arabic** support, strong media rendering, robust offline story. |
 | Storage | **SQLite via `sqflite`** | Offline-first; content browsable and searchable with no connectivity. |
-| Search | **LIKE across AR/EN fields** | Portable now; upgrade path to **FTS5** for large corpora. |
+| Content | **Versioned JSON asset → SQLite import** | Update guides by shipping a new JSON version; no code change to add/edit content. |
+| Search | **FTS5 (prefix + ranked), LIKE fallback** | Fast bilingual full-text search; degrades gracefully where FTS5 is absent. |
 | Rendering | **`flutter_markdown`** | Renders written guides, procedures, and text of diagrams/use cases; images/video attach via assets. |
-| State | **`provider`** | Lightweight, sufficient for language/theme; swap for Riverpod/Bloc as complexity grows. |
+| State | **`provider`** | Language, theme, and favorites; swap for Riverpod/Bloc as complexity grows. |
 | i18n | **`flutter_localizations` + string table** | Automatic RTL/LTR from active locale. |
 
 **Why offline-first:** procedural ERP documentation is consulted *during*
@@ -73,13 +74,23 @@ flutter analyze      # static analysis
 
 ## 5. Roadmap (evolving beyond the offline MVP)
 
-| Phase | Capability | Notes |
+| Phase | Capability | Status |
 |---|---|---|
-| 1 (now) | Offline catalogue, bilingual UI, search, seeded content | This scaffold. |
-| 2 | Content import (bundled/updatable JSON), FTS5 search, favorites | No backend required. |
-| 3 | In-app video player + PDF viewer for visual guides | `video_player`, `pdfx`. |
-| 4 | Backend sync (Supabase/Postgres or **Oracle DB + ORDS**) | Repository-layer swap; enables central authoring & governance. |
-| 5 | Auth, role-based access, audit trail | Aligns with least-privilege / SoD controls. |
+| 1 | Offline catalogue, bilingual UI, search, seeded content | ✅ Done |
+| 2 | Content import (versioned JSON), FTS5 search, favorites | ✅ Done |
+| 3 | In-app video player + PDF viewer for visual guides | `video_player`, `pdfx` |
+| 4 | Backend sync (Supabase/Postgres or **Oracle DB + ORDS**) | Repository-layer swap; central authoring & governance |
+| 5 | Auth, role-based access, audit trail | Aligns with least-privilege / SoD controls |
+
+### Content update workflow (Phase 2)
+
+Content lives in `assets/content/guides.json` with a top-level `contentVersion`.
+On launch, `ContentImporter` compares that version with the version stored in
+the `meta` table and re-imports only when they differ — then rebuilds the FTS5
+index. To publish updated documentation: **edit the JSON, bump
+`contentVersion`, ship the build.** No schema or code change required. When the
+backend arrives (Phase 4), the same importer fetches the JSON from the server
+instead of the bundle — the rest of the pipeline is unchanged.
 
 ## 6. Governance considerations
 

@@ -16,6 +16,14 @@ class Category {
 
   String name(bool isArabic) => isArabic ? nameAr : nameEn;
 
+  factory Category.fromJson(Map<String, dynamic> json) => Category(
+        id: json['id'] as int,
+        nameAr: json['name_ar'] as String,
+        nameEn: json['name_en'] as String,
+        icon: json['icon'] as String,
+        sortOrder: json['sort_order'] as int,
+      );
+
   factory Category.fromMap(Map<String, Object?> map) => Category(
         id: map['id'] as int,
         nameAr: map['name_ar'] as String,

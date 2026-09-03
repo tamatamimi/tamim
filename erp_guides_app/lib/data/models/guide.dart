@@ -37,6 +37,24 @@ class Guide {
   String summary(bool isArabic) => isArabic ? summaryAr : summaryEn;
   String content(bool isArabic) => isArabic ? contentAr : contentEn;
 
+  factory Guide.fromJson(Map<String, dynamic> json) => Guide(
+        id: json['id'] as int,
+        categoryId: json['category_id'] as int,
+        type: GuideTypeX.fromKey(json['type'] as String),
+        titleAr: json['title_ar'] as String,
+        titleEn: json['title_en'] as String,
+        summaryAr: json['summary_ar'] as String,
+        summaryEn: json['summary_en'] as String,
+        contentAr: json['content_ar'] as String,
+        contentEn: json['content_en'] as String,
+        tags: (json['tags'] as List<dynamic>)
+            .map((e) => e.toString().trim())
+            .where((e) => e.isNotEmpty)
+            .toList(),
+        imageAsset: json['image_asset'] as String?,
+        updatedAt: json['updated_at'] as String,
+      );
+
   factory Guide.fromMap(Map<String, Object?> map) => Guide(
         id: map['id'] as int,
         categoryId: map['category_id'] as int,

@@ -9,6 +9,7 @@ import '../../data/models/guide.dart';
 import '../../data/repositories/guide_repository.dart';
 import '../widgets/guide_card.dart';
 import 'category_screen.dart';
+import 'favorites_screen.dart';
 import 'guide_detail_screen.dart';
 import 'search_screen.dart';
 
@@ -44,6 +45,13 @@ class _HomeScreenState extends State<HomeScreen> {
       appBar: AppBar(
         title: Text(s.t('appTitle')),
         actions: [
+          IconButton(
+            tooltip: s.t('favorites'),
+            icon: const Icon(Icons.star_outline),
+            onPressed: () => Navigator.of(context).push(
+              MaterialPageRoute(builder: (_) => const FavoritesScreen()),
+            ),
+          ),
           IconButton(
             tooltip: s.t('toggleTheme'),
             icon: Icon(appState.themeMode == ThemeMode.dark

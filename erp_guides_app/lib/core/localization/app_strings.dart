@@ -29,6 +29,10 @@ class AppStrings {
     'toggleTheme': ['المظهر', 'Theme'],
     'all': ['الكل', 'All'],
     'guideCount': ['دليل', 'guides'],
+    'favorites': ['المفضّلة', 'Favorites'],
+    'noFavorites': ['لا توجد أدلة مفضّلة بعد', 'No favorites yet'],
+    'addToFavorites': ['أضف إلى المفضّلة', 'Add to favorites'],
+    'removeFromFavorites': ['إزالة من المفضّلة', 'Remove from favorites'],
   };
 
   String t(String key) {
