@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 
 import '../../core/state/favorites_state.dart';
 import '../../data/models/guide.dart';
+import '../../data/models/media.dart';
 import 'type_badge.dart';
 
 class GuideCard extends StatelessWidget {
@@ -61,6 +62,18 @@ class GuideCard extends StatelessWidget {
                     style: theme.textTheme.bodySmall
                         ?.copyWith(color: theme.colorScheme.onSurfaceVariant),
                   ),
+                  if (guide.hasMedia) ...[
+                    const Spacer(),
+                    Icon(
+                      guide.mediaType == MediaType.video
+                          ? Icons.play_circle_outline
+                          : guide.mediaType == MediaType.pdf
+                              ? Icons.picture_as_pdf_outlined
+                              : Icons.image_outlined,
+                      size: 16,
+                      color: theme.colorScheme.primary,
+                    ),
+                  ],
                 ],
               ),
             ],

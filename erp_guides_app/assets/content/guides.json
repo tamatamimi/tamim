@@ -1,5 +1,5 @@
 {
-  "contentVersion": 1,
+  "contentVersion": 3,
   "categories": [
     { "id": 1, "name_ar": "المالية", "name_en": "Finance", "icon": "finance", "sort_order": 1 },
     { "id": 2, "name_ar": "المشتريات", "name_en": "Procurement", "icon": "procurement", "sort_order": 2 },
@@ -19,7 +19,8 @@
       "content_ar": "## إنشاء قيد يومية\n\n1. من القائمة الرئيسية اختر **المالية → دفتر اليومية**.\n2. اضغط **قيد جديد**.\n3. أدخل **التاريخ** و**المرجع**.\n4. أضف سطور المدين والدائن حتى **يتوازن القيد** (إجمالي المدين = إجمالي الدائن).\n5. أرفق المستند الداعم إن وجد.\n6. اضغط **حفظ** ثم **ترحيل** للاعتماد.\n\n> ملاحظة حوكمة: لا يمكن تعديل القيد بعد الترحيل — يُستخدم قيد عكسي بدلاً من ذلك.",
       "content_en": "## Creating a Journal Entry\n\n1. From the main menu choose **Finance → General Journal**.\n2. Click **New Entry**.\n3. Enter the **date** and **reference**.\n4. Add debit and credit lines until the entry is **balanced** (total debit = total credit).\n5. Attach the supporting document if available.\n6. Click **Save** then **Post** to commit.\n\n> Governance note: a posted entry cannot be edited — use a reversing entry instead.",
       "tags": ["محاسبة", "قيد", "journal", "finance"],
-      "image_asset": null,
+      "media_type": null,
+      "media_source": null,
       "updated_at": "2026-08-20"
     },
     {
@@ -33,7 +34,8 @@
       "content_ar": "## دورة الشراء حتى الدفع\n\n1. **طلب شراء** يقدّمه القسم المعني.\n2. **اعتماد** حسب مصفوفة الصلاحيات.\n3. تحويله إلى **أمر شراء** وإرساله للمورد.\n4. **استلام البضاعة** وتسجيل محضر الاستلام.\n5. **مطابقة ثلاثية**: أمر الشراء + الاستلام + فاتورة المورد.\n6. **السداد** بعد المطابقة الناجحة.\n\n**نقاط ضبط:** أي تباين في المطابقة الثلاثية يوقف السداد تلقائياً.",
       "content_en": "## Procure-to-Pay Cycle\n\n1. **Purchase Requisition** raised by the requesting department.\n2. **Approval** per the authority matrix.\n3. Convert to **Purchase Order** and send to the vendor.\n4. **Goods Receipt** and receipt note logged.\n5. **Three-way match**: PO + Receipt + Vendor invoice.\n6. **Payment** after a successful match.\n\n**Control point:** any three-way-match variance blocks payment automatically.",
       "tags": ["شراء", "p2p", "procurement", "إجراءات"],
-      "image_asset": null,
+      "media_type": "pdf",
+      "media_source": "assets/media/sample_procedure.pdf",
       "updated_at": "2026-08-22"
     },
     {
@@ -47,7 +49,8 @@
       "content_ar": "## مخطط تدفق البيانات — المشتريات\n\n```\n[القسم الطالب] --طلب شراء--> [نظام المشتريات]\n      |                              |\n      | اعتماد                       | أمر شراء\n      v                              v\n[مصفوفة الصلاحيات]            [المورد الخارجي]\n                                     |\n                              فاتورة/توريد\n                                     v\n[المخزون] <--إشعار استلام-- [المطابقة الثلاثية] --> [المالية/السداد]\n```\n\nتُخزَّن كل حركة في سجل تدقيق (Audit Trail) لأغراض الحوكمة والاعتماد.",
       "content_en": "## Data Flow Diagram — Procurement\n\n```\n[Requesting Dept] --requisition--> [Procurement System]\n      |                                    |\n      | approval                           | purchase order\n      v                                    v\n[Authority Matrix]                  [External Vendor]\n                                           |\n                                    invoice/delivery\n                                           v\n[Inventory] <--goods receipt-- [Three-way Match] --> [Finance/Payment]\n```\n\nEvery movement is stored in an Audit Trail for governance and accreditation.",
       "tags": ["dfd", "تدفق", "diagram", "procurement"],
-      "image_asset": null,
+      "media_type": null,
+      "media_source": null,
       "updated_at": "2026-08-25"
     },
     {
@@ -61,7 +64,8 @@
       "content_ar": "## حالة استخدام: طلب إجازة\n\n- **الفاعل الأساسي:** الموظف\n- **الفاعلون الثانويون:** المدير المباشر، الموارد البشرية\n- **الشرط المسبق:** رصيد إجازات كافٍ\n\n**التدفق الأساسي:**\n1. يقدّم الموظف الطلب مع النوع والمدة.\n2. يستلم المدير إشعاراً ويعتمد/يرفض.\n3. عند الاعتماد يُخصم الرصيد ويُحدَّث التقويم.\n\n**التدفق البديل:** رصيد غير كافٍ → يرفض النظام الطلب ويقترح إجازة بدون راتب.",
       "content_en": "## Use Case: Leave Request\n\n- **Primary actor:** Employee\n- **Secondary actors:** Line manager, HR\n- **Precondition:** sufficient leave balance\n\n**Main flow:**\n1. Employee submits the request with type and duration.\n2. Manager is notified and approves/rejects.\n3. On approval the balance is deducted and the calendar updated.\n\n**Alternate flow:** insufficient balance → system rejects and proposes unpaid leave.",
       "tags": ["use case", "إجازة", "hr", "موارد بشرية"],
-      "image_asset": null,
+      "media_type": null,
+      "media_source": null,
       "updated_at": "2026-08-27"
     },
     {
@@ -72,10 +76,11 @@
       "title_en": "Periodic Stock Count (Video)",
       "summary_ar": "شرح مرئي لخطوات الجرد الدوري والتسويات.",
       "summary_en": "Visual walkthrough of the periodic count and adjustments.",
-      "content_ar": "## الجرد الدوري (دليل مرئي)\n\nيوضّح هذا الدليل المرئي:\n\n- تجميد حركة الأصناف قبل الجرد.\n- إدخال الكميات الفعلية عبر الماسح.\n- مراجعة **فروقات الجرد** واعتماد التسويات.\n\n> أضف ملف الفيديو/الصور إلى `assets/images/` واربطه عبر الحقل `image_asset`، أو ادمج مشغّل فيديو لاحقاً (video_player) لعرض المحتوى المرئي داخل التطبيق.",
-      "content_en": "## Periodic Stock Count (Visual)\n\nThis visual guide covers:\n\n- Freezing item movements before the count.\n- Entering actual quantities via the scanner.\n- Reviewing **count variances** and approving adjustments.\n\n> Add the video/screenshots to `assets/images/` and link via the `image_asset` field, or integrate a video player (video_player) later to play media in-app.",
+      "content_ar": "## الجرد الدوري (دليل مرئي)\n\nيوضّح الفيديو المرفق:\n\n- تجميد حركة الأصناف قبل الجرد.\n- إدخال الكميات الفعلية عبر الماسح.\n- مراجعة **فروقات الجرد** واعتماد التسويات.\n\n> يُشغَّل الفيديو داخل التطبيق. للنشر دون اتصال، ضع ملف الفيديو ضمن `assets/media/` واضبط `media_source` على مساره بدل الرابط الشبكي.",
+      "content_en": "## Periodic Stock Count (Visual)\n\nThe attached video covers:\n\n- Freezing item movements before the count.\n- Entering actual quantities via the scanner.\n- Reviewing **count variances** and approving adjustments.\n\n> The video plays in-app. For fully offline deployment, place the video under `assets/media/` and point `media_source` at that path instead of a network URL.",
       "tags": ["جرد", "مخزون", "inventory", "video"],
-      "image_asset": null,
+      "media_type": "video",
+      "media_source": "https://flutter.github.io/assets-for-api-docs/assets/videos/butterfly.mp4",
       "updated_at": "2026-08-29"
     },
     {
@@ -89,7 +94,8 @@
       "content_ar": "## إدارة الأدوار والصلاحيات\n\n1. **إدارة النظام → الأدوار**.\n2. أنشئ دوراً وامنحه الصلاحيات وفق مبدأ **الحد الأدنى من الامتياز**.\n3. أسند الدور للمستخدمين (وليس صلاحيات فردية).\n4. راجع الأدوار دورياً (Access Recertification) لأغراض الامتثال.\n\n> فصل المهام (SoD): تجنّب منح صلاحيتَي الإنشاء والاعتماد لنفس المستخدم.",
       "content_en": "## Roles & Permissions\n\n1. **System Administration → Roles**.\n2. Create a role and grant permissions on a **least-privilege** basis.\n3. Assign the role to users (not individual permissions).\n4. Periodically review roles (access recertification) for compliance.\n\n> Segregation of Duties (SoD): avoid granting both create and approve rights to the same user.",
       "tags": ["صلاحيات", "أدوار", "security", "admin"],
-      "image_asset": null,
+      "media_type": null,
+      "media_source": null,
       "updated_at": "2026-09-01"
     }
   ]

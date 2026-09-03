@@ -16,7 +16,7 @@ class DatabaseHelper {
   static final DatabaseHelper instance = DatabaseHelper._();
 
   static const _dbName = 'erp_guides.db';
-  static const _dbVersion = 2;
+  static const _dbVersion = 3;
 
   Database? _db;
 
@@ -60,6 +60,10 @@ class DatabaseHelper {
         )
       ''');
     }
+    if (oldVersion < 3) {
+      await db.execute('ALTER TABLE guides ADD COLUMN media_type TEXT');
+      await db.execute('ALTER TABLE guides ADD COLUMN media_source TEXT');
+    }
   }
 
   Future<void> _createCore(Database db) async {
@@ -85,7 +89,8 @@ class DatabaseHelper {
         content_ar TEXT NOT NULL,
         content_en TEXT NOT NULL,
         tags TEXT NOT NULL,
-        image_asset TEXT,
+        media_type TEXT,
+        media_source TEXT,
         updated_at TEXT NOT NULL,
         FOREIGN KEY (category_id) REFERENCES categories (id)
       )

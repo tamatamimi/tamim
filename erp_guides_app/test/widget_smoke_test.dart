@@ -1,6 +1,7 @@
 import 'package:erp_guides_app/core/localization/app_strings.dart';
 import 'package:erp_guides_app/data/models/guide.dart';
 import 'package:erp_guides_app/data/models/guide_type.dart';
+import 'package:erp_guides_app/data/models/media.dart';
 import 'package:erp_guides_app/data/repositories/guide_repository.dart';
 import 'package:flutter_test/flutter_test.dart';
 
@@ -41,7 +42,8 @@ void main() {
         'content_ar': 'محتوى',
         'content_en': 'Content',
         'tags': 'a, b ,c',
-        'image_asset': null,
+        'media_type': null,
+        'media_source': null,
         'updated_at': '2026-09-01',
       };
       final guide = Guide.fromMap(map);
@@ -49,6 +51,7 @@ void main() {
       expect(guide.tags, ['a', 'b', 'c']);
       expect(guide.title(true), 'عنوان');
       expect(guide.title(false), 'Title');
+      expect(guide.hasMedia, isFalse);
       expect(guide.toMap()['tags'], 'a,b,c');
     });
 
@@ -64,11 +67,30 @@ void main() {
         'content_ar': 'محتوى',
         'content_en': 'Content',
         'tags': ['dfd', ' تدفق ', ''],
-        'image_asset': null,
+        'media_type': 'pdf',
+        'media_source': 'assets/media/x.pdf',
         'updated_at': '2026-08-25',
       });
       expect(guide.type, GuideType.dataFlow);
       expect(guide.tags, ['dfd', 'تدفق']); // trimmed, empties dropped
+      expect(guide.mediaType, MediaType.pdf);
+      expect(guide.hasMedia, isTrue);
+    });
+  });
+
+  group('Media', () {
+    test('MediaType.fromKey handles null/blank/unknown', () {
+      expect(MediaTypeX.fromKey(null), isNull);
+      expect(MediaTypeX.fromKey(''), isNull);
+      expect(MediaTypeX.fromKey('nope'), isNull);
+      expect(MediaTypeX.fromKey('video'), MediaType.video);
+    });
+
+    test('mediaSourceKind classifies sources', () {
+      expect(mediaSourceKind('https://x/y.mp4'), MediaSourceKind.network);
+      expect(mediaSourceKind('/data/user/x.pdf'), MediaSourceKind.file);
+      expect(mediaSourceKind('file:x.pdf'), MediaSourceKind.file);
+      expect(mediaSourceKind('assets/media/x.pdf'), MediaSourceKind.asset);
     });
   });
 

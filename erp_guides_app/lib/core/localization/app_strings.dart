@@ -33,6 +33,9 @@ class AppStrings {
     'noFavorites': ['لا توجد أدلة مفضّلة بعد', 'No favorites yet'],
     'addToFavorites': ['أضف إلى المفضّلة', 'Add to favorites'],
     'removeFromFavorites': ['إزالة من المفضّلة', 'Remove from favorites'],
+    'mediaError': ['تعذّر تحميل الوسائط', 'Could not load media'],
+    'video': ['فيديو', 'Video'],
+    'document': ['مستند', 'Document'],
   };
 
   String t(String key) {

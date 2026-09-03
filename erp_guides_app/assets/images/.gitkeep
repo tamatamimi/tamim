@@ -1,1 +1,2 @@
-# Place diagram/screenshot assets here (referenced by Guide.imageAsset).
+# Optional image assets (diagrams/screenshots) referenced by a guide's
+# media_source (media_type: image). Video/PDF assets live in assets/media/.

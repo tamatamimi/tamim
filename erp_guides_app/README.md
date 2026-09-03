@@ -18,7 +18,8 @@ guides, procedures, data-flow diagrams, and use cases.
 | Storage | **SQLite via `sqflite`** | Offline-first; content browsable and searchable with no connectivity. |
 | Content | **Versioned JSON asset → SQLite import** | Update guides by shipping a new JSON version; no code change to add/edit content. |
 | Search | **FTS5 (prefix + ranked), LIKE fallback** | Fast bilingual full-text search; degrades gracefully where FTS5 is absent. |
-| Rendering | **`flutter_markdown`** | Renders written guides, procedures, and text of diagrams/use cases; images/video attach via assets. |
+| Rendering | **`flutter_markdown`** | Renders written guides, procedures, and text of diagrams/use cases. |
+| Media | **`video_player`+`chewie`, `pdfx`** | In-app video and PDF viewing for visual guides; asset/file/network sources. |
 | State | **`provider`** | Language, theme, and favorites; swap for Riverpod/Bloc as complexity grows. |
 | i18n | **`flutter_localizations` + string table** | Automatic RTL/LTR from active locale. |
 
@@ -78,9 +79,20 @@ flutter analyze      # static analysis
 |---|---|---|
 | 1 | Offline catalogue, bilingual UI, search, seeded content | ✅ Done |
 | 2 | Content import (versioned JSON), FTS5 search, favorites | ✅ Done |
-| 3 | In-app video player + PDF viewer for visual guides | `video_player`, `pdfx` |
+| 3 | In-app video player + PDF/image viewers for visual guides | ✅ Done |
 | 4 | Backend sync (Supabase/Postgres or **Oracle DB + ORDS**) | Repository-layer swap; central authoring & governance |
 | 5 | Auth, role-based access, audit trail | Aligns with least-privilege / SoD controls |
+
+### Media attachments (Phase 3)
+
+Each guide may carry one media attachment via `media_type`
+(`image` · `video` · `pdf`) and `media_source`. The source is resolved
+automatically as **asset**, **local file**, or **network** URL, so the same
+field works for bundled offline media and online content. `GuideMediaView`
+dispatches to the right viewer; any load failure degrades to a calm error box
+so the guide text stays readable. A sample PDF ships at
+`assets/media/sample_procedure.pdf`; the visual guide references a sample
+network video (swap for a bundled file for fully offline use).
 
 ### Content update workflow (Phase 2)
 

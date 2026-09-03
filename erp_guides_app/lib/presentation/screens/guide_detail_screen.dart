@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:provider/provider.dart';
@@ -9,6 +7,7 @@ import '../../core/state/app_state.dart';
 import '../../core/state/favorites_state.dart';
 import '../../data/models/guide.dart';
 import '../../data/repositories/guide_repository.dart';
+import '../widgets/media/guide_media_view.dart';
 import '../widgets/type_badge.dart';
 
 class GuideDetailScreen extends StatelessWidget {
@@ -64,8 +63,11 @@ class GuideDetailScreen extends StatelessWidget {
             ],
           ),
           const SizedBox(height: 16),
-          if (guide.imageAsset != null) ...[
-            _GuideImage(path: guide.imageAsset!),
+          if (guide.hasMedia) ...[
+            GuideMediaView(
+              type: guide.mediaType!,
+              source: guide.mediaSource!,
+            ),
             const SizedBox(height: 16),
           ],
           MarkdownBody(
@@ -101,23 +103,6 @@ class GuideDetailScreen extends StatelessWidget {
           const SizedBox(height: 24),
         ],
       ),
-    );
-  }
-}
-
-class _GuideImage extends StatelessWidget {
-  const _GuideImage({required this.path});
-  final String path;
-
-  @override
-  Widget build(BuildContext context) {
-    // Supports both bundled assets and imported files (offline media).
-    final isFile = path.startsWith('/') || path.startsWith('file:');
-    return ClipRRect(
-      borderRadius: BorderRadius.circular(12),
-      child: isFile
-          ? Image.file(File(path), fit: BoxFit.cover)
-          : Image.asset(path, fit: BoxFit.cover),
     );
   }
 }
