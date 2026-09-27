@@ -1,9 +1,7 @@
 import { useState } from 'react'
 import { useQuery } from '@tanstack/react-query'
-import { Link } from 'react-router-dom'
 import {
   BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer,
-  LineChart, Line, Legend,
 } from 'recharts'
 import { reportsApi } from '../lib/api'
 import { formatCurrency, currentYear } from '../lib/utils'
