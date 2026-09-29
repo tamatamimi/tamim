@@ -1,0 +1,29 @@
+services:
+
+  # Oracle Database 23c Free + APEX 24.x + ORDS
+  # تحتاج تسجيل دخول مجاني على container-registry.oracle.com
+  # docker login container-registry.oracle.com
+  ords-apex:
+    image: container-registry.oracle.com/database/ords-developer:latest
+    container_name: hi_apex
+    environment:
+      ORACLE_PWD: ${ORACLE_PWD:-SecurePass2026!}
+      APEX_PASS: ${APEX_PASS:-WelcomeApex2026#}
+      SKIP_VALIDATIONS: true
+    ports:
+      - "8181:8181"   # APEX UI: http://localhost:8181/ords/apex
+      - "1521:1521"   # Oracle SQL*Net
+    volumes:
+      - oracle_data:/opt/oracle/oradata
+      - ./db:/opt/oracle/scripts/setup
+      - ./scripts:/opt/oracle/scripts/startup
+    healthcheck:
+      test: ["CMD-SHELL", "curl -sf http://localhost:8181/ords/healthcheck || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 20
+      start_period: 120s
+
+volumes:
+  oracle_data:
+    driver: local
