@@ -1,0 +1,108 @@
+<title>بطاقات منتجات جنّتان</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap">
+<style>
+:root{
+  --pg:#F1EFEA; --card:#fff; --line:#DDD9D1; --tx:#1c1c1a; --tx2:#5a5a54; --tx3:#8a8a83;
+  --acc:#1A855B; --sh:0 24px 60px rgba(20,20,18,.14);
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --pg:#12140f; --card:#191b16; --line:#2b2e26; --tx:#ecefe8; --tx2:#b2b6ac; --tx3:#7d8177; --acc:#54c492; --sh:0 28px 70px rgba(0,0,0,.55);
+}}
+:root[data-theme="dark"]{--pg:#12140f; --card:#191b16; --line:#2b2e26; --tx:#ecefe8; --tx2:#b2b6ac; --tx3:#7d8177; --acc:#54c492; --sh:0 28px 70px rgba(0,0,0,.55);}
+*{box-sizing:border-box}
+body{margin:0;background:var(--pg);color:var(--tx);direction:rtl;font-family:"IBM Plex Sans Arabic",system-ui,sans-serif;line-height:1.8;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1180px;margin:0 auto;padding:0 24px}
+h1,h2{margin:0;line-height:1.25;letter-spacing:-.01em;font-weight:700;text-wrap:balance}
+.top{padding:70px 0 30px}
+.tag{display:inline-block;font-size:11.5px;font-weight:700;letter-spacing:.14em;color:var(--acc);border:1px solid currentColor;padding:5px 13px;border-radius:6px;margin-bottom:20px}
+.top h1{font-size:clamp(28px,4.6vw,44px);margin-bottom:16px}
+.top p{font-size:17px;color:var(--tx2);max-width:64ch}
+.sec{padding:26px 0 8px}
+.sec h2{font-size:19px;margin-bottom:6px}
+.sec .note{font-size:14px;color:var(--tx2);margin-bottom:18px}
+.stage{background:#fff;border-radius:20px;padding:32px 28px;box-shadow:var(--sh);direction:ltr;border:1px solid var(--line)}
+:root[data-theme="dark"] .stage,:root:not([data-theme="light"]) .stage{background:#fbfbf9}
+
+/* ====== رموز المتجر (ثابتة — تمثّل المنتج النهائي) ====== */
+.mk{font-family:"Poppins",system-ui,sans-serif;color:#1f2421;
+  --immune:#F4E2C6;--heart:#F3D4D4;--sugar:#DBE8D0;--hair:#F3DBE7;--brain:#D8DEF3;--sleep:#DED8EF;--gut:#F7E0CE;--bone:#CFE3EC;--acc:#1A855B;--faint:#a7ada8;--line:#e8e8e4}
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:22px}
+@media(max-width:760px){.grid{grid-template-columns:repeat(2,1fr)}}
+.card{display:flex;flex-direction:column}
+.tile{border-radius:44px 44px 18px 18px;overflow:hidden;transition:transform .3s cubic-bezier(.4,0,.2,1),box-shadow .3s,border-radius .3s;position:relative}
+.card:hover .tile{transform:translateY(-6px);box-shadow:0 18px 34px rgba(20,30,25,.16)}
+.tile .fav{position:absolute;top:12px;right:12px;width:32px;height:32px;border-radius:50%;background:rgba(255,255,255,.9);display:flex;align-items:center;justify-content:center;font-size:13px;color:#6b746f;z-index:2}
+.tile svg{width:100%;aspect-ratio:1/1;padding:14%;display:block;transition:transform .5s cubic-bezier(.4,0,.2,1)}
+.card:hover .tile svg{transform:scale(1.06) rotate(-1.5deg)}
+.bd{padding:14px 6px 0;display:flex;flex-direction:column;gap:5px}
+.cat{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#9a9a95}
+.nm{font-size:15px;font-weight:600;line-height:1.35;color:#1f2421;min-height:2.5em}
+.pr{font-size:16px;font-weight:700}
+.add{margin-top:8px;background:var(--acc);color:#fff;border-radius:8px;text-align:center;padding:10px;font-size:12.5px;font-weight:600}
+/* أنماط الحواف */
+.round .tile{border-radius:26px}
+.blob .tile{border-radius:46% 54% 48% 52%/54% 46% 54% 46%}
+.blob .card:hover .tile{border-radius:52% 48% 54% 46%/46% 54% 46% 54%}
+.arch .tile{border-radius:999px 999px 20px 20px}
+
+.end{padding:44px 0 70px;color:var(--tx3);font-size:14px;text-align:center}
+.end b{color:var(--tx)}
+</style>
+<svg style="display:none"><symbol id="b" viewBox="0 0 100 140">
+<rect x="33" y="2" width="34" height="17" rx="4" fill="#2B3A33"/><rect x="37" y="17" width="26" height="9" fill="#3C4C44"/>
+<rect x="19" y="24" width="62" height="112" rx="13" fill="currentColor"/>
+<rect x="26" y="60" width="48" height="52" rx="7" fill="#fff" opacity=".95"/>
+<rect x="32" y="70" width="36" height="4" rx="2" fill="currentColor" opacity=".5"/>
+<rect x="32" y="79" width="24" height="3" rx="1.5" fill="#191919" opacity=".18"/>
+<circle cx="59" cy="98" r="7" fill="currentColor" opacity=".75"/></symbol></svg>
+
+<div class="wrap">
+  <header class="top">
+    <span class="tag">جنّتان · بطاقات المنتجات</span>
+    <h1>لوح ملوّن لكل تصنيف، وحافة إبداعية</h1>
+    <p>بأسلوب naturesbakery: كل فئة صحية لونها المميّز، والصورة تطفو فوق لوح بحافة مقوّسة. اللون يُربط بالتصنيف تلقائياً — كل منتجات «النوم» لافندر، «القلب» وردي، وهكذا. اختر نمط الحافة من الأسفل.</p>
+  </header>
+
+  <section class="sec">
+    <h2>النمط الافتراضي — حافة مقوّسة من الأعلى</h2>
+    <p class="note">أنيق ومميّز، يوحي بالطبيعة والصيدلية. هذا ما ستحصل عليه فور اللصق.</p>
+    <div class="stage"><div class="mk"><div class="grid">
+      <div class="card"><div class="tile" style="background:var(--immune)"><span class="fav">♡</span><svg style="color:#C8801B"><use href="#b"/></svg></div><div class="bd"><span class="cat">Immune Support</span><span class="nm">Zinc with Vitamin C</span><span class="pr">$18.00</span><span class="add">Add to cart</span></div></div>
+      <div class="card"><div class="tile" style="background:var(--heart)"><span class="fav">♡</span><svg style="color:#B23A4B"><use href="#b"/></svg></div><div class="bd"><span class="cat">Heart Health</span><span class="nm">Coq10 · 200mg</span><span class="pr">$29.00</span><span class="add">Add to cart</span></div></div>
+      <div class="card"><div class="tile" style="background:var(--sleep)"><span class="fav">♡</span><svg style="color:#6B5CA5"><use href="#b"/></svg></div><div class="bd"><span class="cat">Sleep</span><span class="nm">Magnesium Glycinate</span><span class="pr">$24.00</span><span class="add">Add to cart</span></div></div>
+      <div class="card"><div class="tile" style="background:var(--gut)"><span class="fav">♡</span><svg style="color:#C8801B"><use href="#b"/></svg></div><div class="bd"><span class="cat">Gut Health</span><span class="nm">Probiotic 50B CFU</span><span class="pr">$34.00</span><span class="add">Add to cart</span></div></div>
+      <div class="card"><div class="tile" style="background:var(--sugar)"><span class="fav">♡</span><svg style="color:#4E7A3B"><use href="#b"/></svg></div><div class="bd"><span class="cat">Sugar Support</span><span class="nm">Berberine Complex</span><span class="pr">$32.00</span><span class="add">Add to cart</span></div></div>
+      <div class="card"><div class="tile" style="background:var(--hair)"><span class="fav">♡</span><svg style="color:#B85C86"><use href="#b"/></svg></div><div class="bd"><span class="cat">Hair, Skin & Nails</span><span class="nm">Collagen Peptide</span><span class="pr">$30.00</span><span class="add">Add to cart</span></div></div>
+      <div class="card"><div class="tile" style="background:var(--brain)"><span class="fav">♡</span><svg style="color:#4A5AA8"><use href="#b"/></svg></div><div class="bd"><span class="cat">Brain & Cognitive</span><span class="nm">Omega-3 Fish Oil</span><span class="pr">$27.00</span><span class="add">Add to cart</span></div></div>
+      <div class="card"><div class="tile" style="background:var(--bone)"><span class="fav">♡</span><svg style="color:#3B7A94"><use href="#b"/></svg></div><div class="bd"><span class="cat">Bone & Joint</span><span class="nm">Vitamin D3 with K2</span><span class="pr">$9.00</span><span class="add">Add to cart</span></div></div>
+    </div></div></div>
+  </section>
+
+  <section class="sec">
+    <h2>البديل 1 — حافة عضوية <code style="font-family:monospace;font-size:13px">.jp-blob</code></h2>
+    <p class="note">الأكثر جرأة وإبداعاً. مرّر المؤشر لترى الشكل يتبدّل.</p>
+    <div class="stage"><div class="mk blob"><div class="grid">
+      <div class="card"><div class="tile" style="background:var(--immune)"><svg style="color:#C8801B"><use href="#b"/></svg></div><div class="bd"><span class="cat">Immune Support</span><span class="nm">Zinc with Vitamin C</span><span class="pr">$18.00</span><span class="add">Add to cart</span></div></div>
+      <div class="card"><div class="tile" style="background:var(--sleep)"><svg style="color:#6B5CA5"><use href="#b"/></svg></div><div class="bd"><span class="cat">Sleep</span><span class="nm">Magnesium Glycinate</span><span class="pr">$24.00</span><span class="add">Add to cart</span></div></div>
+      <div class="card"><div class="tile" style="background:var(--gut)"><svg style="color:#C8801B"><use href="#b"/></svg></div><div class="bd"><span class="cat">Gut Health</span><span class="nm">Probiotic 50B CFU</span><span class="pr">$34.00</span><span class="add">Add to cart</span></div></div>
+      <div class="card"><div class="tile" style="background:var(--bone)"><svg style="color:#3B7A94"><use href="#b"/></svg></div><div class="bd"><span class="cat">Bone & Joint</span><span class="nm">Vitamin D3 with K2</span><span class="pr">$9.00</span><span class="add">Add to cart</span></div></div>
+    </div></div></div>
+  </section>
+
+  <section class="sec">
+    <h2>البديل 2 — قوس كامل <code style="font-family:monospace;font-size:13px">.jp-arch</code> · والبديل 3 — دائري <code style="font-family:monospace;font-size:13px">.jp-round</code></h2>
+    <p class="note">يمين: قوس نصف دائري. يسار: زوايا دائرية ناعمة كلاسيكية.</p>
+    <div class="stage"><div class="mk"><div class="grid">
+      <div class="card arch"><div class="tile" style="background:var(--heart)"><svg style="color:#B23A4B"><use href="#b"/></svg></div><div class="bd"><span class="cat">Heart Health</span><span class="nm">Coq10 · 200mg</span><span class="pr">$29.00</span><span class="add">Add to cart</span></div></div>
+      <div class="card arch"><div class="tile" style="background:var(--sugar)"><svg style="color:#4E7A3B"><use href="#b"/></svg></div><div class="bd"><span class="cat">Sugar Support</span><span class="nm">Berberine Complex</span><span class="pr">$32.00</span><span class="add">Add to cart</span></div></div>
+      <div class="card round"><div class="tile" style="background:var(--hair)"><svg style="color:#B85C86"><use href="#b"/></svg></div><div class="bd"><span class="cat">Hair, Skin & Nails</span><span class="nm">Collagen Peptide</span><span class="pr">$30.00</span><span class="add">Add to cart</span></div></div>
+      <div class="card round"><div class="tile" style="background:var(--brain)"><svg style="color:#4A5AA8"><use href="#b"/></svg></div><div class="bd"><span class="cat">Brain & Cognitive</span><span class="nm">Omega-3 Fish Oil</span><span class="pr">$27.00</span><span class="add">Add to cart</span></div></div>
+    </div></div></div>
+  </section>
+
+  <footer class="end">
+    <p>الألوان مربوطة بالتصنيف الصحي تلقائياً عبر كلاس <b>product_cat-*</b> · القوارير هنا رموز توضيحية مكان صور منتجاتك</p>
+  </footer>
+</div>

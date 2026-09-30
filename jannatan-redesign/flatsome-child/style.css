@@ -1,0 +1,17 @@
+/*
+Theme Name:   Jannatan Naturals — Flatsome Child
+Theme URI:    https://jannatan.com
+Description:  قالب ابن لـ Flatsome يحتوي نظام تصميم UI/UX جديد لمتجر Jannatan Naturals.
+              كل التخصيصات هنا حتى لا تضيع عند تحديث Flatsome.
+Author:       Jannatan Naturals
+Version:      1.0.0
+Template:     flatsome
+Text Domain:  jannatan
+Tags:         woocommerce, ecommerce, rtl-language-support
+*/
+
+/*
+  ملاحظة مهمة: لا تكتب CSS هنا.
+  كل الأنماط موجودة في assets/css/jannatan-ui.css ويتم تحميلها من functions.php
+  بترتيب صحيح (بعد ستايل Flatsome الأصلي).
+*/
